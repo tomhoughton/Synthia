@@ -86,7 +86,48 @@ class PresetManager:
         self.presets = preset_np
         return preset_np
             
+    def get_preset_data(self):
+        """
+        This is to return a bunch of json to the dojo to see the different files.
+        """
 
+        presets = []
+
+        # Get the json paths
+        for category in self.categories:
+            category_path = os.path.join(self.jsonn_path, category)
+            category_presets = os.listdir(category_path)
+
+            for preset in category_presets:
+
+                values = []
+                name = ""
+
+                with open(os.path.join(category_path, preset)) as json_file:
+                    data = json.load(json_file)
+                    print("---------------------------------")
+                    print(os.path.join(category_path, preset))
+    
+                    # Name
+                    if len(data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]) > 0:
+                        name = data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]
+                    else:
+                        name = preset[:-5]
+
+                    # One value
+                    values.append(data["Ableton"]["UltraAnalog"]["Volume"]["Manual"]["@Value"])
+
+                    new_preset = PresetV2(name, values)
+                    presets.append(new_preset)
+        
+        return presets
+
+    def format_preset_data_for_api(self, presets):
+        preset_json_list = []
+        for preset in presets:
+            preset_json_list.append({ 'name': preset.name, 'volume': preset.volume})
+
+        return preset_json_list
 
     def unzip(self, path, export_path):   
         export_with_category = os.path.join(export_path, "Bass")
@@ -169,9 +210,6 @@ class PresetManager:
 
         
 class Preset:
-    
-
-
     def __init__ (self, name, adv_path, category):
         self.name = name
         self.adv_path = adv_path
@@ -192,5 +230,8 @@ class Preset:
     def get_category(self):
         return self.category
 
-
+class PresetV2:
+    def __init__ (self, name, values):
+        self.name = name
+        self.volume = values[0]
         

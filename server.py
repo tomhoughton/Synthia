@@ -30,17 +30,38 @@ def get_json():
 
 @app.route('/api/get-presets')
 def get_presets():
+    data = preset_manager.get_preset_data()
+    json = preset_manager.format_preset_data_for_api(data)
+    
+    return { 'presets': json }
+
+@app.route('/api/stats')
+def get_stats():
+    # Firstly we need to get the total amount of presets
     preset_manager.get_presets_via_json()
     presets = preset_manager.presets
-
     preset_list = []
 
     for preset in presets:
         preset_list.append(preset.name)
 
-    presets = { 'presets': preset_list}
-    
-    return presets
+    data = [
+        { 'title': 'total presets', 'amount': len(preset_list), 'target': 1000},
+        { 'title': 'Dynamic Low', 'amount': len(preset_list), 'target': 500},
+        { 'title': 'Dynamic Mid', 'amount': len(preset_list), 'target': 300},
+        { 'title': 'Dynamic High', 'amount': len(preset_list), 'target': 150},
+        { 'title': 'Evolution Low', 'amount': len(preset_list), 'target': 300},
+        { 'title': 'Evolution Mid', 'amount': len(preset_list), 'target': 345},
+        { 'title': 'Evolution High', 'amount': len(preset_list), 'target': 234},
+        { 'title': 'Consistency Low', 'amount': len(preset_list), 'target': 145},
+        { 'title': 'Consistency Mid', 'amount': len(preset_list), 'target': 500},
+        { 'title': 'Consistency High', 'amount': len(preset_list), 'target': 134},
+        { 'title': 'Brightness Low', 'amount': len(preset_list), 'target': 169},
+        { 'title': 'Brightness Mid', 'amount': len(preset_list), 'target': 221},
+        { 'title': 'Brightness High', 'amount': len(preset_list), 'target': 121},
+    ]
+
+    return json.dumps(data)
 
 
 if __name__ == "__main__":

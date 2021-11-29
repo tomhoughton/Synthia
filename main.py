@@ -18,6 +18,11 @@ STEPS FOR THE WEB APP:
 JSON FILE STRUCTURE:
 .Ableton .UltraAnalog .UserName
 
+TASK FOR THIS BRANCH:
+
+* Build a way to conveniently see all the preset names 
+  and show a single value from that preset.
+
 """
 
 # Important variables:
@@ -27,8 +32,8 @@ categories = np.array([
 
 # Create a preset manager instance.
 preset_manager = PresetManager(categories)
-#print(preset_manager.get_json_array(0))
 
-preset_manager.get_presets_via_json()
+data = preset_manager.get_preset_data()
+json = preset_manager.format_preset_data_for_api(data)
 
-presets = preset_manager.presets.tolist()
+print(json)
