@@ -21,6 +21,7 @@ class PresetManager:
         self.jsonn_path = os.path.join(self.preset_path, "JSON")
         self.categories = pr_categories # The categories from ableton analog.
         self.presets = []
+        self.new_preseet_path = os.path.join("NewPresets") # The path to the new presets.
 
 
 
@@ -86,6 +87,8 @@ class PresetManager:
         self.presets = preset_np
         return preset_np
             
+
+
     def get_preset_data(self):
         """
         This is to return a bunch of json to the dojo to see the different files.
@@ -114,13 +117,54 @@ class PresetManager:
                     else:
                         name = preset[:-5]
 
+                    """
+                    Values for the parts that dont relate to the signal chain.
+                    """
                     # One value
-                    values.append(data["Ableton"]["UltraAnalog"]["Volume"]["Manual"]["@Value"])
+                    values.append(data["Ableton"]["UltraAnalog"]["Volume"]["Manual"]["@Value"]) # 0
+
+                    """
+                    Signal Chain 01
+                    """
+                    # Oscillator Toggle [1]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorToggle"]["Manual"]["@Value"])
+                    
+                    # Oscillator Waveshape [2]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorWaveShape"]["Manual"]["@Value"]) 
+
+                    # Oscillator Oct [3]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorOct"]["Manual"]["@Value"]) 
+
+                    # Oscillator Semitone [4]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorSemi"]["Manual"]["@Value"]) 
+
+                    # Oscillator ENV Time [5]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorEnvTime"]["Manual"]["@Value"]) 
+
+                    """
+                    Signal Chain 02
+                    """
+                    # Oscillator Toggle [6]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorToggle"]["Manual"]["@Value"])
+                    
+                    # Oscillator Waveshape [7]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorWaveShape"]["Manual"]["@Value"]) 
+
+                    # Oscillator Oct [8]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorOct"]["Manual"]["@Value"]) 
+
+                    # Oscillator Semitone [9]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorSemi"]["Manual"]["@Value"]) 
+
+                    # Oscillator ENV Time [10]:
+                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorEnvTime"]["Manual"]["@Value"]) 
 
                     new_preset = PresetV2(name, values)
                     presets.append(new_preset)
         
         return presets
+
+
 
     def format_preset_data_for_api(self, presets):
         preset_json_list = []
@@ -208,6 +252,20 @@ class PresetManager:
         return rtn_data
 
 
+    def check_for_new_presets(self): 
+        """
+        This functions role is to check the new presets folder,
+        find the names for all the presets,
+        then return a list of the preset namese to post
+        """
+        presets = os.listdir(self.new_preseet_path)
+        new_preset_lst = [] # The list to store the new presets.
+
+        for preset in presets:
+            new_preset_lst.append({ 'name': preset[:-4], 'dynamics': 0, 'brightness': 0, 'consistency': 0, 'evolution': 0})
+
+        return new_preset_lst
+
         
 class Preset:
     def __init__ (self, name, adv_path, category):
@@ -234,4 +292,37 @@ class PresetV2:
     def __init__ (self, name, values):
         self.name = name
         self.volume = values[0]
-        
+
+        """
+        Signal Chain 01
+        """
+        self.OscToggle01 = values[1]
+        self.OscWaveshape01 = values[2]
+        self.OscOsctave01 = values[3]
+        self.OscSemi01 = values[4]
+        self.OscEnvT01 = values[5]
+
+        """
+        Signal Chain 02
+        """
+        self.OscToggle02 = values[6]
+        self.OscWaveshape02 = values[7]
+        self.OscOsctave02 = values[8]
+        self.OscSemi02 = values[9]
+        self.OscEnvT02 = values[10]
+
+    def format_to_json(self):
+        return {
+            'name': self.name,
+            'volume': self.volume,
+            'OscToggle01': self.OscToggle01,
+            'OscWaveshape01': self.OscWaveshape01,
+            'OscOctave01': self.OscOsctave01,
+            'OscSemi01': self.OscSemi01,
+            'OsvEnvT01': self.OscEnvT01,
+            'OscToggle02': self.OscToggle02,
+            'OscWaveshape02': self.OscWaveshape02,
+            'OscOctave02': self.OscOsctave02,
+            'OscSemi02': self.OscSemi02,
+            'OscEnvT02': self.OscEnvT02
+        }

@@ -30,10 +30,25 @@ def get_json():
 
 @app.route('/api/get-presets')
 def get_presets():
-    data = preset_manager.get_preset_data()
-    json = preset_manager.format_preset_data_for_api(data)
+    presets = preset_manager.get_preset_data()
+    json = []
+
+    for preset in presets:
+        json.append(preset.format_to_json())
+    
     
     return { 'presets': json }
+
+@app.route('/api/find-new-data')
+def find_new_data():
+    new_presets = preset_manager.check_for_new_presets()
+
+    if len(new_presets) <= 0:
+        return { 'newPresets': ['nothing'] }
+    else:
+        return { 'newPresets': new_presets}
+
+
 
 @app.route('/api/stats')
 def get_stats():

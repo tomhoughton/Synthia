@@ -36,4 +36,4 @@ preset_manager = PresetManager(categories)
 data = preset_manager.get_preset_data()
 json = preset_manager.format_preset_data_for_api(data)
 
-print(json)
+preset_manager.check_for_new_presets()
