@@ -28,7 +28,7 @@ def get_json():
     json_array = preset_manager.get_json_array(0)
     return { 'presets': json_array}
 
-@app.route('/api/get-presets')
+@app.route('/api/get-presets') # For library view.
 def get_presets():
     presets = preset_manager.get_preset_data()
     json = []
@@ -39,9 +39,11 @@ def get_presets():
     
     return { 'presets': json }
 
-@app.route('/api/find-new-data')
+@app.route('/api/find-new-data') # For train view.
 def find_new_data():
     new_presets = preset_manager.check_for_new_presets()
+
+    print('new presets', new_presets)
 
     if len(new_presets) <= 0:
         return { 'newPresets': ['nothing'] }
@@ -81,7 +83,11 @@ def get_stats():
 @app.route('/api/newdata', methods=['POST'])
 def new_data():
     input_json = request.get_json(force=True)
-    print('data from client: ', input_json)
+    
+    # We need to create a function to store the new json data:
+
+
+
     return { 'hello': 'hello'}
 
 

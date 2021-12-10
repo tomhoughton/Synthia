@@ -25,15 +25,21 @@ TASK FOR THIS BRANCH:
 
 """
 
-# # Important variables:
-# categories = np.array([
-#     'Bass'
-# ])
+# Important variables:
+categories = np.array([
+    'Bass'
+])
 
-# # Create a preset manager instance.
-# preset_manager = PresetManager(categories)
+# Create a preset manager instance.
+preset_manager = PresetManager(categories)
 
 # data = preset_manager.get_preset_data()
 # json = preset_manager.format_preset_data_for_api(data)
 
 # preset_manager.check_for_new_presets()
+
+# First thing we need to do is check for adv files:
+
+
+
+
