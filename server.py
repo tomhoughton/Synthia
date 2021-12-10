@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from preset_extract import PresetManager
 import numpy as np
 import json
@@ -77,6 +77,12 @@ def get_stats():
     ]
 
     return json.dumps(data)
+
+@app.route('/api/newdata', methods=['POST'])
+def new_data():
+    input_json = request.get_json(force=True)
+    print('data from client: ', input_json)
+    return { 'hello': 'hello'}
 
 
 if __name__ == "__main__":
