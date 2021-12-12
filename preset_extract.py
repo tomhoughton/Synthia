@@ -272,6 +272,10 @@ class PresetManager:
         # Json export path:
         json_export_path = os.path.join('NewPresetsJson')
 
+
+        # Store the new preset object:
+        new_preset_obj = []
+
         # Loop through:
         for index, preset in enumerate(presets):
 
@@ -285,6 +289,74 @@ class PresetManager:
             self.to_json(xml_file, json_export_path, json_file_name)
             print('should be done')
 
+        # Read through the completed json files:
+        json_files = os.listdir(json_export_path)
+        print('json folder length: ', len(json_files))
+
+        for preset in json_files:
+            print('iterate')
+            values = []
+            name = ""
+
+            with open(os.path.join(json_export_path, preset)) as json_file:
+                data = json.load(json_file)
+                print('---------------------------')
+                print(os.path.join(json_export_path, preset))
+
+                # Name:
+                if len(data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]) > 0:
+                    name = data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]
+                else:
+                    name = preset[:-5]
+
+            """
+            Values not related to signal chains:
+            """
+
+            # One value [0]:
+            values.append(data["Ableton"]["UltraAnalog"]["Volume"]["Manual"]["@Value"])
+
+            """
+            Signal Chain 01
+            """
+            # Oscillator Toggle [1]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorToggle"]["Manual"]["@Value"])
+
+            # Oscillator Waveshape [2]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorWaveShape"]["Manual"]["@Value"])
+
+            # Oscillator Octave [3]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorOct"]["Manual"]["@Value"])
+
+            # Oscillator Semitone [4]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorSemi"]["Manual"]["@Value"])
+
+            # Oscillator ENV Time [5]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorEnvTime"]["Manual"]["@Value"])
+
+            """
+            Signal Chain 02
+            """
+
+            # Oscillator Toggle [6]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorToggle"]["Manual"]["@Value"])
+
+            # Oscillator Waveshape [7]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorWaveShape"]["Manual"]["@Value"])
+
+            # Oscillator Osctave [8]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorOct"]["Manual"]["@Value"])
+
+            # Oscillator Semitone [9]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorSemi"]["Manual"]["@Value"])
+
+            # Psco;;atpr ENV Time [10]:
+            values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorEnvTime"]["Manual"]["@Value"])
+
+            # Append new preset and values to array.
+            new_preset = PresetV2(name, values, 0, 0, 0, 0)
+            new_preset_obj.append(new_preset)
+        return new_preset_obj
 
 
     def to_xml(self, path, export_path, file_name):
