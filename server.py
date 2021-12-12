@@ -79,9 +79,10 @@ def get_stats():
 def new_data():
     input_json = request.get_json(force=True)
     
-    # We need to create a function to store the new json data:
+    preset_manager.save_training_data(input_json['presets'])
 
-
+    print('CLEAR')
+    preset_manager.clear_NewPresets_folder(input_json['presets'])
 
     return { 'hello': 'hello'}
 

@@ -385,6 +385,10 @@ class PresetManager:
             json.dump(xml_to_dict, json_file, indent=2)
 
 
+    def write_json(self, export_path, file_name, data):
+        with open(os.path.join(export_path, file_name), 'w') as json_file:
+            json.dump(data, json_file)
+
     def get_json_tree(self, presets):
         json_presets = []
 
@@ -395,6 +399,54 @@ class PresetManager:
 
         return { 'presets': json_presets }
 
+    def save_training_data(self, presets):
+        """
+        This saves the new presets as json files.
+        And then deletes the old 'new' presets.
+        """
+
+        # Need to get the path to export the json files:
+        training_json_export = os.path.join('TrainingData', 'TrainingPresets')
+
+        for preset in presets:
+            preset_name = preset["name"] + '.json'
+            self.write_json(training_json_export, preset_name, preset)
+
+
+    def clear_NewPresets_folder(self, usedPresets):
+
+        # Path to NewPresets:
+        NewPresets_folder = os.path.join('NewPresets')
+        NewPresetsJson_folder = os.path.join('NewPresetsJson')
+        NewPresets_Presets = os.listdir(NewPresets_folder)
+        adv_to_remove = self.create_file_extensions(usedPresets, '.adv')
+        json_to_remove = self.create_file_extensions(usedPresets, '.json')
+
+        for index, adv in enumerate(adv_to_remove):
+            # Generate the correct file paths:
+            path_to_remove_adv = os.path.join(NewPresets_folder, adv)
+            path_to_remove_json = os.path.join(NewPresetsJson_folder, json_to_remove[index])
+            
+            # Remove file:
+            os.remove(path_to_remove_adv)
+            os.remove(path_to_remove_json)
+
+
+
+        for adv in adv_to_remove:
+            print(adv)
+            path_to_remove_adv = os.path.join(NewPresets_folder, adv)
+            path_to_remove_json = os.path.join(NewPresetsJson_folder, )
+            os.remove(path_to_remove_adv)
+
+
+    def create_file_extensions(self, data, extension):
+        temp = []
+        for element in data:
+            temp.append(element["name"] + extension)
+
+        return temp
+    
 
     def covert_xml_category_to_json(self, category_index):
         # Create XML paths:
@@ -510,5 +562,11 @@ class PresetV2:
             'OscWaveshape02': self.OscWaveshape02,
             'OscOctave02': self.OscOsctave02,
             'OscSemi02': self.OscSemi02,
-            'OscEnvT02': self.OscEnvT02
+            'OscEnvT02': self.OscEnvT02,
+            'descriptors': {
+                'consistency': self.consistency,
+                'brightness': self.brightness,
+                'dynamics': self.dynamics,
+                'evolution': self.evolution
+            }
         }
