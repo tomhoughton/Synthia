@@ -39,7 +39,4 @@ preset_manager = PresetManager(categories)
 # preset_manager.check_for_new_presets()
 
 # First thing we need to do is check for adv files:
-
-
-
-
+print(preset_manager.get_new_data_v2())

@@ -1,4 +1,3 @@
-from _typeshed import Self
 import gzip
 import os
 from xml.etree.ElementTree import tostring
@@ -160,7 +159,7 @@ class PresetManager:
                     # Oscillator ENV Time [10]:
                     values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorEnvTime"]["Manual"]["@Value"]) 
 
-                    new_preset = PresetV2(name, values)
+                    new_preset = PresetV2(name, values, 50, 50, 50, 50)
                     presets.append(new_preset)
         
         return presets
@@ -172,67 +171,7 @@ class PresetManager:
         then return a list of the preset namese to post
         """
         presets = os.listdir(self.new_preseet_path)
-        new_preset_lst = [] # The list to store the new presets.
-
-        for preset in presets:
-            values = []
-            name = ""
-
-            with open(os.path.join('NewPresets', preset)) as json_file:
-                    data = json.load(json_file)
-                    print("---------------------------------")
-                    print(os.path.join(preset))
-    
-                    # Name
-                    if len(data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]) > 0:
-                        name = data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]
-                    else:
-                        name = preset[:-5]
-
-                    """
-                    Values for the parts that dont relate to the signal chain.
-                    """
-                    # One value
-                    values.append(data["Ableton"]["UltraAnalog"]["Volume"]["Manual"]["@Value"]) # 0
-
-                    """
-                    Signal Chain 01
-                    """
-                    # Oscillator Toggle [1]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorToggle"]["Manual"]["@Value"])
-                    
-                    # Oscillator Waveshape [2]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorWaveShape"]["Manual"]["@Value"]) 
-
-                    # Oscillator Oct [3]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorOct"]["Manual"]["@Value"]) 
-
-                    # Oscillator Semitone [4]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorSemi"]["Manual"]["@Value"]) 
-
-                    # Oscillator ENV Time [5]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain1"]["OscillatorEnvTime"]["Manual"]["@Value"]) 
-
-                    """
-                    Signal Chain 02
-                    """
-                    # Oscillator Toggle [6]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorToggle"]["Manual"]["@Value"])
-                    
-                    # Oscillator Waveshape [7]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorWaveShape"]["Manual"]["@Value"]) 
-
-                    # Oscillator Oct [8]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorOct"]["Manual"]["@Value"]) 
-
-                    # Oscillator Semitone [9]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorSemi"]["Manual"]["@Value"]) 
-
-                    # Oscillator ENV Time [10]:
-                    values.append(data["Ableton"]["UltraAnalog"]["SignalChain2"]["OscillatorEnvTime"]["Manual"]["@Value"]) 
-
-                    new_preset = PresetV2(name, values, 0, 0, 0 , 0)
-                    new_preset_lst.append(new_preset)
+        new_preset_lst = ['hello'] # The list to store the new presets.
 
 
 
@@ -307,11 +246,44 @@ class PresetManager:
             for xml_preset in xml_presets:
                 xml_preset_path = os.path.join(new_presets_xml, xml_preset)
                 name = xml_preset[:-3] + 'json'
-                Self.to_json(xml_preset_path, export_json_path, name)
+                print(xml_preset)
+                self.to_json(xml_preset_path, export_json_path, name)
                 
         else:
             print('none')
 
+
+
+    def get_new_data_v2(self):
+        
+        """
+        CLEAN THIS FUNCTION ASAP AND FINISH IT !!!!!!!!
+        """
+
+        # New presets path:
+        new_presets = os.path.join('NewPresets')
+
+        # New presets array:
+        presets = os.listdir(new_presets)
+
+        # XML export path:
+        xml_export_path = os.path.join('NewPresetsXML')
+
+        # Json export path:
+        json_export_path = os.path.join('NewPresetsJson')
+
+        # Loop through:
+        for index, preset in enumerate(presets):
+
+            # Export and save the xml files:
+            adv_file = os.path.join(new_presets, preset)
+            xml_file_name = preset[:-3] + 'xml'
+            self.to_xml(adv_file, xml_export_path, xml_file_name)
+
+            json_file_name = preset[:-3] + 'json'
+            xml_file = os.path.join(xml_export_path, xml_file_name)
+            self.to_json(xml_file, json_export_path, json_file_name)
+            print('should be done')
 
 
 
@@ -323,6 +295,8 @@ class PresetManager:
             tree = ET.ElementTree(xml)
             tree.write(os.path.join(export_path, file_name), encoding="utf-8")
 
+
+
     def to_json(self, path, export_path, file_name):
         xml_tree = ET.parse(path)
 
@@ -332,6 +306,7 @@ class PresetManager:
         
         with open(os.path.join(export_path, file_name), 'w') as json_file:
             json.dump(xml_to_dict, json_file, indent=2)
+
 
 
     def covert_xml_category_to_json(self, category_index):
