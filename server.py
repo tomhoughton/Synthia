@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from preset_extract import PresetManager
+from preset_extractV2 import PresetManager_V2
 import numpy as np
 import json
 
@@ -10,6 +11,7 @@ categories = np.array([
 ])
 
 preset_manager = PresetManager(categories)
+preset_managerV2 = PresetManager_V2()
 
 @app.route("/api/adv-files")
 def get_adv():
@@ -49,28 +51,53 @@ def find_new_data():
 
 @app.route('/api/stats')
 def get_stats():
-    # Firstly we need to get the total amount of presets
-    preset_manager.get_presets_via_json()
-    presets = preset_manager.presets
-    preset_list = []
+   
+    data = preset_managerV2.refresh_stats()
+    descriptors = data['descriptorMatrix']
+    descriptors_sum = np.sum(descriptors)
 
-    for preset in presets:
-        preset_list.append(preset.name)
+    consistency = [
+        ((descriptors[0][0] / descriptors_sum) * 100),
+        ((descriptors[0][1] / descriptors_sum) * 100),
+        ((descriptors[0][2] / descriptors_sum) * 100),
+    ]
+    
+
+    brightness = [
+        ((descriptors[1][0] / descriptors_sum) * 100),
+        ((descriptors[1][1] / descriptors_sum) * 100),
+        ((descriptors[1][2] / descriptors_sum) * 100),
+    ]
+
+    
+    dynamics = [
+        ((descriptors[2][0] / descriptors_sum) * 100),
+        ((descriptors[2][1] / descriptors_sum) * 100),
+        ((descriptors[2][2] / descriptors_sum) * 100),
+    ]
+
+    
+    evolution = [
+        ((descriptors[3][0] / descriptors_sum) * 100),
+        ((descriptors[3][1] / descriptors_sum) * 100),
+        ((descriptors[3][2] / descriptors_sum) * 100),
+    ]
+
 
     data = [
-        { 'title': 'total presets', 'amount': len(preset_list), 'target': 1000},
-        { 'title': 'Dynamic Low', 'amount': len(preset_list), 'target': 500},
-        { 'title': 'Dynamic Mid', 'amount': len(preset_list), 'target': 300},
-        { 'title': 'Dynamic High', 'amount': len(preset_list), 'target': 150},
-        { 'title': 'Evolution Low', 'amount': len(preset_list), 'target': 300},
-        { 'title': 'Evolution Mid', 'amount': len(preset_list), 'target': 345},
-        { 'title': 'Evolution High', 'amount': len(preset_list), 'target': 234},
-        { 'title': 'Consistency Low', 'amount': len(preset_list), 'target': 145},
-        { 'title': 'Consistency Mid', 'amount': len(preset_list), 'target': 500},
-        { 'title': 'Consistency High', 'amount': len(preset_list), 'target': 134},
-        { 'title': 'Brightness Low', 'amount': len(preset_list), 'target': 169},
-        { 'title': 'Brightness Mid', 'amount': len(preset_list), 'target': 221},
-        { 'title': 'Brightness High', 'amount': len(preset_list), 'target': 121},
+        { 'title': 'total presets', 'amount': 'totalPresets', 'target': 100},
+        { 'title': 'Dynamic Low', 'amount': dynamics[0], 'target': 500},
+        { 'title': 'Dynamic Mid', 'amount': dynamics[1], 'target': 300},
+        { 'title': 'Dynamic High', 'amount': dynamics[2], 'target': 150},
+        { 'title': 'Evolution Low', 'amount': evolution[0], 'target': 300},
+        { 'title': 'Evolution Mid', 'amount': evolution[1], 'target': 345},
+        { 'title': 'Evolution High', 'amount': evolution[2], 'target': 234},
+        { 'title': 'Consistency Low', 'amount': consistency[0], 'target': 145},
+        { 'title': 'Consistency Mid', 'amount': consistency[1], 'target': 500},
+        { 'title': 'Consistency High', 'amount': consistency[2], 'target': 134},
+        { 'title': 'Brightness Low', 'amount': brightness[0], 'target': 169},
+        { 'title': 'Brightness Mid', 'amount': brightness[1], 'target': 221},
+        { 'title': 'Brightness High', 'amount': brightness[2], 'target': 121},
     ]
 
     return json.dumps(data)

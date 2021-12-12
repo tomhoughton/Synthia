@@ -258,6 +258,48 @@ class PresetManager_V2:
 
         return temp       
 
+    def refresh_stats(self):
+
+        # This stores the low mid and high bands of the descriptors:
+        descriptor_m = np.array([
+            [0, 0, 0], # Consistency
+            [0, 0, 0], # Brightness
+            [0, 0, 0], # Dynamics
+            [0, 0, 0] # Evolution
+        ])
+
+        total = 0 # Stores the total presets.
+
+        presets = os.listdir(self.training_json_folder)
+
+        for preset in presets:
+            total += 1
+            with open(os.path.join(self.training_json_folder, preset), 'r') as json_file:
+                data = json.load(json_file)
+                descriptors = [
+                    data["descriptors"]["consistency"],
+                    data["descriptors"]["brightness"],
+                    data["descriptors"]["dynamics"],
+                    data["descriptors"]["evolution"]
+                ]
+
+                for i, descrip in enumerate(descriptors):
+                    if descrip > 66:
+                        descriptor_m[i][2] = descriptor_m[i][2] + 1
+                    elif descrip < 66 and descrip > 33:
+                        descriptor_m[i][1] = descriptor_m[i][1] + 1
+                    elif descrip < 33:
+                        descriptor_m[i][0] = descriptor_m[i][0] + 1
+        
+        data = {
+            'descriptorMatrix': descriptor_m,
+            'totalPresets': total
+        }
+
+        return data
+
+
+
 
 
 class PresetV2:

@@ -1,5 +1,6 @@
 import numpy as np
 from preset_extract import Preset, PresetManager
+from preset_extractV2 import PresetManager_V2, PresetV2
 import os
 import json
 
@@ -32,14 +33,23 @@ categories = np.array([
 
 # Create a preset manager instance.
 preset_manager = PresetManager(categories)
+preset_managerV2 = PresetManager_V2()
 
-# data = preset_manager.get_preset_data()
-# json = preset_manager.format_preset_data_for_api(data)
+data = preset_managerV2.refresh_stats()
+m = data["descriptorMatrix"]
 
-# preset_manager.check_for_new_presets()
 
-# First thing we need to do is check for adv files:
-presets = preset_manager.get_preset_dataV2()
+a = np.array([
+  [30, 30, 30],
+  [30, 30, 30],
+  [30, 30, 30],
+  [30, 30, 30]
+])
 
-for preset in presets:
-  print(preset.name)
+sum = np.sum(a)
+
+print(sum)
+print((5 / sum) * 100)
+
+# NEED TO FIGURE OUT HOW TO SHOW WHETHER DESCRIPTOR 
+# VALUES ARE EQUAL OR NOT.
