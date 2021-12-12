@@ -41,14 +41,9 @@ def get_presets():
 
 @app.route('/api/find-new-data') # For train view.
 def find_new_data():
-    new_presets = preset_manager.check_for_new_presets()
-
-    print('new presets', new_presets)
-
-    if len(new_presets) <= 0:
-        return { 'newPresets': ['nothing'] }
-    else:
-        return { 'newPresets': new_presets}
+    new_presets = preset_manager.get_new_data_v2()
+    json = preset_manager.get_json_tree(new_presets)
+    return json
 
 
 

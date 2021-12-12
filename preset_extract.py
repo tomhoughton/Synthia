@@ -257,7 +257,12 @@ class PresetManager:
     def get_new_data_v2(self):
         
         """
-        CLEAN THIS FUNCTION ASAP AND FINISH IT !!!!!!!!
+        This function checks the new presets folder to see if there are any new ones.
+        Then return an array of PresetV2 objects for the program to use.
+
+        Improvements:
+        - Get it to delete the xml presets as they are not needed.
+        - Get rid of the enumerate function as it is not needed.
         """
 
         # New presets path:
@@ -379,6 +384,16 @@ class PresetManager:
         with open(os.path.join(export_path, file_name), 'w') as json_file:
             json.dump(xml_to_dict, json_file, indent=2)
 
+
+    def get_json_tree(self, presets):
+        json_presets = []
+
+        for preset in presets:
+            json_presets.append(
+                preset.format_to_json()
+            )
+
+        return { 'presets': json_presets }
 
 
     def covert_xml_category_to_json(self, category_index):
