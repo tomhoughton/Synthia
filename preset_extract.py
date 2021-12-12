@@ -164,6 +164,71 @@ class PresetManager:
         
         return presets
 
+    def get_preset_dataV2(self):
+
+        presets = []
+
+        # Need to get the path to the training data:
+        training_json_folder = os.path.join('TrainingData', 'TrainingPresets')
+
+        training_presets = os.listdir(training_json_folder)
+
+        for preset in training_presets:
+            values = []
+
+            with open(os.path.join(training_json_folder, preset)) as json_file:
+
+                data = json.load(json_file)
+                
+                name = data["name"] 
+
+                # Volume:
+                values.append(data["volume"])
+
+                # OscToggle01:
+                values.append(data["OscToggle01"])
+
+                # OscWaveShape01:
+                values.append(data["OscWaveshape01"])
+
+                # OscOctave01
+                values.append(data["OscOctave01"])
+
+                # OscSemi01:
+                values.append(data["OscSemi01"])
+
+                # OscEnvT01:
+                values.append(data["OsvEnvT01"])
+
+                # OscToggle 02:
+                values.append(data["OscToggle02"])
+
+                # Osc WaveShape 02:
+                values.append(data["OscWaveshape02"])
+
+                # Osc Octave02:
+                values.append(data["OscOctave02"])
+
+                # Osc Semi 02:
+                values.append(data["OscSemi02"])
+
+                # Osc Env02
+                values.append(data["OscEnvT02"])
+
+                """
+                Descriptors:
+                """
+                brightness = data["descriptors"]["brightness"] 
+                consistency = data["descriptors"]["consistency"] 
+                dynamics = data["descriptors"]["dynamics"] 
+                evolution = data["descriptors"]["evolution"] 
+
+                new_preset = PresetV2(name, values, consistency, brightness, dynamics, evolution)
+                presets.append(new_preset)
+
+                
+        return presets
+
     def check_for_new_presets(self): 
         """
         This functions role is to check the new presets folder,
@@ -418,7 +483,6 @@ class PresetManager:
         # Path to NewPresets:
         NewPresets_folder = os.path.join('NewPresets')
         NewPresetsJson_folder = os.path.join('NewPresetsJson')
-        NewPresets_Presets = os.listdir(NewPresets_folder)
         adv_to_remove = self.create_file_extensions(usedPresets, '.adv')
         json_to_remove = self.create_file_extensions(usedPresets, '.json')
 
@@ -430,15 +494,6 @@ class PresetManager:
             # Remove file:
             os.remove(path_to_remove_adv)
             os.remove(path_to_remove_json)
-
-
-
-        for adv in adv_to_remove:
-            print(adv)
-            path_to_remove_adv = os.path.join(NewPresets_folder, adv)
-            path_to_remove_json = os.path.join(NewPresetsJson_folder, )
-            os.remove(path_to_remove_adv)
-
 
     def create_file_extensions(self, data, extension):
         temp = []

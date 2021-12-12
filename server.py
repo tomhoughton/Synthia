@@ -30,7 +30,7 @@ def get_json():
 
 @app.route('/api/get-presets') # For library view.
 def get_presets():
-    presets = preset_manager.get_preset_data()
+    presets = preset_manager.get_preset_dataV2()
     json = []
 
     for preset in presets:
