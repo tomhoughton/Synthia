@@ -35,21 +35,5 @@ categories = np.array([
 preset_manager = PresetManager(categories)
 preset_managerV2 = PresetManager_V2()
 
-data = preset_managerV2.refresh_stats()
-m = data["descriptorMatrix"]
+a = preset_managerV2.get_new_data_v2()
 
-
-a = np.array([
-  [30, 30, 30],
-  [30, 30, 30],
-  [30, 30, 30],
-  [30, 30, 30]
-])
-
-sum = np.sum(a)
-
-print(sum)
-print((5 / sum) * 100)
-
-# NEED TO FIGURE OUT HOW TO SHOW WHETHER DESCRIPTOR 
-# VALUES ARE EQUAL OR NOT.
