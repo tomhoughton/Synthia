@@ -566,67 +566,20 @@ class PresetManager_V2:
         return new_preset_obj
 
     def get_preset_dataV2(self):
-
+        # Create an empty list to store the json data:
         presets = []
 
-        # Need to get the path to the training data:
+        # Create a path to the training json folder:
         training_json_folder = os.path.join('TrainingData', 'TrainingPresets')
 
+        # Create a list of all the training presets in the folder:
         training_presets = os.listdir(training_json_folder)
 
+        # Loop through:
         for preset in training_presets:
-            values = []
-
             with open(os.path.join(training_json_folder, preset)) as json_file:
-
                 data = json.load(json_file)
-                
-                name = data["name"] 
-
-                # Volume:
-                values.append(data["volume"])
-
-                # OscToggle01:
-                values.append(data["OscToggle01"])
-
-                # OscWaveShape01:
-                values.append(data["OscWaveshape01"])
-
-                # OscOctave01
-                values.append(data["OscOctave01"])
-
-                # OscSemi01:
-                values.append(data["OscSemi01"])
-
-                # OscEnvT01:
-                values.append(data["OsvEnvT01"])
-
-                # OscToggle 02:
-                values.append(data["OscToggle02"])
-
-                # Osc WaveShape 02:
-                values.append(data["OscWaveshape02"])
-
-                # Osc Octave02:
-                values.append(data["OscOctave02"])
-
-                # Osc Semi 02:
-                values.append(data["OscSemi02"])
-
-                # Osc Env02
-                values.append(data["OscEnvT02"])
-
-                """
-                Descriptors:
-                """
-                brightness = data["descriptors"]["brightness"] 
-                consistency = data["descriptors"]["consistency"] 
-                dynamics = data["descriptors"]["dynamics"] 
-                evolution = data["descriptors"]["evolution"] 
-
-                new_preset = PresetV2(name, values, consistency, brightness, dynamics, evolution)
-                presets.append(new_preset)
-
+                presets.append(data)
                 
         return presets
 
@@ -638,7 +591,6 @@ class PresetManager_V2:
             xml = ET.fromstring(raw_xml)
             tree = ET.ElementTree(xml)
             tree.write(os.path.join(export_path, file_name), encoding="utf-8")
-
 
 
     def to_json(self, path, export_path, file_name):
@@ -656,7 +608,7 @@ class PresetManager_V2:
 
         for preset in presets:
             json_presets.append(
-                preset.format_to_json()
+                preset.format_to_jsonV2()
             )
 
         return { 'presets': json_presets }
@@ -745,6 +697,16 @@ class PresetManager_V2:
 
         return data
 
+    def get_json_tree(self, presets):
+        json_presets = []
+
+        for preset in presets:
+            json_presets.append(
+                preset.format_to_jsonV2()
+            )
+
+        return { 'presets': json_presets }
+
 
 
 
@@ -817,8 +779,8 @@ class PresetV2:
         self.filterCutoffFreq01 = values[38]
         self.filterKbdMod01 = values[39]
         self.filterQFactor01 = values[40]
-        self.filterLFOCuttoffMod = values[41]
-        self.filterENVCuttoffMod = values[42]
+        self.filterLFOCuttoffMod01 = values[41]
+        self.filterENVCuttoffMod01 = values[42]
         
         self.ampToggle01 = values[43]
         self.ampKbdAmpMod01 = values[44]
@@ -831,7 +793,7 @@ class PresetV2:
         self.lfoToggle01 = values[51]
         self.lfoWaveshape01 = values[52]
         self.lfoSync01 = values[53]
-        self.lfoSyncToggle = values[54]
+        self.lfoSyncToggle01 = values[54]
         self.lfoGateReset01 = values[55]
         self.lfoPulseWidth01 = values[56]
         self.lfoSpeed01 = values[57]
@@ -885,15 +847,15 @@ class PresetV2:
         self.OscLFOModPW02 = values[95]
         self.OscLevel02 = values[96]
         
-        self.filterToggle01 = values[97]
-        self.filterType01 = values[98]
-        self.filterDrive01 = values[99]
-        self.filterCutoffMod01 = values[100]
-        self.filterCutoffFreq01 = values[101]
-        self.filterKbdMod01 = values[102]
-        self.filterQFactor01 = values[103]
-        self.filterLFOCuttoffMod = values[104]
-        self.filterENVCuttoffMod = values[105]
+        self.filterToggle02 = values[97]
+        self.filterType02 = values[98]
+        self.filterDrive02 = values[99]
+        self.filterCutoffMod02 = values[100]
+        self.filterCutoffFreq02 = values[101]
+        self.filterKbdMod02 = values[102]
+        self.filterQFactor02 = values[103]
+        self.filterLFOCuttoffMod02 = values[104]
+        self.filterENVCuttoffMod02 = values[105]
         
         self.ampToggle02 = values[106]
         self.ampKbdAmpMod02 = values[107]
@@ -906,7 +868,7 @@ class PresetV2:
         self.lfoToggle02 = values[114]
         self.lfoWaveshape02 = values[115]
         self.lfoSync02 = values[116]
-        self.lfoSyncToggle = values[117]
+        self.lfoSyncToggle02 = values[117]
         self.lfoGateReset02 = values[118]
         self.lfoPulseWidth02 = values[119]
         self.lfoSpeed02 = values[120]
@@ -958,5 +920,189 @@ class PresetV2:
                 'brightness': self.brightness,
                 'dynamics': self.dynamics,
                 'evolution': self.evolution
+            }
+        }
+
+    def format_to_jsonV2(self):
+        return {
+            'name': self.name,
+            'globals': {
+                'unisonToggle': self.UnisonToggle,
+                'keyboardUnison': self.keyboardUnison,
+                'keyboardDetune': self.keyboardDetune,
+                'keyboardUnisonDelay': self.keyboardUnisonDelay,
+                'keyboardPriority': self.keyboardPriority,
+                'vibratoToggle': self.vibratoToggle,
+                'vibratoSpeed': self.vibratoSpeed,
+                'vibratoFadeIn': self.vibratoFadein,
+                'vibratoAmount': self.vibratoAmount,
+                'vibratoError': self.vibratoError,
+                'vibratoDelay': self.vibratoDelay,
+                'portamentoToggle': self.portamentoToggle,
+                'portamentoTime': self.portamentoTime,
+                'portamentoMode': self.PortamentoMode,
+                'portamentoLegato': self.PortamentoLegato,
+                'noiseToggle': self.noiseToggle,
+                'noiseColor': self.noiseColor,
+                'noiseLevel': self.noiseLevel
+            },
+            'signalChain01': {
+                'Oscillator': {
+                    'OscToggle': self.OscToggle01,
+                    'OscWaveshape': self.OscWaveshape01,
+                    'OscOctave': self.OscOsctave01,
+                    'OscSemi': self.OscSemi01,
+                    'OscEnvTime': self.OscEnvT01,
+                    'OscDetune': self.OscDetune01,
+                    'OscModulation': self.OscModulation01,
+                    'OscPulseWidth': self.OscPulseWidth01,
+                    'OscSubAmount': self.OscSubAmount01,
+                    'OscBalance': self.OscBalance01,
+                    'OscEnvAmount': self.OscEnvAmount01,
+                    'OscLFOModPitch': self.OscLFOModPitch01,
+                    'OscLFOModPW': self.OscLFOModPW01,
+                    'OscLevel': self.OscLevel01
+                },
+                'filter': {
+                    'FilterToggle': self.filterToggle01 ,
+                    'FilterType': self.filterType01,
+                    'FilterDrive': self.filterDrive01,
+                    'FilterCutoffMod': self.filterCutoffMod01,
+                    'FilterCutoffFreq': self.filterCutoffFreq01,
+                    'FilterKbdMod': self.filterKbdMod01,
+                    'FilterQFactor': self.filterQFactor01,
+                    'FilterLFOCuttoffMod': self.filterLFOCuttoffMod01,
+                    'FilterEnvCuttoffMod': self.filterENVCuttoffMod01,
+                },
+                'amp': {
+                    'ampToggle': self.ampToggle01,
+                    'ampKbdMod': self.ampKbdAmpMod01,
+                    'ampLevel': self.ampLevel01,
+                    'ampKbdPanMod': self.ampKbdPanMod01,
+                    'ampPan': self.ampPan01,
+                    'ampLFOMod': self.ampLFOampMod01,
+                    'ampPanMod': self.ampKbdPanMod01,
+                },
+                'env01': {
+                    'envExpoSlope': self.envExpoSlope01,
+                    'envLoop': self.envLoop01,
+                    'envFreeRun': self.envFreeRun01,
+                    'envLegato': self.envLegato01,
+                    'envAttackMod': self.envAttackMod01,
+                    'envAttackTime': self.envAttackTime01,
+                    'envDecayTime': self.envDecayTime01,
+                    'envAmpMod': self.envAmpMod01,
+                    'envSustainLevel': self.envSustainLevel01,
+                    'envSustainTime': self.envSustainTime01,
+                    'envReleaseTime': self.envReleaseTime01
+                },
+                'env02': {
+                    'envExpoSlope': self.env02ExpoSlope01,
+                    'envLoop': self.env02Loop01,
+                    'envFreeRun': self.env02FreeRun01,
+                    'envLegato': self.env02Legato01,
+                    'envAttackMod': self.env02AttackMod01,
+                    'envAttackTime': self.env02AttackTime01,
+                    'envDecayTime': self.env02DecayTime01,
+                    'envAmpMod': self.env02AmpMod01,
+                    'envSustainLevel': self.env02SustainLevel01,
+                    'envSustainTime': self.env02SustainTime01,
+                    'envReleaseTime': self.env02ReleaseTime01
+                },
+                'lfo': {
+                    'lfoToggle': self.lfoToggle01,
+                    'lfoWaveshape': self.lfoWaveshape01,
+                    'lfosync': self.lfoSync01,
+                    'lfosyncToggle': self.lfoSyncToggle01,
+                    'lfoGateReset': self.lfoGateReset01,
+                    'lfoPulseWidth': self.lfoPulseWidth01,
+                    'lfoSpeed': self.lfoSpeed01,
+                    'lfoPhase': self.lfoPhase01,
+                    'lfoDelay': self.lfoDelay01,
+                    'lfoFadeIn': self.lfoFadeIn01
+                }
+                
+            },
+            'signalChain02': {
+                'Oscillator': {
+                    'OscToggle': self.OscToggle02,
+                    'OscWaveshape': self.OscWaveshape02,
+                    'OscOctave': self.OscOsctave02,
+                    'OscSemi': self.OscSemi02,
+                    'OscEnvTime': self.OscEnvT02,
+                    'OscDetune': self.OscDetune02,
+                    'OscModulation': self.OscModulation02,
+                    'OscPulseWidth': self.OscPulseWidth02,
+                    'OscSubAmount': self.OscSubAmount02,
+                    'OscBalance': self.OscBalance02,
+                    'OscEnvAmount': self.OscEnvAmount02,
+                    'OscLFOModPitch': self.OscLFOModPitch02,
+                    'OscLFOModPW': self.OscLFOModPW02,
+                    'OscLevel': self.OscLevel02
+                },
+                'filter': {
+                    'FilterToggle': self.filterToggle02 ,
+                    'FilterType': self.filterType02,
+                    'FilterDrive': self.filterDrive02,
+                    'FilterCutoffMod': self.filterCutoffMod02,
+                    'FilterCutoffFreq': self.filterCutoffFreq02,
+                    'FilterKbdMod': self.filterKbdMod02,
+                    'FilterQFactor': self.filterQFactor01,
+                    'FilterLFOCuttoffMod': self.filterLFOCuttoffMod02,
+                    'FilterEnvCuttoffMod': self.filterENVCuttoffMod02,
+                },
+                'amp': {
+                    'ampToggle': self.ampToggle02,
+                    'ampKbdMod': self.ampKbdAmpMod02,
+                    'ampLevel': self.ampLevel02,
+                    'ampKbdPanMod': self.ampKbdPanMod02,
+                    'ampPan': self.ampPan02,
+                    'ampLFOMod': self.ampLFOampMod02,
+                    'ampPanMod': self.ampKbdPanMod02,
+                },
+                'env01': {
+                    'envExpoSlope': self.envExpoSlope02,
+                    'envLoop': self.envLoop02,
+                    'envFreeRun': self.envFreeRun02,
+                    'envLegato': self.envLegato02,
+                    'envAttackMod': self.envAttackMod02,
+                    'envAttackTime': self.envAttackTime02,
+                    'envDecayTime': self.envDecayTime02,
+                    'envAmpMod': self.envAmpMod02,
+                    'envSustainLevel': self.envSustainLevel02,
+                    'envSustainTime': self.envSustainTime02,
+                    'envReleaseTime': self.envReleaseTime02
+                },
+                'env02': {
+                    'envExpoSlope': self.env02ExpoSlope02,
+                    'envLoop': self.env02Loop02,
+                    'envFreeRun': self.env02FreeRun02,
+                    'envLegato': self.env02Legato02,
+                    'envAttackMod': self.env02AttackMod02,
+                    'envAttackTime': self.env02AttackTime02,
+                    'envDecayTime': self.env02DecayTime02,
+                    'envAmpMod': self.env02AmpMod02,
+                    'envSustainLevel': self.env02SustainLevel02,
+                    'envSustainTime': self.env02SustainTime02,
+                    'envReleaseTime': self.env02ReleaseTime02
+                },
+                'lfo': {
+                    'lfoToggle': self.lfoToggle02,
+                    'lfoWaveshape': self.lfoWaveshape02,
+                    'lfosync': self.lfoSync02,
+                    'lfosyncToggle': self.lfoSyncToggle02,
+                    'lfoGateReset': self.lfoGateReset02,
+                    'lfoPulseWidth': self.lfoPulseWidth02,
+                    'lfoSpeed': self.lfoSpeed02,
+                    'lfoPhase': self.lfoPhase02,
+                    'lfoDelay': self.lfoDelay02,
+                    'lfoFadeIn': self.lfoFadeIn02
+                }
+            },
+            'descriptors': {
+                'consistency': self.consistency,
+                'dynamics': self.dynamics,
+                'evolution': self.evolution,
+                'brightness': self.brightness
             }
         }

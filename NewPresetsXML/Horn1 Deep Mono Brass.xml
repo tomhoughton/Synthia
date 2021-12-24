@@ -1,4 +1,4 @@
-<Ableton MajorVersion="5" MinorVersion="10.0_377" SchemaChangeCount="6" Creator="Ableton Live 10.1.42" Revision="537ff2c6436c6f6f28226ced0c55f15fd34c0ae5">
+<Ableton MajorVersion="5" MinorVersion="10.0_377" SchemaChangeCount="3" Creator="Ableton Live 10.1.3d1" Revision="29bb8f2920bd08036a270fd62ef54610b5b8d4fd">
 	<UltraAnalog>
 		<LomId Value="0" />
 		<LomIdView Value="0" />
@@ -19,31 +19,34 @@
 		<LastSelectedClipEnvelopeIndex Value="0" />
 		<LastPresetRef>
 			<Value>
-				<AbletonDefaultPresetRef Id="0">
+				<FilePresetRef Id="0">
 					<FileRef>
 						<HasRelativePath Value="true" />
 						<RelativePathType Value="5" />
 						<RelativePath>
-							<RelativePathElement Id="0" Dir="Devices" />
-							<RelativePathElement Id="1" Dir="Instruments" />
-							<RelativePathElement Id="2" Dir="Analog" />
+							<RelativePathElement Id="52" Dir="Devices" />
+							<RelativePathElement Id="53" Dir="Instruments" />
+							<RelativePathElement Id="54" Dir="Analog" />
+							<RelativePathElement Id="55" Dir="Brass" />
 						</RelativePath>
-						<Name Value="" />
+						<Name Value="Horn1 Deep Mono Brass.adv" />
 						<Type Value="2" />
 						<Data>
-							0000000001B6000200010C4D6163696E746F73682048440000000000000000000000000000000000
-							000042440001FFFFFFFF06416E616C6F670000000000000000000000000000000000000000000000
-							00000000000000000000000000000000000000000000000000000000000000000000FFFFFFFF0000
-							00000000000000000000FFFFFFFF00000A206375000000000000000000000000000B496E73747275
-							6D656E747300000200682F3A4170706C69636174696F6E733A41626C65746F6E204C697665203130
-							2053756974652E6170703A436F6E74656E74733A4170702D5265736F75726365733A436F7265204C
-							6962726172793A446576696365733A496E737472756D656E74733A416E616C6F672F000E000E0006
-							0041006E0061006C006F0067000F001A000C004D006100630069006E0074006F0073006800200048
-							0044001200654170706C69636174696F6E732F41626C65746F6E204C697665203130205375697465
-							2E6170702F436F6E74656E74732F4170702D5265736F75726365732F436F7265204C696272617279
-							2F446576696365732F496E737472756D656E74732F416E616C6F6700001300012F00FFFF0000
+							0000000001FE00020000094C6976655061636B73000000000000000000000000000000000000D73C
+							7B28482B000000C36ECA19486F726E312044656570204D6F6E6F2042726173732E61647600000000
+							0000000000000000000000000000000000000000000000000000000000000000000000C3A66EDB21
+							259A612D6476612D6C76FFFFFFFF0000090000000000000000000000000000000005427261737300
+							001000080000D73C5F080000001100080000DB21097A00000001001C00C36ECA00C36E4A00C36E43
+							00C36E3F00C36E3A0026A3D30026A3D2000200624C6976655061636B733A746D703A007472756E6B
+							3A00436F7265204C6962726172793A00446576696365733A00496E737472756D656E74733A00416E
+							616C6F673A0042726173733A00486F726E312044656570204D6F6E6F2042726173732E616476000E
+							003400190048006F0072006E0031002000440065006500700020004D006F006E006F002000420072
+							006100730073002E006100640076000F00140009004C006900760065005000610063006B00730012
+							00522F746D702F7472756E6B2F436F7265204C6962726172792F446576696365732F496E73747275
+							6D656E74732F416E616C6F672F42726173732F486F726E312044656570204D6F6E6F204272617373
+							2E616476001300122F566F6C756D65732F4C6976655061636B73FFFF0000
 						</Data>
-						<RefersToFolder Value="true" />
+						<RefersToFolder Value="false" />
 						<SearchHint>
 							<PathHint />
 							<FileSize Value="0" />
@@ -54,19 +57,18 @@
 						<LivePackName Value="Core Library" />
 						<LivePackId Value="www.ableton.com/0" />
 					</FileRef>
-					<DeviceId Name="UltraAnalog" />
-				</AbletonDefaultPresetRef>
+				</FilePresetRef>
 			</Value>
 		</LastPresetRef>
 		<LockedScripts />
 		<IsFolded Value="false" />
 		<ShouldShowPresetName Value="true" />
-		<UserName Value="" />
+		<UserName Value="Horn1 Deep Mono Brass" />
 		<Annotation Value="" />
 		<SourceContext>
 			<Value />
 		</SourceContext>
-		<OverwriteProtectionNumber Value="2561" />
+		<OverwriteProtectionNumber Value="2562" />
 		<Polyphony>
 			<LomId Value="0" />
 			<Manual Value="0" />
@@ -76,7 +78,7 @@
 		</Polyphony>
 		<PitchBendRange>
 			<LomId Value="0" />
-			<Manual Value="0.1666666716" />
+			<Manual Value="0.5" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -90,7 +92,7 @@
 		</PitchBendRange>
 		<Volume>
 			<LomId Value="0" />
-			<Manual Value="0.7047889829" />
+			<Manual Value="0.5634920597" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -148,7 +150,7 @@
 		</KeyboardFineTune>
 		<KeyboardUnisonToggle>
 			<LomId Value="0" />
-			<Manual Value="true" />
+			<Manual Value="false" />
 			<AutomationTarget Id="0">
 				<LockEnvelope Value="0" />
 			</AutomationTarget>
@@ -166,7 +168,7 @@
 		</KeyboardUnison>
 		<KeyboardDetune>
 			<LomId Value="0" />
-			<Manual Value="0.40625" />
+			<Manual Value="0" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -229,7 +231,7 @@
 		</KeyboardError>
 		<VibratoToggle>
 			<LomId Value="0" />
-			<Manual Value="false" />
+			<Manual Value="true" />
 			<AutomationTarget Id="0">
 				<LockEnvelope Value="0" />
 			</AutomationTarget>
@@ -240,7 +242,7 @@
 		</VibratoToggle>
 		<VibratoSpeed>
 			<LomId Value="0" />
-			<Manual Value="0.5" />
+			<Manual Value="0.5317460299" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -254,7 +256,7 @@
 		</VibratoSpeed>
 		<VibratoFadeIn>
 			<LomId Value="0" />
-			<Manual Value="0" />
+			<Manual Value="0.296875" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -268,7 +270,7 @@
 		</VibratoFadeIn>
 		<VibratoAmount>
 			<LomId Value="0" />
-			<Manual Value="0" />
+			<Manual Value="0.484375" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -282,7 +284,7 @@
 		</VibratoAmount>
 		<VibratoError>
 			<LomId Value="0" />
-			<Manual Value="0" />
+			<Manual Value="0.265625" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -296,7 +298,7 @@
 		</VibratoError>
 		<VibratoDelay>
 			<LomId Value="0" />
-			<Manual Value="0" />
+			<Manual Value="0.296875" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -310,7 +312,7 @@
 		</VibratoDelay>
 		<VibratoModWheel>
 			<LomId Value="0" />
-			<Manual Value="0" />
+			<Manual Value="0.722222209" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -335,7 +337,7 @@
 		</PortamentoToggle>
 		<PortamentoTime>
 			<LomId Value="0" />
-			<Manual Value="0.6015625" />
+			<Manual Value="0.3359375" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -349,14 +351,14 @@
 		</PortamentoTime>
 		<PortamentoMode>
 			<LomId Value="0" />
-			<Manual Value="0" />
+			<Manual Value="1" />
 			<AutomationTarget Id="0">
 				<LockEnvelope Value="0" />
 			</AutomationTarget>
 		</PortamentoMode>
 		<PortamentoLegato>
 			<LomId Value="0" />
-			<Manual Value="true" />
+			<Manual Value="false" />
 			<AutomationTarget Id="0">
 				<LockEnvelope Value="0" />
 			</AutomationTarget>
@@ -367,7 +369,7 @@
 		</PortamentoLegato>
 		<NoiseToggle>
 			<LomId Value="0" />
-			<Manual Value="true" />
+			<Manual Value="false" />
 			<AutomationTarget Id="0">
 				<LockEnvelope Value="0" />
 			</AutomationTarget>
@@ -378,7 +380,7 @@
 		</NoiseToggle>
 		<NoiseColor>
 			<LomId Value="0" />
-			<Manual Value="0.1111111119" />
+			<Manual Value="1" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -392,7 +394,7 @@
 		</NoiseColor>
 		<NoiseBalance>
 			<LomId Value="0" />
-			<Manual Value="1" />
+			<Manual Value="0.5" />
 			<MidiControllerRange>
 				<Min Value="0" />
 				<Max Value="1" />
@@ -439,7 +441,7 @@
 			</OscillatorWaveShape>
 			<OscillatorOct>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="1" />
 				<MidiControllerRange>
 					<Min Value="-3" />
 					<Max Value="3" />
@@ -476,7 +478,7 @@
 			</OscillatorMode>
 			<OscillatorEnvTime>
 				<LomId Value="0" />
-				<Manual Value="0.5" />
+				<Manual Value="0.28125" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -490,7 +492,7 @@
 			</OscillatorEnvTime>
 			<OscillatorDetune>
 				<LomId Value="0" />
-				<Manual Value="0.4126984179" />
+				<Manual Value="0.46875" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -518,7 +520,7 @@
 			</OscillatorModulation1>
 			<OscillatorPulseWidth>
 				<LomId Value="0" />
-				<Manual Value="0.5" />
+				<Manual Value="0.3515625" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -532,7 +534,7 @@
 			</OscillatorPulseWidth>
 			<OscillatorSubAmount>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="0.724409461" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -602,7 +604,7 @@
 			</OscillatorLFOModPW>
 			<OscillatorLevel>
 				<LomId Value="0" />
-				<Manual Value="0.8062000275" />
+				<Manual Value="0.984375" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -634,14 +636,14 @@
 			</FilterType>
 			<FilterDrive>
 				<LomId Value="0" />
-				<Manual Value="1" />
+				<Manual Value="2" />
 				<AutomationTarget Id="0">
 					<LockEnvelope Value="0" />
 				</AutomationTarget>
 			</FilterDrive>
 			<FilterKbdCutoffMod>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="0.5" />
 				<MidiControllerRange>
 					<Min Value="-1" />
 					<Max Value="1" />
@@ -655,7 +657,7 @@
 			</FilterKbdCutoffMod>
 			<FilterCutoffFrequency>
 				<LomId Value="0" />
-				<Manual Value="1" />
+				<Manual Value="0.3937007785" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -683,7 +685,7 @@
 			</FilterKbdQMod>
 			<FilterQFactor>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="0.2380952388" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -697,7 +699,7 @@
 			</FilterQFactor>
 			<FilterLFOCutoffMod>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="0.0234375" />
 				<MidiControllerRange>
 					<Min Value="-1" />
 					<Max Value="1" />
@@ -711,7 +713,7 @@
 			</FilterLFOCutoffMod>
 			<FilterEnvCutoffMod>
 				<LomId Value="0" />
-				<Manual Value="0.7047610879" />
+				<Manual Value="0.6507936716" />
 				<MidiControllerRange>
 					<Min Value="-1" />
 					<Max Value="1" />
@@ -764,7 +766,7 @@
 			</AmplifierToggle>
 			<AmplifierKbdAmpMod>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="-0.296875" />
 				<MidiControllerRange>
 					<Min Value="-1" />
 					<Max Value="1" />
@@ -778,7 +780,7 @@
 			</AmplifierKbdAmpMod>
 			<AmplifierLevel>
 				<LomId Value="0" />
-				<Manual Value="0.474311769" />
+				<Manual Value="0.6349206567" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -820,7 +822,7 @@
 			</AmplifierPan>
 			<AmplifierLFOAmpMod>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="0.0078125" />
 				<MidiControllerRange>
 					<Min Value="-1" />
 					<Max Value="1" />
@@ -862,7 +864,7 @@
 			</AmplifierEnvPanMod>
 			<LFOToggle>
 				<LomId Value="0" />
-				<Manual Value="false" />
+				<Manual Value="true" />
 				<AutomationTarget Id="0">
 					<LockEnvelope Value="0" />
 				</AutomationTarget>
@@ -880,7 +882,7 @@
 			</LFOWaveShape>
 			<LFOSync>
 				<LomId Value="0" />
-				<Manual Value="13" />
+				<Manual Value="0" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="23" />
@@ -912,7 +914,7 @@
 			</LFOGateReset>
 			<LFOPulseWidth>
 				<LomId Value="0" />
-				<Manual Value="0.5" />
+				<Manual Value="0.5158730149" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -926,7 +928,7 @@
 			</LFOPulseWidth>
 			<LFOSpeed>
 				<LomId Value="0" />
-				<Manual Value="0.5" />
+				<Manual Value="0.7539682388" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -954,7 +956,7 @@
 			</LFOPhase>
 			<LFODelay>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="0.2109375" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -968,7 +970,7 @@
 			</LFODelay>
 			<LFOFadeIn>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="0.390625" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -1023,7 +1025,7 @@
 				</Legato>
 				<AttackMod>
 					<LomId Value="0" />
-					<Manual Value="0" />
+					<Manual Value="0.453125" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1037,7 +1039,7 @@
 				</AttackMod>
 				<AttackTime>
 					<LomId Value="0" />
-					<Manual Value="0" />
+					<Manual Value="0.5396825671" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1051,7 +1053,7 @@
 				</AttackTime>
 				<DecayTime>
 					<LomId Value="0" />
-					<Manual Value="0.6000000238" />
+					<Manual Value="0.7301587462" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1065,7 +1067,7 @@
 				</DecayTime>
 				<AmpMod>
 					<LomId Value="0" />
-					<Manual Value="0" />
+					<Manual Value="0.0625" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1079,7 +1081,7 @@
 				</AmpMod>
 				<SustainLevel>
 					<LomId Value="0" />
-					<Manual Value="0.5" />
+					<Manual Value="0.3671875" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1107,7 +1109,7 @@
 				</SustainTime>
 				<ReleaseTime>
 					<LomId Value="0" />
-					<Manual Value="0.4847841263" />
+					<Manual Value="0.4765625" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1163,7 +1165,7 @@
 				</Legato>
 				<AttackMod>
 					<LomId Value="0" />
-					<Manual Value="0" />
+					<Manual Value="0.6190476418" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1177,7 +1179,7 @@
 				</AttackMod>
 				<AttackTime>
 					<LomId Value="0" />
-					<Manual Value="0" />
+					<Manual Value="0.46875" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1191,7 +1193,7 @@
 				</AttackTime>
 				<DecayTime>
 					<LomId Value="0" />
-					<Manual Value="0.5272727013" />
+					<Manual Value="0.6984127164" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1205,7 +1207,7 @@
 				</DecayTime>
 				<AmpMod>
 					<LomId Value="0" />
-					<Manual Value="0.5" />
+					<Manual Value="0.1953125" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1219,7 +1221,7 @@
 				</AmpMod>
 				<SustainLevel>
 					<LomId Value="0" />
-					<Manual Value="1" />
+					<Manual Value="0.34375" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1247,7 +1249,7 @@
 				</SustainTime>
 				<ReleaseTime>
 					<LomId Value="0" />
-					<Manual Value="0.5718053579" />
+					<Manual Value="0.46875" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1262,7 +1264,7 @@
 			</Envelope.1>
 			<FilterToFilter2>
 				<LomId Value="0" />
-				<Manual Value="1" />
+				<Manual Value="0" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -1333,7 +1335,7 @@
 			</OscillatorMode>
 			<OscillatorEnvTime>
 				<LomId Value="0" />
-				<Manual Value="0.5" />
+				<Manual Value="0.234375" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -1347,7 +1349,7 @@
 			</OscillatorEnvTime>
 			<OscillatorDetune>
 				<LomId Value="0" />
-				<Manual Value="0.6349206567" />
+				<Manual Value="0.5634920597" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -1375,7 +1377,7 @@
 			</OscillatorModulation1>
 			<OscillatorPulseWidth>
 				<LomId Value="0" />
-				<Manual Value="0.5" />
+				<Manual Value="0.3515625" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -1389,7 +1391,7 @@
 			</OscillatorPulseWidth>
 			<OscillatorSubAmount>
 				<LomId Value="0" />
-				<Manual Value="0" />
+				<Manual Value="0.724409461" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -1459,7 +1461,7 @@
 			</OscillatorLFOModPW>
 			<OscillatorLevel>
 				<LomId Value="0" />
-				<Manual Value="0.8062000275" />
+				<Manual Value="0.8546875119" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -1491,7 +1493,7 @@
 			</FilterType>
 			<FilterDrive>
 				<LomId Value="0" />
-				<Manual Value="1" />
+				<Manual Value="0" />
 				<AutomationTarget Id="0">
 					<LockEnvelope Value="0" />
 				</AutomationTarget>
@@ -1568,7 +1570,7 @@
 			</FilterLFOCutoffMod>
 			<FilterEnvCutoffMod>
 				<LomId Value="0" />
-				<Manual Value="0.7047610879" />
+				<Manual Value="0" />
 				<MidiControllerRange>
 					<Min Value="-1" />
 					<Max Value="1" />
@@ -1635,7 +1637,7 @@
 			</AmplifierKbdAmpMod>
 			<AmplifierLevel>
 				<LomId Value="0" />
-				<Manual Value="0.474311769" />
+				<Manual Value="0.8690000176" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -1737,7 +1739,7 @@
 			</LFOWaveShape>
 			<LFOSync>
 				<LomId Value="0" />
-				<Manual Value="13" />
+				<Manual Value="0" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="23" />
@@ -1783,7 +1785,7 @@
 			</LFOPulseWidth>
 			<LFOSpeed>
 				<LomId Value="0" />
-				<Manual Value="0.5" />
+				<Manual Value="0.5634920597" />
 				<MidiControllerRange>
 					<Min Value="0" />
 					<Max Value="1" />
@@ -1936,7 +1938,7 @@
 				</AmpMod>
 				<SustainLevel>
 					<LomId Value="0" />
-					<Manual Value="0.5" />
+					<Manual Value="0" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -1964,7 +1966,7 @@
 				</SustainTime>
 				<ReleaseTime>
 					<LomId Value="0" />
-					<Manual Value="0.4847841263" />
+					<Manual Value="0.6000000238" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -2062,7 +2064,7 @@
 				</DecayTime>
 				<AmpMod>
 					<LomId Value="0" />
-					<Manual Value="0.5" />
+					<Manual Value="0" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -2076,7 +2078,7 @@
 				</AmpMod>
 				<SustainLevel>
 					<LomId Value="0" />
-					<Manual Value="0.5" />
+					<Manual Value="0" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />
@@ -2104,7 +2106,7 @@
 				</SustainTime>
 				<ReleaseTime>
 					<LomId Value="0" />
-					<Manual Value="0.5718053579" />
+					<Manual Value="0.6000000238" />
 					<MidiControllerRange>
 						<Min Value="0" />
 						<Max Value="1" />

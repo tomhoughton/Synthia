@@ -32,19 +32,16 @@ def get_json():
 
 @app.route('/api/get-presets') # For library view.
 def get_presets():
-    presets = preset_manager.get_preset_dataV2()
-    json = []
+    presets = preset_managerV2.get_preset_dataV2()
 
-    for preset in presets:
-        json.append(preset.format_to_json())
-    
-    
-    return { 'presets': json }
+    return { 'presets': presets }
 
 @app.route('/api/find-new-data') # For train view.
 def find_new_data():
-    new_presets = preset_manager.get_new_data_v2()
-    json = preset_manager.get_json_tree(new_presets)
+    new_presets = preset_managerV2.get_new_data_v2()
+    json = preset_managerV2.get_json_tree(new_presets)
+    print('json')
+    print(json)
     return json
 
 

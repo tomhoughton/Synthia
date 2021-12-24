@@ -25,15 +25,3 @@ TASK FOR THIS BRANCH:
   and show a single value from that preset.
 
 """
-
-# Important variables:
-categories = np.array([
-    'Bass'
-])
-
-# Create a preset manager instance.
-preset_manager = PresetManager(categories)
-preset_managerV2 = PresetManager_V2()
-
-a = preset_managerV2.get_new_data_v2()
-
