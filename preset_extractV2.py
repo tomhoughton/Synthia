@@ -30,6 +30,8 @@ class PresetManager_V2:
         self.json_export_path = os.path.join('New{resetsJson')
         self.configObject = Config()
 
+
+
     def get_new_data_v3(self):
         """
         This function should check the new presets folder, then convert them to json.
@@ -82,6 +84,7 @@ class PresetManager_V2:
                     name = preset[:-5]
 
             values['name'] = name
+            values['descriptors'] = { 'consistency': 0, 'dynamics': 0, 'brightness': 0, 'evolution': 0}
             # Get global values:
             globalValues = self.getGlobals(data)
             values['globals'] = globalValues
@@ -96,6 +99,8 @@ class PresetManager_V2:
     
         return values
 
+
+
     def getGlobals(self, data):
         features = self.configObject.features
         values = {}
@@ -109,6 +114,8 @@ class PresetManager_V2:
                 values[feature] = data[pathTo[0]][pathTo[1]][feature]["@Value"]
 
         return values
+
+
 
     def getSignalChain1(self, data):
         features = self.configObject.SCFeatures
@@ -145,6 +152,8 @@ class PresetManager_V2:
         rtn = values
         return rtn
 
+
+
     def getSignalChain2(self, data):
         features = self.configObject.SCFeatures2
         features.append(self.configObject.FilterToFilter2[1])
@@ -178,6 +187,7 @@ class PresetManager_V2:
 
         rtn = values
         return rtn
+
 
 
     def get_new_data_v2(self):
