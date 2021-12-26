@@ -36,19 +36,14 @@ class PresetManager_V2:
         It should then use the config objects features to go through and obtain each feature,
         and place it within an object as an array:
         """
-
         # New presets path:
         new_presets = os.path.join('NewPresets')
-
         # New presets array:
         presets = os.listdir(new_presets)
-
         # XML export path:
         xml_export_path = os.path.join('NewPresetsXML')
-
         # Json export path:
         json_export_path = os.path.join('NewPresetsJson')
-
 
         # Store the new preset object:
         new_preset_obj = []
@@ -127,7 +122,27 @@ class PresetManager_V2:
             except KeyError:
                 values.append({ feature: data[pathTo[0]][pathTo[1]][pathTo[2]][feature]["@Value"]})
 
-        return values
+
+        # ENV 1:
+        # Need to get env features:
+        envFeatures = self.configObject.ENVFeatures
+        envValues = []
+        for i in envFeatures:
+            envValues.append({ i: data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.0"][i]["Manual"]["@Value"]})
+        
+        # ENV 2:
+        env2Values = []
+
+        for x in envFeatures: 
+            env2Values.append({ x: data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.1"][x]["Manual"]["@Value"]})
+
+        rtn = {
+            'SignalChain1': values,
+            'Envelope.0': envValues,
+            'Envelope.1': env2Values
+        }
+
+        return rtn
 
     def getSignalChain2(self, data):
         features = self.configObject.SCFeatures2
@@ -140,7 +155,26 @@ class PresetManager_V2:
                 except KeyError:
                     values.append({ i: data[pathTo[0]][pathTo[1]][pathTo[2]][i]["@Value"]})
 
-        return values
+        # ENV 1:
+        # Need to get env features:
+        envFeatures = self.configObject.ENVFeatures
+        envValues = []
+        for i in envFeatures:
+            envValues.append({ i: data["Ableton"]["UltraAnalog"]["SignalChain2"]["Envelope.0"][i]["Manual"]["@Value"]})
+        
+        # ENV 2:
+        env2Values = []
+
+        for x in envFeatures: 
+            env2Values.append({ x: data["Ableton"]["UltraAnalog"]["SignalChain2"]["Envelope.1"][x]["Manual"]["@Value"]})
+
+        rtn = {
+            'SignalChain2': values,
+            'Envelope.0': envValues,
+            'Envelope.1': env2Values
+        }
+        
+        return rtn
 
 
     def get_new_data_v2(self):
