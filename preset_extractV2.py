@@ -34,8 +34,9 @@ class PresetManager_V2:
         """
         This function should check the new presets folder, then convert them to json.
         It should then use the config objects features to go through and obtain each feature,
-        and place it within an object as an array:
+        and place it within an object as a dictionary:
         """
+
         # New presets path:
         new_presets = os.path.join('NewPresets')
         # New presets array:
@@ -45,12 +46,8 @@ class PresetManager_V2:
         # Json export path:
         json_export_path = os.path.join('NewPresetsJson')
 
-        # Store the new preset object:
-        new_preset_obj = []
-
         # Loop through:
         for index, preset in enumerate(presets):
-
             # Export and save the xml files:
             adv_file = os.path.join(new_presets, preset)
             xml_file_name = preset[:-3] + 'xml'
@@ -72,7 +69,7 @@ class PresetManager_V2:
             name = ""
 
             # Create an empty array to store preset values:
-            values = []
+            values = {}
 
             # Open the json file:
             with open(os.path.join(json_export_path, preset)) as json_file:
@@ -84,96 +81,102 @@ class PresetManager_V2:
                 else:
                     name = preset[:-5]
 
-            
+            values['name'] = name
             # Get global values:
             globalValues = self.getGlobals(data)
-            values.append({ 'Globals' : globalValues})
+            values['globals'] = globalValues
 
             # Get Signal Chain 1:
             signal1 = self.getSignalChain1(data)
-            values.append({ 'SignalChain1': signal1 })
+            values['SignalChain1'] = signal1
 
             # Get Signal Chain 2:
             signal2 = self.getSignalChain2(data)
-            values.append({ 'SignalChain2': signal2})
+            values['SignalChain2'] = signal2
     
         return values
 
     def getGlobals(self, data):
         features = self.configObject.features
-        values = []
+        values = {}
         for feature in features:
             pathTo = ["Ableton", "UltraAnalog"]
             try:
-                values.append({ feature: data[pathTo[0]][pathTo[1]][feature]["Manual"]["@Value"]})
+                #values.append({ feature: data[pathTo[0]][pathTo[1]][feature]["Manual"]["@Value"]})
+                values[feature] = data[pathTo[0]][pathTo[1]][feature]["Manual"]["@Value"]
             except KeyError:
-                values.append({ feature: data[pathTo[0]][pathTo[1]][feature]["@Value"]})
+                #values.append({ feature: data[pathTo[0]][pathTo[1]][feature]["@Value"]})
+                values[feature] = data[pathTo[0]][pathTo[1]][feature]["@Value"]
 
         return values
 
     def getSignalChain1(self, data):
         features = self.configObject.SCFeatures
         features.append(self.configObject.FilterToFilter2[0])
-        values = []
+        values = {}
         for feature in features:
             pathTo = ["Ableton", "UltraAnalog", "SignalChain1"]
             try:
-                values.append({feature: data[pathTo[0]][pathTo[1]][pathTo[2]][feature]["Manual"]["@Value"]})
+                #values.append({feature: data[pathTo[0]][pathTo[1]][pathTo[2]][feature]["Manual"]["@Value"]})
+                values[feature] = data[pathTo[0]][pathTo[1]][pathTo[2]][feature]["Manual"]["@Value"]
             except KeyError:
-                values.append({ feature: data[pathTo[0]][pathTo[1]][pathTo[2]][feature]["@Value"]})
+                #values.append({ feature: data[pathTo[0]][pathTo[1]][pathTo[2]][feature]["@Value"]})
+                values[feature] = data[pathTo[0]][pathTo[1]][pathTo[2]][feature]["@Value"]
 
 
         # ENV 1:
         # Need to get env features:
         envFeatures = self.configObject.ENVFeatures
-        envValues = []
+        envValues = {}
         for i in envFeatures:
-            envValues.append({ i: data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.0"][i]["Manual"]["@Value"]})
+            #envValues.append({ i: data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.0"][i]["Manual"]["@Value"]})
+            envValues[i] = data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.0"][i]["Manual"]["@Value"]
         
         # ENV 2:
-        env2Values = []
-
+        env2Values = {}
         for x in envFeatures: 
-            env2Values.append({ x: data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.1"][x]["Manual"]["@Value"]})
+            #env2Values.append({ x: data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.1"][x]["Manual"]["@Value"]})
+            env2Values[x] = data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.1"][x]["Manual"]["@Value"]
 
-        rtn = {
-            'SignalChain1': values,
-            'Envelope.0': envValues,
-            'Envelope.1': env2Values
-        }
+        # Add envelopes to the values dictionary.
+        values["Envelope.0"] = envValues
+        values["Envelope.1"] = env2Values
 
+        rtn = values
         return rtn
 
     def getSignalChain2(self, data):
         features = self.configObject.SCFeatures2
         features.append(self.configObject.FilterToFilter2[1])
-        values = []
+        values = {}
         for i in features:
                 pathTo = ["Ableton", "UltraAnalog", "SignalChain2"]
                 try:
-                    values.append({ i: data[pathTo[0]][pathTo[1]][pathTo[2]][i]["Manual"]["@Value"]})
+                    #values.append({ i: data[pathTo[0]][pathTo[1]][pathTo[2]][i]["Manual"]["@Value"]})
+                    values[i] = data[pathTo[0]][pathTo[1]][pathTo[2]][i]["Manual"]["@Value"]
                 except KeyError:
-                    values.append({ i: data[pathTo[0]][pathTo[1]][pathTo[2]][i]["@Value"]})
+                    #values.append({ i: data[pathTo[0]][pathTo[1]][pathTo[2]][i]["@Value"]})
+                    values[i] = data[pathTo[0]][pathTo[1]][pathTo[2]][i]["@Value"]
 
         # ENV 1:
         # Need to get env features:
         envFeatures = self.configObject.ENVFeatures
-        envValues = []
+        envValues = {}
         for i in envFeatures:
-            envValues.append({ i: data["Ableton"]["UltraAnalog"]["SignalChain2"]["Envelope.0"][i]["Manual"]["@Value"]})
+            #envValues.append({ i: data["Ableton"]["UltraAnalog"]["SignalChain2"]["Envelope.0"][i]["Manual"]["@Value"]})
+            envValues[i] = data["Ableton"]["UltraAnalog"]["SignalChain2"]["Envelope.0"][i]["Manual"]["@Value"]
         
         # ENV 2:
-        env2Values = []
-
+        env2Values = {}
         for x in envFeatures: 
-            env2Values.append({ x: data["Ableton"]["UltraAnalog"]["SignalChain2"]["Envelope.1"][x]["Manual"]["@Value"]})
+            #env2Values.append({ x: data["Ableton"]["UltraAnalog"]["SignalChain2"]["Envelope.1"][x]["Manual"]["@Value"]})
+            env2Values[x] = data["Ableton"]["UltraAnalog"]["SignalChain2"]["Envelope.1"][x]["Manual"]["@Value"]
 
-        rtn = {
-            'SignalChain2': values,
-            'Envelope.0': envValues,
-            'Envelope.1': env2Values
-        }
-        
+        # Add Envelopes to the values dictionary.
+        values["Envelope.0"] = envValues
+        values["Envelope.1"] = env2Values
+
+        rtn = values
         return rtn
 
 
