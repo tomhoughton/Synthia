@@ -58,11 +58,9 @@ class PresetManager_V2:
             json_file_name = preset[:-3] + 'json'
             xml_file = os.path.join(xml_export_path, xml_file_name)
             self.to_json(xml_file, json_export_path, json_file_name)
-            print('should be done')
 
         # Read through the completed json files:
         json_files = os.listdir(json_export_path)
-        print('json folder length: ', len(json_files))
 
         # Step 01: Loop through the json_files:
         for preset in json_files:
