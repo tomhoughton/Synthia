@@ -1,0 +1,157 @@
+"""
+This is a class to store all of the configuration of the application.
+"""
+
+class Config:
+    def __init__(self) -> None:
+
+        # These are the features which dont belong to the signal chains:
+        self.features = [
+            'Polyphony',
+            'PitchBendRange',
+            'Volume',
+            'Octave',
+            'OctaveRelativePosition',
+            'Transpose',
+            'TransposeRelativePosition',
+            'KeyboardFineTune',
+            'KeyboardUnisonToggle',
+            'KeyboardUnison',
+            'KeyboardUnisonDelay',
+            'KeyboardPriority',
+            'KeyboardStretch',
+            'KeyboardError',
+            'VibratoToggle',
+            'VibratoSpeed',
+            'VibratoFadeIn',
+            'VibratoAmount',
+            'VibratoError',
+            'VibratoDelay',
+            'VibratoModWheel',
+            'PortamentoToggle',
+            'PortamentoTime',
+            'PortamentoMode',
+            'PortamentoLegato',
+            'NoiseToggle',
+            'NoiseColor',
+            'NoiseBalance',
+            'NoiseLevel'
+        ]
+
+        # These are the features which belong to both signal Chains:
+        self.SCFeatures = [
+            'OscillatorToggle',
+            'OscillatorWaveShape',
+            'OscillatorOct',
+            'OscillatorOctRelativePosition',
+            'OscillatorSemi',
+            'OscillatorSemiRelativePosition',
+            'OscillatorSemi',
+            'OscillatorMode',
+            'OscillatorEnvTime',
+            'OscillatorDetune',
+            'OscillatorModulation1',
+            'OscillatorPulseWidth',
+            'OscillatorSubAmount',
+            'OscillatorBalance',
+            'OscillatorEnvAmount',
+            'OscillatorLFOModPW',
+            'OscillatorLevel',
+            'FilterToggle',
+            'FilterType',
+            'FilterDrive',
+            'FilterKbdCutoffMod',
+            'FilterCutoffFrequency',
+            'FilterKbdQMod',
+            'FilterQFactor',
+            'FilterLFOCutoffMod',
+            'FilterEnvCutoffMod',
+            'FilterLFOQMod',
+            'FilterEnvQMod',
+            'AmplifierToggle',
+            'AmplifierKbdAmpMod',
+            'AmplifierLevel',
+            'AmplifierKbdPanMod',
+            'AmplifierPan',
+            'AmplifierLFOAmpMod',
+            'AmplifierLFOPanMod',
+            'AmplifierEnvPanMod',
+            'LFOToggle',
+            'LFOSync',
+            'LFOSyncToggle',
+            'LFOGateReset',
+            'LFOPulseWidth',
+            'LFOSpeed',
+            'LFOPhase',
+            'LFODelay',
+            'LFOFadeIn'
+        ]
+
+        self.SCFeatures2 = [
+            'OscillatorToggle',
+            'OscillatorWaveShape',
+            'OscillatorOct',
+            'OscillatorOctRelativePosition',
+            'OscillatorSemi',
+            'OscillatorSemiRelativePosition',
+            'OscillatorSemi',
+            'OscillatorMode',
+            'OscillatorEnvTime',
+            'OscillatorDetune',
+            'OscillatorModulation1',
+            'OscillatorPulseWidth',
+            'OscillatorSubAmount',
+            'OscillatorBalance',
+            'OscillatorEnvAmount',
+            'OscillatorLFOModPW',
+            'OscillatorLevel',
+            'FilterToggle',
+            'FilterType',
+            'FilterDrive',
+            'FilterKbdCutoffMod',
+            'FilterCutoffFrequency',
+            'FilterKbdQMod',
+            'FilterQFactor',
+            'FilterLFOCutoffMod',
+            'FilterEnvCutoffMod',
+            'FilterLFOQMod',
+            'FilterEnvQMod',
+            'AmplifierToggle',
+            'AmplifierKbdAmpMod',
+            'AmplifierLevel',
+            'AmplifierKbdPanMod',
+            'AmplifierPan',
+            'AmplifierLFOAmpMod',
+            'AmplifierLFOPanMod',
+            'AmplifierEnvPanMod',
+            'LFOToggle',
+            'LFOSync',
+            'LFOSyncToggle',
+            'LFOGateReset',
+            'LFOPulseWidth',
+            'LFOSpeed',
+            'LFOPhase',
+            'LFODelay',
+            'LFOFadeIn'
+        ]
+
+        # These are the features which belong to the envs:
+        self.ENVFeatures = [
+            'ExponentialSlope',
+            'Loop',
+            'FreeRun',
+            'Legato',
+            'AttackMod',
+            'AttackTime',
+            'DecayTime',
+            'AmpMod',
+            'SustainLevel',
+            'SustainTime',
+            'ReleaseTime'
+        ]
+
+        'These are the filter to filter things'
+        self.FilterToFilter2 = [
+            'FilterToFilter2',
+            'FilterSlave'
+        ]

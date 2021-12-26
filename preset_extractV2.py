@@ -18,7 +18,7 @@ import numpy as np
 import xmltodict
 import json
 from xml.dom import minidom
-
+from Config import Config
 
 class PresetManager_V2:
     def __init__(self):
@@ -28,6 +28,120 @@ class PresetManager_V2:
         self.new_presets = os.path.join('NewPresets')
         self.xml_export_path = os.path.join('NewPresetsXML')
         self.json_export_path = os.path.join('New{resetsJson')
+        self.configObject = Config()
+
+    def get_new_data_v3(self):
+        """
+        This function should check the new presets folder, then convert them to json.
+        It should then use the config objects features to go through and obtain each feature,
+        and place it within an object as an array:
+        """
+
+        # New presets path:
+        new_presets = os.path.join('NewPresets')
+
+        # New presets array:
+        presets = os.listdir(new_presets)
+
+        # XML export path:
+        xml_export_path = os.path.join('NewPresetsXML')
+
+        # Json export path:
+        json_export_path = os.path.join('NewPresetsJson')
+
+
+        # Store the new preset object:
+        new_preset_obj = []
+
+        # Loop through:
+        for index, preset in enumerate(presets):
+
+            # Export and save the xml files:
+            adv_file = os.path.join(new_presets, preset)
+            xml_file_name = preset[:-3] + 'xml'
+            self.to_xml(adv_file, xml_export_path, xml_file_name)
+
+            json_file_name = preset[:-3] + 'json'
+            xml_file = os.path.join(xml_export_path, xml_file_name)
+            self.to_json(xml_file, json_export_path, json_file_name)
+            print('should be done')
+
+        # Read through the completed json files:
+        json_files = os.listdir(json_export_path)
+        print('json folder length: ', len(json_files))
+
+        # Step 01: Loop through the json_files:
+        for preset in json_files:
+            
+            # Store the preset name:
+            name = ""
+
+            # Create an empty array to store preset values:
+            values = []
+
+            # Open the json file:
+            with open(os.path.join(json_export_path, preset)) as json_file:
+                data = json.load(json_file)
+                
+                # Obtain Preset Name:
+                if len(data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]) > 0:
+                    name = data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]
+                else:
+                    name = preset[:-5]
+
+            
+            # Get global values:
+            globalValues = self.getGlobals(data)
+            values.append({ 'Globals' : globalValues})
+
+            # Get Signal Chain 1:
+            signal1 = self.getSignalChain1(data)
+            values.append({ 'SignalChain1': signal1 })
+
+            # Get Signal Chain 2:
+            signal2 = self.getSignalChain2(data)
+            values.append({ 'SignalChain2': signal2})
+    
+        return values
+
+    def getGlobals(self, data):
+        features = self.configObject.features
+        values = []
+        for feature in features:
+            pathTo = ["Ableton", "UltraAnalog"]
+            try:
+                values.append({ feature: data[pathTo[0]][pathTo[1]][feature]["Manual"]["@Value"]})
+            except KeyError:
+                values.append({ feature: data[pathTo[0]][pathTo[1]][feature]["@Value"]})
+
+        return values
+
+    def getSignalChain1(self, data):
+        features = self.configObject.SCFeatures
+        features.append(self.configObject.FilterToFilter2[0])
+        values = []
+        for feature in features:
+            pathTo = ["Ableton", "UltraAnalog", "SignalChain1"]
+            try:
+                values.append({feature: data[pathTo[0]][pathTo[1]][pathTo[2]][feature]["Manual"]["@Value"]})
+            except KeyError:
+                values.append({ feature: data[pathTo[0]][pathTo[1]][pathTo[2]][feature]["@Value"]})
+
+        return values
+
+    def getSignalChain2(self, data):
+        features = self.configObject.SCFeatures2
+        features.append(self.configObject.FilterToFilter2[1])
+        values = []
+        for i in features:
+                pathTo = ["Ableton", "UltraAnalog", "SignalChain2"]
+                try:
+                    values.append({ i: data[pathTo[0]][pathTo[1]][pathTo[2]][i]["Manual"]["@Value"]})
+                except KeyError:
+                    values.append({ i: data[pathTo[0]][pathTo[1]][pathTo[2]][i]["@Value"]})
+
+        return values
+
 
     def get_new_data_v2(self):
         

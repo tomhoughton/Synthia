@@ -25,3 +25,7 @@ TASK FOR THIS BRANCH:
   and show a single value from that preset.
 
 """
+
+pm = PresetManager_V2()
+
+print(pm.get_new_data_v3())
