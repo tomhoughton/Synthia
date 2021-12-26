@@ -28,4 +28,6 @@ TASK FOR THIS BRANCH:
 
 pm = PresetManager_V2()
 
-print(pm.get_new_data_v3())
+a = pm.get_new_data_v3()
+
+print(a[1])

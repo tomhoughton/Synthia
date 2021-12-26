@@ -38,11 +38,8 @@ def get_presets():
 
 @app.route('/api/find-new-data') # For train view.
 def find_new_data():
-    new_presets = preset_managerV2.get_new_data_v2()
-    json = preset_managerV2.get_json_tree(new_presets)
-    print('json')
-    print(json)
-    return json
+    new_presets = preset_managerV2.get_new_data_v3()
+    return new_presets
 
 
 

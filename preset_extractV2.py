@@ -47,6 +47,8 @@ class PresetManager_V2:
         xml_export_path = os.path.join('NewPresetsXML')
         # Json export path:
         json_export_path = os.path.join('NewPresetsJson')
+        # Array to store the new presets:
+        new_data = []
 
         # Loop through:
         for index, preset in enumerate(presets):
@@ -94,8 +96,10 @@ class PresetManager_V2:
             # Get Signal Chain 2:
             signal2 = self.getSignalChain2(data)
             values['SignalChain2'] = signal2
-    
-        return values
+
+            new_data.append(values)
+        
+        return new_data
 
 
 
