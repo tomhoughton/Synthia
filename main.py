@@ -30,4 +30,7 @@ pm = PresetManager_V2()
 
 a = pm.get_new_data_v3()
 
-print(a[1])
+
+b = json.dumps(a[0]['SignalChain1'])
+
+print(b)
