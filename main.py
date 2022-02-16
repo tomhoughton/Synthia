@@ -5,7 +5,11 @@ from preset_extractV3 import PresetManager_V3
 
 manager = PresetManager_V3()
 
-manager.get_new_data()
+# new_data = manager.get_new_data()
 
+# print(new_data)
 
+# manager.save_training_data(presets=new_data)
+
+manager.to_pandas()
 
