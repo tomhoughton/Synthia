@@ -16,6 +16,9 @@ import xmltodict
 import json
 from xml.dom import minidom
 from Config import Config
+from DataFrameConfig import DataFrameConfig
+import pandas as pd
+from datetime import date
 
 class PresetManager_V3:
     
@@ -28,6 +31,7 @@ class PresetManager_V3:
         self.xml_export_path = os.path.join('NewPresetsXML')
         self.json_export_path = os.path.join('NewPresetsJson')
         self.configObject = Config()
+        self.data_f_config = DataFrameConfig()
 
     # Clear the new presets folder:
     def clear_new_presets(self, usedPresets):
@@ -245,9 +249,35 @@ class PresetManager_V3:
         
         test_name = 'Default.json'
         training_json_path = os.path.join('TrainingData', 'TrainingPresets')
+        data_frame_export_path = os.path.join('TrainingData', 'Datasets')
+        today = date.today()
+        date_str = today.strftime("%b-%d-%Y")
+        
+        dictionary = {}
+        
+        data_order = [self.data_f_config.signalChain, self.data_f_config.signalChain, self.data_f_config.globals]
         
         # Need to load the json file:
         with open(os.path.join(training_json_path, test_name)) as json_file:
             data = json.load(json_file)
             
-            print(data)
+            #Signal Chain 1:
+            for parameter in self.data_f_config.signalChain:
+                print(data['SignalChain1'][parameter])
+                dictionary[parameter] = [data['SignalChain1'][parameter]]
+            
+            # Signal Chain 2:
+            for parameter in self.data_f_config.signalChain:
+                print(data['SignalChain2'][parameter])
+                dictionary[parameter] = [data['SignalChain2'][parameter]]
+                
+            for parameter in self.data_f_config.globals:
+                print(data['globals'][parameter])
+                dictionary[parameter] = [data['globals'][parameter]]
+                
+            df = pd.DataFrame(data=dictionary)
+            
+            df.to_csv(os.path.join(data_frame_export_path, date_str))
+            
+            print(df)
+            
