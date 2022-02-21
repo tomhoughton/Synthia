@@ -50,7 +50,7 @@ class PresetManager_V3:
             os.remove(json_path)
        
             
-    def get_new_data(self):
+    def get_new_data(self, folder):
         """
         What should this function do:
         
@@ -62,12 +62,13 @@ class PresetManager_V3:
         """
         
         # Create an array of the new presets:
-        presets_adv = os.listdir(self.new_presets_folder)
+        presets_adv_path = os.path.join(self.new_presets_folder, folder)
+        presets_adv = os.listdir(presets_adv_path)
         
         # Loop through the presets:
         for index, preset in enumerate(presets_adv):
             # Export and save the xml files:
-            adv_file = os.path.join(self.new_presets_folder, preset)
+            adv_file = os.path.join(presets_adv_path, preset)
             xml_file_name = preset[:-3] + 'xml'
             
             # We then convert the adv file into an xml file:
@@ -82,10 +83,10 @@ class PresetManager_V3:
         # Gather all of the json files:
         json_files = os.listdir(os.path.join('NewPresetsJson'))
         
+        new_data = []
         for preset in json_files:
             
             # Array to store new presets:
-            new_data = []
             
             # Store the preset name:
             name = ""
@@ -281,3 +282,11 @@ class PresetManager_V3:
             
             print(df)
             
+            
+        # def to_pandas_v2(self):
+            
+        #     # Get the path for the preset description json file:
+        #     preset_description_path = os.path.join('PresetDescriptions')
+            
+            
+                        

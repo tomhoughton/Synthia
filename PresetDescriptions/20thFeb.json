@@ -1,0 +1,51 @@
+{
+    "80801": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "Bass01": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "Bass"
+    },
+    "Bass02": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "Bass"
+    },
+    "Lead01": {
+        "Consistent": true,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "Lead"
+    },
+    "Lead02": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "Lead"
+    },
+    "Pad01": {
+        "Consistent": true,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "808"
+    },
+    "Pluck01": {
+        "Consistent": true,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    }
+}
