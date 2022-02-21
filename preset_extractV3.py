@@ -283,10 +283,95 @@ class PresetManager_V3:
             print(df)
             
             
-        # def to_pandas_v2(self):
+    def to_pandas_v2(self, description_file):
+        
+        # Get the path for the preset description json file:
+        preset_description_path = os.path.join('PresetDescriptions')
+        
+        # Need to go through the training presets:
+        training_presets = os.listdir(self.training_json_folder)
+        
+        print('TrainingPresets: ', training_presets)
+        
+        # Need to structure the pd_dictionary so we can append values:
+        pd_dictionary = {}
+        
+        # Descriptors 01:
+        pd_dictionary['Name'] = []
+        pd_dictionary['Type'] = []
+        pd_dictionary['Consistent'] = []
+        pd_dictionary['Bright'] = []
+        pd_dictionary['Evolves'] = []
+        pd_dictionary['Dynamic'] = []
+        
+        # Oscillator 01:
+        pd_dictionary['OscillatorWaveShape01'] = []
+        pd_dictionary['OscillatorOct01'] = []
+        pd_dictionary['OscillatorSemi01'] = []
+        pd_dictionary['OscillatorDetune01'] = []
+        pd_dictionary['FilterCutoffFrequency01'] = []
+        pd_dictionary['FilterLFOCutoffMod01'] = []
+        pd_dictionary['FilterEnvCutoffMod01'] = []
+        
+        # Oscillator 02:
+        pd_dictionary['OscillatorWaveShape02'] = []
+        pd_dictionary['OscillatorOct02'] = []
+        pd_dictionary['OscillatorSemi02'] = []
+        pd_dictionary['OscillatorDetune02'] = []
+        pd_dictionary['FilterCutoffFrequency02'] = []
+        pd_dictionary['FilterLFOCutoffMod02'] = []
+        pd_dictionary['FilterEnvCutoffMod02'] = []
+        
+        # Envelope 01:
+        pd_dictionary['AttackTime01'] = []
+        pd_dictionary['DecayTime01'] = []
+        pd_dictionary['SustainLevel01'] = []
+        pd_dictionary['SustainTime01'] = []
+        pd_dictionary['ReleaseTime01'] = []
+        
+        # Envelope 02:
+        pd_dictionary['AttackTime02'] = []
+        pd_dictionary['DecayTime02'] = []
+        pd_dictionary['SustainLevel02'] = []
+        pd_dictionary['SustainTime02'] = []
+        pd_dictionary['ReleaseTime02'] = []
+        
+        # Globals:
+        pd_dictionary['VibratoSpeed'] = []
+        pd_dictionary['VibratoAmount'] = []
+        pd_dictionary['KeyboardUnison'] = []
+        
+        
+        for preset in training_presets:
             
-        #     # Get the path for the preset description json file:
-        #     preset_description_path = os.path.join('PresetDescriptions')
+            preset_name = preset[:-5]
+            
+            # Add the name to the dictionary:
+            pd_dictionary['Name'].append(preset_name)
+            
+            # Get Descriptor Columns:
+            with open(os.path.join(preset_description_path, description_file)) as json_file:
+                data = json.load(json_file)
+                
+                # Consistent:
+                pd_dictionary['Consistent'].append(data[preset_name]["Consistent"])
+                
+                # Bright:
+                pd_dictionary['Bright'].append(data[preset_name]["Bright"])
+                
+                # Evolves:
+                pd_dictionary['Evolves'].append(data[preset_name]["Evolves"])
+                
+                # Dynamic:
+                pd_dictionary['Dynamic'].append(data[preset_name]["Dynamic"])
+                
+            
+            
+            
+        print('Dictionary')
+        print(pd_dictionary)
+                
+            
             
             
                         

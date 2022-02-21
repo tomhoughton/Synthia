@@ -15,6 +15,14 @@ class DataFrameConfig:
             'FilterEnvCutoffMod'
         ]
         
+        self.envelopes = [
+            'AttackTime',
+            'DecayTime',
+            'SustainLevel',
+            'SustainTime',
+            'ReleaseTime'
+        ]
+        
         self.globals = [
             'VibratoSpeed',
             'VibratoFadeIn',
@@ -23,8 +31,4 @@ class DataFrameConfig:
             'KeyboardUnisonDelay'
         ]
         
-        self.parents = [
-            'SignalChain1',
-            'globals',
-            'Envelope.0'
-        ]
+        
