@@ -287,6 +287,10 @@ class PresetManager_V3:
         
         # Get the path for the preset description json file:
         preset_description_path = os.path.join('PresetDescriptions')
+        training_json_path = os.path.join('TrainingData', 'TrainingPresets')
+        data_frame_export_path = os.path.join('TrainingData', 'Datasets')
+        today = date.today()
+        date_str = today.strftime("%b-%d-%Y")
         
         # Need to go through the training presets:
         training_presets = os.listdir(self.training_json_folder)
@@ -305,41 +309,21 @@ class PresetManager_V3:
         pd_dictionary['Dynamic'] = []
         
         # Oscillator 01:
-        pd_dictionary['OscillatorWaveShape01'] = []
-        pd_dictionary['OscillatorOct01'] = []
-        pd_dictionary['OscillatorSemi01'] = []
-        pd_dictionary['OscillatorDetune01'] = []
-        pd_dictionary['FilterCutoffFrequency01'] = []
-        pd_dictionary['FilterLFOCutoffMod01'] = []
-        pd_dictionary['FilterEnvCutoffMod01'] = []
-        
-        # Oscillator 02:
-        pd_dictionary['OscillatorWaveShape02'] = []
-        pd_dictionary['OscillatorOct02'] = []
-        pd_dictionary['OscillatorSemi02'] = []
-        pd_dictionary['OscillatorDetune02'] = []
-        pd_dictionary['FilterCutoffFrequency02'] = []
-        pd_dictionary['FilterLFOCutoffMod02'] = []
-        pd_dictionary['FilterEnvCutoffMod02'] = []
-        
-        # Envelope 01:
-        pd_dictionary['AttackTime01'] = []
-        pd_dictionary['DecayTime01'] = []
-        pd_dictionary['SustainLevel01'] = []
-        pd_dictionary['SustainTime01'] = []
-        pd_dictionary['ReleaseTime01'] = []
-        
-        # Envelope 02:
-        pd_dictionary['AttackTime02'] = []
-        pd_dictionary['DecayTime02'] = []
-        pd_dictionary['SustainLevel02'] = []
-        pd_dictionary['SustainTime02'] = []
-        pd_dictionary['ReleaseTime02'] = []
+        pd_dictionary['OscillatorWaveShape'] = []
+        pd_dictionary['OscillatorOct'] = []
+        pd_dictionary['OscillatorSemi'] = []
+        pd_dictionary['OscillatorDetune'] = []
+        pd_dictionary['FilterCutoffFrequency'] = []
+        pd_dictionary['FilterLFOCutoffMod'] = []
+        pd_dictionary['FilterEnvCutoffMod'] = []
+        pd_dictionary['LFOSpeed'] = []
+        pd_dictionary['LFOFadeIn'] = []
         
         # Globals:
         pd_dictionary['VibratoSpeed'] = []
         pd_dictionary['VibratoAmount'] = []
         pd_dictionary['KeyboardUnison'] = []
+        pd_dictionary['KeyboardUnisonToggle'] = []
         
         
         for preset in training_presets:
@@ -364,6 +348,36 @@ class PresetManager_V3:
                 
                 # Dynamic:
                 pd_dictionary['Dynamic'].append(data[preset_name]["Dynamic"])
+                
+                #Type:
+                pd_dictionary['Type'].append(data[preset_name]["Type"])
+                
+            data_order = [self.data_f_config.signalChain, self.data_f_config.signalChain, self.data_f_config.globals]
+        
+            # Need to load the json file:
+            with open(os.path.join(training_json_path, preset)) as json_file:
+                data = json.load(json_file)
+                
+                #Signal Chain 1:
+                for parameter in self.data_f_config.signalChain:
+                    print(data['SignalChain1'][parameter])
+                    pd_dictionary[parameter].append(data['SignalChain1'][parameter])
+                
+                for parameter in self.data_f_config.globals:
+                    print(data['globals'][parameter])
+                    pd_dictionary[parameter].append(data['globals'][parameter])
+            
+            print(pd_dictionary)
+            
+            df = pd.DataFrame(data=pd_dictionary)
+            df.to_csv(os.path.join(data_frame_export_path, date_str))
+            
+            print(df)
+            
+                    
+                
+                
+                
                 
             
             

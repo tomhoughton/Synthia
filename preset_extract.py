@@ -625,3 +625,32 @@ class PresetV2:
                 'evolution': self.evolution
             }
         }
+        
+        
+    """
+    
+        # Oscillator 02:
+        pd_dictionary['OscillatorWaveShape02'] = []
+        pd_dictionary['OscillatorOct02'] = []
+        pd_dictionary['OscillatorSemi02'] = []
+        pd_dictionary['OscillatorDetune02'] = []
+        pd_dictionary['FilterCutoffFrequency02'] = []
+        pd_dictionary['FilterLFOCutoffMod02'] = []
+        pd_dictionary['FilterEnvCutoffMod02'] = []
+        
+        # Envelope 01:
+        pd_dictionary['AttackTime01'] = []
+        pd_dictionary['DecayTime01'] = []
+        pd_dictionary['SustainLevel01'] = []
+        pd_dictionary['SustainTime01'] = []
+        pd_dictionary['ReleaseTime01'] = []
+        
+        # Envelope 02:
+        pd_dictionary['AttackTime02'] = []
+        pd_dictionary['DecayTime02'] = []
+        pd_dictionary['SustainLevel02'] = []
+        pd_dictionary['SustainTime02'] = []
+        pd_dictionary['ReleaseTime02'] = []
+        
+    
+    """

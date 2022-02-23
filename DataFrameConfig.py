@@ -2,10 +2,8 @@
 class DataFrameConfig:
     def __init__(self) -> None:
         self.signalChain = [
-            'LFOSpeed',
-            'LFOPhase',
+            "LFOSpeed",
             'LFOFadeIn',
-            'LFODelay',
             'OscillatorWaveShape',
             'OscillatorOct',
             'OscillatorSemi',
@@ -25,10 +23,9 @@ class DataFrameConfig:
         
         self.globals = [
             'VibratoSpeed',
-            'VibratoFadeIn',
             'VibratoAmount',
-            'KeyboardUnison',
-            'KeyboardUnisonDelay'
+            'KeyboardUnisonToggle',
+            'KeyboardUnison'
         ]
         
         
