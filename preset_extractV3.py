@@ -324,6 +324,7 @@ class PresetManager_V3:
         pd_dictionary['VibratoAmount'] = []
         pd_dictionary['KeyboardUnison'] = []
         pd_dictionary['KeyboardUnisonToggle'] = []
+        pd_dictionary['KeyboardDetune'] = []
         
         
         for preset in training_presets:

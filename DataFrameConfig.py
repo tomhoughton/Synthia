@@ -25,7 +25,8 @@ class DataFrameConfig:
             'VibratoSpeed',
             'VibratoAmount',
             'KeyboardUnisonToggle',
-            'KeyboardUnison'
+            'KeyboardUnison',
+            'KeyboardDetune'
         ]
         
         

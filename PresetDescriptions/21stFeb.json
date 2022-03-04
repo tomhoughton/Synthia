@@ -1,0 +1,170 @@
+{
+    "21_808_01": {
+        "Consistent": false,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_02": {
+        "Consistent": false,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_03": {
+        "Consistent": false,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_04": {
+        "Consistent": false,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_05": {
+        "Consistent": true,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_06": {
+        "Consistent": true,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_07": {
+        "Consistent": true,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_08": {
+        "Consistent": true,
+        "Bright": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_09": {
+        "Consistent": false,
+        "Bright": true,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_10": {
+        "Consistent": false,
+        "Bright": true,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_11": {
+        "Consistent": false,
+        "Bright": true,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_12": {
+        "Consistent": false,
+        "Bright": true,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_13": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": true,
+        "Type": "808"
+    },
+    "21_808_14": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": true,
+        "Type": "808"
+    },
+    "21_808_15": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": true,
+        "Type": "808"
+    },
+    "21_808_16": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": true,
+        "Type": "808"
+    },
+    "21_808_17": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_18": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_19": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_20": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "808"
+    },
+    "21_808_21": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "808"
+    },
+    "21_808_22": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "808"
+    },
+    "21_808_23": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "808"
+    },
+    "21_808_24": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "808"
+    }
+}

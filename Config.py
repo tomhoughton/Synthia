@@ -17,6 +17,7 @@ class Config:
             'KeyboardFineTune',
             'KeyboardUnisonToggle',
             'KeyboardUnison',
+            'KeyboardDetune',
             'KeyboardUnisonDelay',
             'KeyboardPriority',
             'KeyboardStretch',
