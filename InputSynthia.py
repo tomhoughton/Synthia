@@ -43,3 +43,15 @@ description_file = description_files[int(usr_input)]
 print('-------------------------')
 print('Folder of presets: ', folder_input)
 print('Description File: ', description_file)
+
+
+# Get the new data into json:
+new_data = manager.get_new_data(folder=folder_input)
+
+# Save the data:
+manager.save_training_data(presets=new_data)
+
+# Convert the data to a pandas dataframe:
+manager.to_pandas_v2(description_file=description_file)
+
+print('Conversion is complete')

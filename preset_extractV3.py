@@ -98,10 +98,11 @@ class PresetManager_V3:
                 data = json.load(json_file)
                 
                 # Obtain Preset Name:
-                if len(data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]) > 0:
-                    name = data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]
-                else:
-                    name = preset[:-5]
+                # if len(data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]) > 0:
+                #     name = data["Ableton"]["UltraAnalog"]["UserName"]["@Value"]
+                # else:
+                #     name = preset[:-5]
+                name = preset[:-5]
                     
             values['name'] = name
             
@@ -290,7 +291,7 @@ class PresetManager_V3:
         training_json_path = os.path.join('TrainingData', 'TrainingPresets')
         data_frame_export_path = os.path.join('TrainingData', 'Datasets')
         today = date.today()
-        date_str = today.strftime("%b-%d-%Y")
+        date_str = today.strftime("%b-%d-%Y") + '.csv'
         
         # Need to go through the training presets:
         training_presets = os.listdir(self.training_json_folder)
