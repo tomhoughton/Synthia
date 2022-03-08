@@ -377,6 +377,7 @@ class PresetManager_V3:
             print(df)
             
                     
+        # We now need to delete the folders holding the different versions of the presets:
                 
                 
                 
