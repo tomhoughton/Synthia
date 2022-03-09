@@ -25,11 +25,75 @@ def data_merge():
 
     return initial_dataset
 
+def min_max(df):
+    """
+    We need to get the min and max of each column with continuous values:
+
+    - OscillatorWaveShape
+    - OscillatorOct
+    - OscillatorSemi
+    - OscillatorDetune
+    - FilterCutoffFrequency
+    - FilterLFOCutoffMod
+    - FilterEnvCutoffMod
+    - LFOSpeed
+    - LFOFadeIn
+    - VibratoSpeed
+    - Vibrato Amount
+    - KeyboardUnison
+    - KeyboardUnisonToggle
+    - KeyboardDetune
+
+    """
+
+    continueous_cols = [
+        'OscillatorWaveShape', 
+        'OscillatorOct', 
+        'OscillatorSemi', 
+        'OscillatorDetune', 
+        'FilterCutoffFrequency', 
+        'FilterLFOCutoffMod', 
+        'FilterEnvCutoffMod',
+        'LFOSpeed',
+        'LFOFadeIn',
+        'VibratoSpeed',
+        'VibratoAmount',
+        'KeyboardUnison',
+        'KeyboardUnisonToggle',
+        'KeyboardDetune'
+    ]
+
+    # MIN:
+    min_dict = {}
+    min_dict['Stat'] = ['Min']
+
+    for col in continueous_cols:
+        min_dict[col] = [df[col].min()]
+
+    # Max:
+    max_dict = {}
+    max_dict['Stat'] = ['Max']
+
+    for col in continueous_cols:
+        max_dict[col] = [df[col].max()]
+
+    # Create final dataframes:
+    min_df = pd.DataFrame(data=min_dict)
+    max_df = pd.DataFrame(data=max_dict)
+
+    summary_df = pd.concat([min_df, max_df])
+    print(summary_df)
+
+
 # The program must concat all the datasets that we need:
 def main():
     print('Hello World')
 
     df = data_merge()
+
+    print('Df Columns: ', df.columns)
+
+    min_max(df=df)
 
 
 
