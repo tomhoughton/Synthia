@@ -1,0 +1,93 @@
+{
+    "09_03_Pluck_01": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "Pluck"
+    },
+    "09_03_Pluck_02": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "Pluck"
+    },
+    "09_03_Pluck_03": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "Pluck"
+    },
+    "09_03_Pluck_04": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "Pluck"
+    },
+    "09_03_Pluck_05": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "Pluck"
+    },
+    "09_03_Pluck_06": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": true,
+        "Type": "Pluck"
+    },
+    "09_03_Pad_01": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "Pad"
+    },
+    "09_03_Pad_02": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "Pad"
+    },
+    "09_03_Pad_03": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "Pad"
+    },
+    "09_03_Pad_04": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "Pad"
+    },
+    "09_03_Pad_05": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "Pad"
+    },
+    "09_03_Pad_06": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "Pad"
+    },
+    "09_03_Pad_07": {
+        "Consistent": false,
+        "Bright": false,
+        "Evolves": true,
+        "Dynamic": false,
+        "Type": "Pad"
+    }
+}
