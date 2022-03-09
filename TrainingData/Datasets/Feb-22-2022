@@ -1,8 +1,0 @@
-,Name,Type,Consistent,Bright,Evolves,Dynamic,OscillatorWaveShape,OscillatorOct,OscillatorSemi,OscillatorDetune,FilterCutoffFrequency,FilterLFOCutoffMod,FilterEnvCutoffMod,LFOSpeed,LFOFadeIn,VibratoSpeed,VibratoAmount,KeyboardUnison,KeyboardUnisonToggle
-0,80801,808,True,False,False,False,0,-3,0,0.5,0.1984127015,0,0.5497624874,0.5,0,0.5,0,0,false
-1,Bass01,Bass,False,False,True,False,0,-3,0,0.5,0.2857142985,0.8125,-0.640625,0.7142857313,0,0.5,0,0,false
-2,Bass02,Bass,True,False,False,False,0,-3,0,0.5,0.2460317463,0,0.7047610879,0.5,0,0.5,0,0,false
-3,Lead01,Lead,True,True,False,False,1,0,0,0.5,1,0,0.7047610879,0.5,0,0.5,0,0,true
-4,Lead02,Lead,False,False,True,False,0,0,0,0.5793650746,0.206349209,0.78125,0.7047610879,0.5873016119,0,0.5,0,0,true
-5,Pad01,808,True,True,False,True,1,0,0,0.5,1,0,0.7047610879,0.5,0,0.421875,0.5625,1,true
-6,Pluck01,808,True,True,False,False,0,0,0,0.5,0.2301587313,0,0.7047610879,0.5,0,0.5,0,0,false
