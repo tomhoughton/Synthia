@@ -37,3 +37,11 @@ df.head()
 for col in df.columns:
     print(col)
 # %%
+
+""" Find unique values"""
+arr = df.Type.unique()
+
+# %%
+for a in arr:
+    print(a)
+# %%
