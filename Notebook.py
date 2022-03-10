@@ -26,4 +26,14 @@ for f in os.listdir(training_presets):
     
     
 # %%
+import pandas as pd
+datasets_path = os.path.join('TrainingData', 'Datasets')
 
+df = pd.read_csv(os.path.join(datasets_path, 'Mar-10-2022.csv'))
+df.head()
+
+# %%
+
+for col in df.columns:
+    print(col)
+# %%

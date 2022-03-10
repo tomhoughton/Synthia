@@ -207,7 +207,6 @@ class PresetManager_V3:
 
         rtn = values
         return rtn
-    
          
     def to_xml(self, path, export_path, file_name):
         with gzip.open(path, 'r') as f:
@@ -314,12 +313,34 @@ class PresetManager_V3:
         pd_dictionary['OscillatorOct'] = []
         pd_dictionary['OscillatorSemi'] = []
         pd_dictionary['OscillatorDetune'] = []
+
+        # Filter and LFO:
         pd_dictionary['FilterCutoffFrequency'] = []
         pd_dictionary['FilterLFOCutoffMod'] = []
         pd_dictionary['FilterEnvCutoffMod'] = []
         pd_dictionary['LFOSpeed'] = []
         pd_dictionary['LFOFadeIn'] = []
-        
+
+        # Oscillator 02:
+        pd_dictionary['OscillatorWaveShape2'] = []
+        pd_dictionary['OscillatorOct2'] = []
+        pd_dictionary['OscillatorSemi2'] = []
+        pd_dictionary['OscillatorDetune2'] = []
+
+        # Envelope 01:
+        pd_dictionary['AttackTime'] = []
+        pd_dictionary['DecayTime'] = []
+        pd_dictionary['SustainLevel'] = []
+        pd_dictionary['SustainTime'] = []
+        pd_dictionary['ReleaseTime'] = []
+
+        # Envelope 02:
+        pd_dictionary['AttackTime2'] = []
+        pd_dictionary['DecayTime2'] = []
+        pd_dictionary['SustainLevel2'] = []
+        pd_dictionary['SustainTime2'] = []
+        pd_dictionary['ReleaseTime2'] = []
+
         # Globals:
         pd_dictionary['VibratoSpeed'] = []
         pd_dictionary['VibratoAmount'] = []
@@ -364,10 +385,25 @@ class PresetManager_V3:
                 for parameter in self.data_f_config.signalChain:
                     print(data['SignalChain1'][parameter])
                     pd_dictionary[parameter].append(data['SignalChain1'][parameter])
+
+                # Signal Chain 2;
+                for parameter in self.data_f_config.signalChain2:
+                    print(data['SignalChain2'][parameter])
+                    pd_dictionary[parameter + '2'].append(data['SignalChain2'][parameter])
                 
+                # Globals:
                 for parameter in self.data_f_config.globals:
                     print(data['globals'][parameter])
                     pd_dictionary[parameter].append(data['globals'][parameter])
+
+                # Envelope 1:
+                for parameter in self.data_f_config.envelopes:
+                    pd_dictionary[parameter].append(data['SignalChain1']['Envelope.0'][parameter])
+
+                # Envelope 2:
+                for parameter in self.data_f_config.envelopes:
+                    pd_dictionary[parameter + '2'].append(data['SignalChain1']['Envelope.1'][parameter])
+
             
             print(pd_dictionary)
             

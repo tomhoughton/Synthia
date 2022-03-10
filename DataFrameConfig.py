@@ -12,6 +12,13 @@ class DataFrameConfig:
             'FilterLFOCutoffMod',
             'FilterEnvCutoffMod'
         ]
+
+        self.signalChain2 = [
+            'OscillatorWaveShape',
+            'OscillatorOct',
+            'OscillatorSemi',
+            'OscillatorDetune'
+        ]
         
         self.envelopes = [
             'AttackTime',
