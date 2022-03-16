@@ -1,0 +1,123 @@
+{
+    "12_03_Lead_01": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": false,
+        "Type": "Lead",
+        "Consistency": 1,
+        "Evolution": 0.5,
+        "Dynamics": 0,
+        "Brightness": 0.4
+    },
+    "12_03_Lead_02": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": false,
+        "Type": "Lead",
+        "Consistency": 0.9,
+        "Evolution": 0.6,
+        "Dynamics": 0.1,
+        "Brightness": 0.3
+    },
+    "12_03_Lead_03": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": false,
+        "Type": "Lead",
+        "Consistency": 0.7,
+        "Evolution": 0.7,
+        "Dynamics": 0.2,
+        "Brightness": 0.2
+    },
+    "12_03_Lead_04": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": false,
+        "Type": "Lead",
+        "Consistency": 0.6,
+        "Evolution": 0.8,
+        "Dynamics": 0.3,
+        "Brightness": 0.1
+    },
+    "12_03_Lead_05": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": false,
+        "Type": "Lead",
+        "Consistency": 0.5,
+        "Evolution": 0.9,
+        "Dynamics": 0.4,
+        "Brightness": 0
+    },
+    "12_03_Lead_06": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Lead",
+        "Consistency": 0.8,
+        "Evolution": 1,
+        "Dynamics": 0.5,
+        "Brightness": 0.2
+    },
+    "12_03_Lead_07": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Lead",
+        "Consistency": 0,
+        "Evolution": 0.4,
+        "Dynamics": 0.6,
+        "Brightness": 0.2
+    },
+    "12_03_Lead_08": {
+        "Consistent": false,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Lead",
+        "Consistency": 0.1,
+        "Evolution": 0.3,
+        "Dynamics": 0.7,
+        "Brightness": 0.2
+    },
+    "12_03_Lead_09": {
+        "Consistent": false,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Lead",
+        "Consistency": 0.3,
+        "Evolution": 0.2,
+        "Dynamics": 0.8,
+        "Brightness": 0.2
+    },
+    "12_03_Lead_10": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Lead",
+        "Consistency": 0.4,
+        "Evolution": 0.1,
+        "Dynamics": 0.9,
+        "Brightness": 0.2
+    },
+    "12_03_Lead_11": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Lead",
+        "Consistency": 0.5,
+        "Evolution": 0,
+        "Dynamics": 1,
+        "Brightness": 0.2
+    }
+}

@@ -1,0 +1,458 @@
+{
+    "15_03_Pluck_01": {
+        "Consistent": true,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 0,
+        "Dynamics": 0,
+        "Brightness": 0.6
+    },
+    "15_03_Pluck_02": {
+        "Consistent": true,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 0,
+        "Dynamics": 0.2,
+        "Brightness": 0.8
+    },
+    "15_03_Pluck_03": {
+        "Consistent": true,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 0,
+        "Dynamics": 0.3,
+        "Brightness": 0.8
+    },
+    "15_03_Pluck_04": {
+        "Consistent": true,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 0,
+        "Dynamics": 0.2,
+        "Brightness": 0.7
+    },
+    "15_03_Pluck_05": {
+        "Consistent": true,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 0,
+        "Dynamics": 0.2,
+        "Brightness": 0.8
+    },
+    "15_03_Pluck_06": {
+        "Consistent": true,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 0,
+        "Dynamics": 0.4,
+        "Brightness": 0.6
+    },
+    "15_03_Pluck_07": {
+        "Consistent": true,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 0.7,
+        "Evolution": 0,
+        "Dynamics": 0.2,
+        "Brightness": 0.8
+    },
+    "15_03_Pluck_08": {
+        "Consistent": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Bright": true,
+        "Type": "Pluck",
+        "Consistency": 0.8,
+        "Evolution": 0,
+        "Dynamics": 0.1,
+        "Brightness": 0.6
+    },
+    "15_03_Pluck_09": {
+        "Consistent": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Bright": true,
+        "Type": "Pluck",
+        "Consistency": 0.7,
+        "Evolution": 0,
+        "Dynamics": 0.1,
+        "Brightness": 0.6
+    },
+    "15_03_Pluck_10": {
+        "Consistent": true,
+        "Evolves": false,
+        "Dynamic": false,
+        "Bright": true,
+        "Type": "Pluck",
+        "Consistency": 0.9,
+        "Evolution": 0,
+        "Dynamics": 0.3,
+        "Brightness": 0.6
+    },
+    "15_03_Pluck_11": {
+        "Consistent": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Bright": true,
+        "Type": "Pluck",
+        "Consistency": 0.2,
+        "Evolution": 0,
+        "Dynamics": 0.1,
+        "Brightness": 0.5
+    },
+    "15_03_Pluck_12": {
+        "Consistnet": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Bright": false,
+        "Type": "Pluck",
+        "Consistency": 0.1,
+        "Evolution": 0.4,
+        "Dynamics": 0.1,
+        "Brightness": 0.4
+    },
+    "15_03_Pluck_13": {
+        "Consistent": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Bright": false,
+        "Type": "Pluck",
+        "Consistency": 0.4,
+        "Evolution": 0.4,
+        "Dynamics": 0.3,
+        "Brightness": 0.4
+    },
+    "15_03_Pluck_14": {
+        "Consistent": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Bright": true,
+        "Type": "Pluck",
+        "Consistency": 0,
+        "Evolution": 0.4,
+        "Dynamics": 0.4,
+        "Brightness": 0.6
+    },
+    "15_03_Pluck_15": {
+        "Consistent": false,
+        "Evolves": false,
+        "Bright": true,
+        "Type": "Pluck",
+        "Consistency": 0,
+        "Evolution": 0.2,
+        "Dynamics": 0,
+        "Brightness": 0.5
+    },
+    "15_03_Pluck_16": {
+        "Consistent": false,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 0,
+        "Evolution": 0.3,
+        "Dynamics": 0.2,
+        "Brightness": 0.8
+    },
+    "15_03_Pluck_17": {
+        "Consistent": true,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 0.6,
+        "Evolution": 0.4,
+        "Dynamics": 0.4,
+        "Brightness": 0.8
+    },
+    "15_03_Pluck_18": {
+        "Consistent": true,
+        "Evolves": false,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 0.7,
+        "Evolution": 0.4,
+        "Dynamics": 0.2,
+        "Brightness": 0.7
+    },
+    "15_03_Pluck_19": {
+        "Consistent": false,
+        "Evolves": false,
+        "Bright": false,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 0.5,
+        "Evolution": 0.4,
+        "Dynamics": 0.2,
+        "Brightness": 0.3
+    },
+    "15_03_Pluck_20": {
+        "Consistent": false,
+        "Evolves": false,
+        "Bright": false,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 0.2,
+        "Evolution": 0.4,
+        "Dynamics": 0.2,
+        "Brightness": 0.3
+    },
+    "15_03_Pluck_21": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 1,
+        "Dynamics": 0.2,
+        "Brightness": 0.5
+    },
+    "15_03_Pluck_22": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 1,
+        "Dynamics": 0.2,
+        "Brightness": 0.5
+    },
+    "15_03_Pluck_23": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 1,
+        "Dynamics": 0,
+        "Brightness": 0.5
+    }, 
+    "15_03_Pluck_24": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 1,
+        "Dynamics": 0.4,
+        "Brightness": 0.4
+    },
+    "15_03_Pluck_25": {
+        "Consistent": true,
+        "Evoles": true,
+        "Bright": false,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 0.6,
+        "Dynamics": 0.4,
+        "Brightness": 0.2
+    },
+    "15_03_Pluck_26": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 0.7,
+        "Dynamics": 0.2,
+        "Brightness": 0.6
+    },
+    "15_03_Pluck_27": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": true,
+        "Dynamic": false,
+        "Type": "Pluck",
+        "Consistency": 1,
+        "Evolution": 0.8,
+        "Dynamics": 0.1,
+        "Brightness": 0.8
+    },
+    "15_03_Pluck_28": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": true,
+        "Dynamic": true,
+        "Type": "Pluck",
+        "Consistency": 0.1,
+        "Evolution": 0.6,
+        "Dynamics": 1,
+        "Brightness": 0.5
+    },
+    "15_03_Pluck_29": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": true,
+        "Dynamic": true,
+        "Type": "Pluck",
+        "Consistency": 0.1,
+        "Evolution": 0.9,
+        "Dynamics": 0.9,
+        "Brightness": 0.5 
+    },
+    "15_03_Pluck_30": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Pluck",
+        "Consistency": 0.1,
+        "Evolution": 0.9,
+        "Dynamics": 0.7,
+        "Brightness": 0.3
+    },
+    "15_03_Pluck_31": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Pluck",
+        "Consistency": 0.1,
+        "Evolution": 0.9,
+        "Dynamics": 0.6,
+        "Brightness": 0.3
+    },
+    "15_03_Pluck_32": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Pluck",
+        "Consistency": 0.1,
+        "Evolution": 0.8,
+        "Dynamics": 1,
+        "Brightness": 0.3
+    },
+    "15_03_Pluck_33": {
+        "Consistent": true,
+        "Evolves": true,
+        "Bright": false,
+        "Dynamic": true,
+        "Type": "Pluck",
+        "Consistency": 0.1, 
+        "Evolution": 0.9,
+        "Brightness": 0.3,
+        "Dynamics": 1
+    },
+    "15_03_Pluck_34": {
+        "Consistent": true,
+        "Evolves": true,
+        "Dynamic": true,
+        "Type": "Pluck",
+        "Consistency": 0.1,
+        "Evolution": 0.9,
+        "Brightness": 0.3,
+        "Dynamics": 1
+    },
+    "15_03_Bass_35": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "Bass",
+        "Consistency": 1,
+        "Brightness": 0.1,
+        "Evolution": 0,
+        "Dynamics": 0.2
+    },
+    "15_03_Bass_36": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "Bass",
+        "Consistency": 1,
+        "Brightness": 0,
+        "Evolution": 0,
+        "Dynamics": 0.2
+    },
+    "15_03_Bass_37": {
+        "Consistent": true,
+        "Bright": false,
+        "Evovles": false,
+        "Dynamic": false,
+        "Type": "Bass",
+        "Consistency": 1,
+        "Brightness": 0,
+        "Evolution": 0, 
+        "Dynamics": 0.1
+    },
+    "15_03_Bass_38": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "Bass",
+        "Consistency": 1,
+        "Brightness": 0,
+        "Evolution": 0,
+        "Dynamics": 0
+    },
+    "15_03_Bass_39": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "Bass",
+        "Consistency": 1,
+        "Brightness": 0,
+        "Evolution": 0,
+        "Dynamics": 0.3
+    },
+    "15_03_Bass_40": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "Bass",
+        "Consistency": 1,
+        "Brightness": 0,
+        "Evolution": 0,
+        "Dynamics": 0.4  
+    },
+    "15_03_Bass_41": {
+        "Consistent": true,
+        "Bright": false,
+        "Evolves": false,
+        "Dynamic": false,
+        "Type": "Bass",
+        "Consistency": 1,
+        "Brightness": 0,
+        "Evolution": 0,
+        "Dynamics": 0.3
+    }
+
+}
+
+/*
+* Consistency -> True
+* Brightness -> False
+* Evolution -> False
+* Dynamics -> False*/

@@ -5,7 +5,6 @@ TODO
 - clear_new_presets
 - innit
 """
-
 # Imports:
 import gzip
 import os
@@ -26,7 +25,7 @@ class PresetManager_V3:
     def __init__(self):
         self.training_json_folder = os.path.join('TrainingData', 'TrainingPresets')
         self.new_presets_folder = os.path.join('NewPresets')
-        #self.new_presets_json_folder = os.path.join('NewPresetsJson')
+        # self.new_presets_json_folder = os.path.join('NewPresetsJson')
         self.new_presets = os.path.join('NewPresets')
         self.xml_export_path = os.path.join('NewPresetsXML')
         self.json_export_path = os.path.join('NewPresetsJson')
@@ -35,8 +34,6 @@ class PresetManager_V3:
 
     # Clear the new presets folder:
     def clear_new_presets(self, usedPresets):
-        
-        
         adv_to_remove = self.add_fextensions(usedPresets, '.adv')
         json_to_remove = self.add_fextensions(usedPresets, '.json')
 
@@ -411,20 +408,9 @@ class PresetManager_V3:
             df.to_csv(os.path.join(data_frame_export_path, date_str))
             
             print(df)
-            
-                    
+        
+
         # We now need to delete the folders holding the different versions of the presets:
-                
-                
-                
-                
-            
-            
-            
         print('Dictionary')
-        print(pd_dictionary)
-                
-            
-            
-            
+        print(pd_dictionary)        
                         
