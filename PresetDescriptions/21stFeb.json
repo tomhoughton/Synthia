@@ -4,28 +4,44 @@
         "Bright": true,
         "Evolves": false,
         "Dynamic": false,
-        "Type": "808"
+        "Type": "808",
+        "Consistency": 1,
+        "Brightness": 0.5,
+        "Evolution": 0,
+        "Dynamics": 0
     },
     "808B02": {
         "Consistent": false,
         "Bright": true,
         "Evolves": false,
         "Dynamic": false,
-        "Type": "808"
+        "Type": "808",
+        "Consistency": 0,
+        "Brightness": 0,
+        "Evolution": 0,
+        "Dynamics": 0
     },
     "808B03": {
         "Consistent": false,
         "Bright": true,
         "Evolves": false,
         "Dynamic": false,
-        "Type": "808"
+        "Type": "808",
+        "Consistency": 0,
+        "Brightness": 0,
+        "Evolution": 0,
+        "Dynamics": 0
     },
     "808B04": {
         "Consistent": false,
         "Bright": true,
         "Evolves": false,
         "Dynamic": false,
-        "Type": "808"
+        "Type": "808",
+        "Consistency": 0,
+        "Brightness": 0,
+        "Evolution": 0,
+        "Dynamics": 0
     },
     "808BC01": {
         "Consistent": true,
