@@ -304,6 +304,10 @@ class PresetManager_V3:
         pd_dictionary['Bright'] = []
         pd_dictionary['Evolves'] = []
         pd_dictionary['Dynamic'] = []
+        pd_dictionary['Consistency'] = []
+        pd_dictionary['Brightness'] = []
+        pd_dictionary['Evolution'] = []
+        pd_dictionary['Dynamics'] = []
         
         # Oscillator 01:
         pd_dictionary['OscillatorWaveShape'] = []
@@ -371,6 +375,19 @@ class PresetManager_V3:
                 
                 #Type:
                 pd_dictionary['Type'].append(data[preset_name]["Type"])
+                
+                # Consistency:
+                pd_dictionary['Consistency'].append(data[preset_name]["Consistency"])
+                
+                # Evolution:
+                pd_dictionary['Evolution'].append(data[preset_name]["Evolution"])
+                
+                # Dynamics:
+                pd_dictionary['Dynamics'].append(data[preset_name]["Dynamics"])
+                
+                # Brightness:
+                pd_dictionary['Brightness'].append(data[preset_name]["Brightness"])
+                
                 
             data_order = [self.data_f_config.signalChain, self.data_f_config.signalChain, self.data_f_config.globals]
         

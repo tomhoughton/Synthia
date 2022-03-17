@@ -121,7 +121,7 @@
         "Brightness": 0.5
     },
     "15_03_Pluck_12": {
-        "Consistnet": false,
+        "Consistent": false,
         "Evolves": false,
         "Dynamic": false,
         "Bright": false,
@@ -156,6 +156,7 @@
     "15_03_Pluck_15": {
         "Consistent": false,
         "Evolves": false,
+        "Dynamic": false,
         "Bright": true,
         "Type": "Pluck",
         "Consistency": 0,
@@ -264,7 +265,7 @@
     },
     "15_03_Pluck_25": {
         "Consistent": true,
-        "Evoles": true,
+        "Evolves": true,
         "Bright": false,
         "Dynamic": false,
         "Type": "Pluck",
@@ -364,6 +365,7 @@
     "15_03_Pluck_34": {
         "Consistent": true,
         "Evolves": true,
+        "Bright": false,
         "Dynamic": true,
         "Type": "Pluck",
         "Consistency": 0.1,
@@ -396,7 +398,7 @@
     "15_03_Bass_37": {
         "Consistent": true,
         "Bright": false,
-        "Evovles": false,
+        "Evolves": false,
         "Dynamic": false,
         "Type": "Bass",
         "Consistency": 1,
@@ -450,9 +452,3 @@
     }
 
 }
-
-/*
-* Consistency -> True
-* Brightness -> False
-* Evolution -> False
-* Dynamics -> False*/
