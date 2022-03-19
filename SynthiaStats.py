@@ -110,7 +110,8 @@ class SynthiaStats:
 
         combinations = self.get_combination_dfs()
 
-        temp_df = combinations[0][0].copy() # This dataframe is just to test this idea.
+        # temp_df = combinations[0][0].copy() # This dataframe is just to test this idea.
+        temp_df = self.df
 
         # Table to summarise:
         print('The table to summaries')
@@ -133,11 +134,6 @@ class SynthiaStats:
 
         # Evolution:
         temp_evolution_df = temp_df[['Evolution', 'LFOSpeed', 'FilterLFOCutoffMod']]
-        
-        print(temp_consistency_df)
-        print(temp_dynamics_df)
-        print(temp_brightness_df)
-        print(temp_evolution_df)
 
         # Now we need to get the min and max of each dataframe:
         consistency_min_max = self.get_min_max(data=temp_consistency_df)
@@ -150,6 +146,56 @@ class SynthiaStats:
         print(brightness_min_max)
         print(evolution_min_max)
 
+        # Lets try and do this for consistency:
+        # FIX THIS CODE !!!!!! THE ISSUE IS WITH BRIGHTNESS
+        
+        # THIS IS THE CODE TO IMPROVE THIS FUNCTION: THE CODE ABOVE IS KEPT FOR REFERENCE!!!!
+        # Firstly we need a df for each degree that exists in the df:
+
+        # Consistency: 
+        consistency_unqiue_values = temp_consistency_df.Consistency.unique()
+        consistency_unique_dfs = self.get_unique_values_dfs(temp_consistency_df, consistency_unqiue_values, descriptor='Consistency')
+
+        # Dynamics:
+        dynamics_unique_values = temp_dynamics_df.Dynamics.unique()
+        dynamics_unique_dfs = self.get_unique_values_dfs(data=temp_dynamics_df, values=dynamics_unique_values, descriptor='Dynamics')
+
+        # Brightness:
+        brightness_unique_values = temp_brightness_df.Brightness.unique()
+        brightness_unique_dfs = self.get_unique_values_dfs(data=temp_dynamics_df, values=brightness_unique_values, descriptor='Brightness')
+
+        # Evolution:
+        evolution_unique_values = temp_evolution_df.Evolution.unique()
+        evolution_unique_dfs = self.get_unique_values_dfs(data=temp_evolution_df, values=evolution_unique_values, descriptor='Evolution')
+
+        # Print for testing:
+        for c in consistency_unique_dfs:
+            print(c)
+
+        for d in dynamics_unique_dfs:
+            print(d)
+
+        for b in brightness_unique_dfs:
+            print(b)
+
+        for e in evolution_unique_dfs:
+            print(e)
+        
+        
+    def get_unique_values_dfs(self, data, values, descriptor):
+        
+        """This function will return dataframes where the descriptor column only contains the same value.
+           This is to gain min and max values at each degree of the description.
+
+        Returns:
+            List of Pandas Data Frames: The list contains these unqiue dataframes.
+        """
+
+        data_frames = []
+        for v in values:
+            data_frames.append(data[data[descriptor] == v])
+
+        return data_frames
 
 
     def get_min_max(self, data):
@@ -170,6 +216,8 @@ class SynthiaStats:
             df_dict[c] = [data[c].min()]
             df_dict[c].append(data[c].max())
             
+        
+
         return pd.DataFrame(data=df_dict)
         
 
