@@ -162,7 +162,7 @@ class SynthiaStats:
 
         # Brightness:
         brightness_unique_values = temp_brightness_df.Brightness.unique()
-        brightness_unique_dfs = self.get_unique_values_dfs(data=temp_dynamics_df, values=brightness_unique_values, descriptor='Brightness')
+        brightness_unique_dfs = self.get_unique_values_dfs(data=temp_brightness_df, values=brightness_unique_values, descriptor='Brightness')
 
         # Evolution:
         evolution_unique_values = temp_evolution_df.Evolution.unique()
@@ -171,15 +171,19 @@ class SynthiaStats:
         # Print for testing:
         for c in consistency_unique_dfs:
             print(c)
+            usr = input('...')
 
         for d in dynamics_unique_dfs:
             print(d)
+            usr = input('...')
 
         for b in brightness_unique_dfs:
             print(b)
+            usr = input('...')
 
         for e in evolution_unique_dfs:
             print(e)
+            usr = input('...')
         
         
     def get_unique_values_dfs(self, data, values, descriptor):

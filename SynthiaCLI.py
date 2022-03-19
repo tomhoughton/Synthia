@@ -106,6 +106,11 @@ def data_summary(delay):
     print('------ Min and Max Test -----')
     S_Stats.get_combination_min_max()
 
+    usr_input = input('Type [exit] to go back to the main menu')
+
+    if (usr_input == 'exit'):
+        return ''
+ 
 
     return ''
 
@@ -170,6 +175,7 @@ def main():
             data_augment(delay=delay)
         elif usr_input == 'exit':
             exit(delay=delay)
+            return '...'
 
 main()
 
