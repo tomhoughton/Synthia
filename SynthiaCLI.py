@@ -2,8 +2,9 @@
 import time
 import os
 import platform
-from InputSynthiaV2 import run_input
 import pandas as pd
+from InputSynthiaV2 import run_input
+from SynthiaDataAugment import DataAugmentor
 from SynthiaStats import SynthiaStats
 
 def display_title():
@@ -133,6 +134,9 @@ def data_summary(delay):
 
 def data_augment(delay):
 
+    # Clear the console:
+    clear_console() 
+
     print('██████╗░░█████╗░████████╗░█████╗░  ░█████╗░██╗░░░██╗░██████╗░███╗░░░███╗███████╗███╗░░██╗████████╗')
     print('██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗  ██╔══██╗██║░░░██║██╔════╝░████╗░████║██╔════╝████╗░██║╚══██╔══╝')
     print('██║░░██║███████║░░░██║░░░███████║  ███████║██║░░░██║██║░░██╗░██╔████╔██║█████╗░░██╔██╗██║░░░██║░░░')
@@ -140,9 +144,32 @@ def data_augment(delay):
     print('██████╔╝██║░░██║░░░██║░░░██║░░██║  ██║░░██║╚██████╔╝╚██████╔╝██║░╚═╝░██║███████╗██║░╚███║░░░██║░░░')
     print('╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ╚═╝░░╚═╝░╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░')
 
+    """REPEATING CODE"""
+    # Get the path to the datasets:
+    df_path = os.path.join('TrainingData', 'Datasets')
+    
+    # Get a list of all of the datasets:
+    datasets = os.listdir(df_path)
 
+    # Display all of the datasets:
+    for dataset, x in enumerate(datasets):
+        print(x, ': ', dataset)
 
-    x = intput('...')
+    usr_input = int(input('Select which dataset you would like to summarise: '))
+    
+    # Get and store the dataframe the user would like:
+    df = pd.read_csv(os.path.join(df_path, datasets[usr_input]))
+    
+    # Create a new Synthia Stats class and provide it with the selected dataframe:
+    S_Stats = SynthiaStats(data=df)
+
+    consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
+
+    augmentor = DataAugmentor(df, consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm)
+
+    augmentor.display_dataset()
+
+    x = input('...')
 
 
 def root_menu(delay):
