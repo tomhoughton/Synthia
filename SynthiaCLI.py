@@ -13,6 +13,7 @@ def display_title():
         print(c, end=' ')
         time.sleep(0.13)
 
+
 def clear_console():
     # Get the os that the user is using:
     usr_os = platform.system()
@@ -23,6 +24,7 @@ def clear_console():
     elif (usr_os == 'Windows'):
         clear = lambda: os.system('cls')
         clear()
+
 
 def input_data(delay):
     print('Input Data')
@@ -45,6 +47,7 @@ def input_data(delay):
 
     # Run the input function:
     run_input()
+
 
 def exit(delay):
 
@@ -95,16 +98,29 @@ def data_summary(delay):
         print(x, ': ', dataset)
 
     usr_input = int(input('Select which dataset you would like to summarise: '))
-
+    
+    # Get and store the dataframe the user would like:
     df = pd.read_csv(os.path.join(df_path, datasets[usr_input]))
 
+    # Create a new Synthia Stats class and provide it with the selected dataframe:
     S_Stats = SynthiaStats(data=df)
-    S_Stats.type_count()
-    combination_counts = S_Stats.get_combination_counts()
+    
+    # Display the dataframe
     S_Stats.display_dataframe()
+    x = input('...')
+
+    # Get the type count:
+    S_Stats.type_count()
+    x = input('...')
+
+    # Get the binary combination counts:
+    combination_counts = S_Stats.get_combination_counts()
     print(combination_counts)
-    print('------ Min and Max Test -----')
-    S_Stats.get_combination_min_max()
+    x = input('...')
+
+    consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
+    
+    S_Stats.display_decriptor_stats(consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm)
 
     usr_input = input('Type [exit] to go back to the main menu')
 
@@ -115,9 +131,6 @@ def data_summary(delay):
     return ''
 
 
-    
-
-
 def data_augment(delay):
 
     print('██████╗░░█████╗░████████╗░█████╗░  ░█████╗░██╗░░░██╗░██████╗░███╗░░░███╗███████╗███╗░░██╗████████╗')
@@ -126,6 +139,11 @@ def data_augment(delay):
     print('██║░░██║██╔══██║░░░██║░░░██╔══██║  ██╔══██║██║░░░██║██║░░╚██╗██║╚██╔╝██║██╔══╝░░██║╚████║░░░██║░░░')
     print('██████╔╝██║░░██║░░░██║░░░██║░░██║  ██║░░██║╚██████╔╝╚██████╔╝██║░╚═╝░██║███████╗██║░╚███║░░░██║░░░')
     print('╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ╚═╝░░╚═╝░╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░')
+
+
+
+    x = intput('...')
+
 
 def root_menu(delay):
     # Clear the console:
