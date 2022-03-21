@@ -1,5 +1,8 @@
 # Imports:
 import pandas as pd
+import os
+from os.path import exists
+from datetime import date
 
 """
 THINGS TO DO:
@@ -13,11 +16,14 @@ THINGS TO DO:
 What do you want to know:
 - I would like to see the count for each TYPE of sound [X]
 - I would like to see the count for each binary combination [X]
-- I would like to see individual tables for the binary combinations []
-- I would like the min and max for each column in the binary combination tables []
+- I would like to see individual tables for the binary combinations [X]
+- I would like the min and max for each column in the non binary combination tables [X]
 
     - We could either get the min and max for each binary combination according to each row
-    - Or we could either get the min and max for each degree of the descriptor
+    - Or we could either get the min and max for each degree of the descriptor [X]
+
+Things to add on:
+- I want to export all of the charts for use for the report [].
 
 """ 
 
@@ -33,12 +39,22 @@ and also make the display code easier to read.
 
 class SynthiaStats: 
     
-    def __init__(self, data) -> None:
+    def __init__(self, data, is_exporting) -> None:
         self.df = data
         self.types = [
             'Pluck',
             'Bass'
         ]
+
+        # Export Code:
+        self.is_exporting = is_exporting
+        self.export_path = os.path.join('Statistics') # Holds the folder for the stats exports.
+        self.data_frames_to_export = [] # This holds the array of data framees to export.
+
+        if (is_exporting == True):
+            print('Is exporting...')
+        else:
+            print('No exporting')
 
 
     def display_dataframe(self):
@@ -67,6 +83,9 @@ class SynthiaStats:
         print('')
         print('')
         print('')
+
+        # Export:
+        self.export_handler(data=[rtn_df], dataset_names=['TypeCount'], stats_name='TypeCount')
 
 
     def get_combination_dfs(self):
@@ -147,7 +166,12 @@ class SynthiaStats:
             c, r = data_frame.shape
             df_dict[combination_id] = [c]
 
-        return pd.DataFrame(data=df_dict)
+        rtn_df = pd.DataFrame(data=df_dict)
+        
+        # Export:
+        self.export_handler(data=[rtn_df], dataset_names=['BinaryCombinationCounts'], stats_name='CombinationCounts')
+
+        return rtn_df
 
 
     def get_descriptor_degrees_min_max_mean(self):
@@ -217,16 +241,27 @@ class SynthiaStats:
         evolution_unique_dfs = self.get_unique_values_dfs(data=temp_evolution_df, values=evolution_unique_values, descriptor='Evolution')
 
         # Get min max for all degrees of each descriptor:
-        consistency_min_max_mean_dfs = self.get_all_min_max(data_frames=consistency_unique_dfs)
+        consistency_min_max_mean_dfs, consistency_df_names = self.get_all_min_max(data_frames=consistency_unique_dfs)
+        print('CONSISTENCY DF STUFF: ')
+        print('Dataframes: ', consistency_min_max_mean_dfs)
+        print('Names: ', consistency_df_names)
+        # Export consistency:
+        self.export_handler(data=consistency_min_max_mean_dfs, dataset_names=consistency_df_names, stats_name='ConsistencyMinMaxMean')
 
         # Dynamics:
-        dynamics_min_max_mean_dfs = self.get_all_min_max(data_frames=dynamics_unique_dfs)
+        dynamics_min_max_mean_dfs, dynamics_df_names = self.get_all_min_max(data_frames=dynamics_unique_dfs)
+        # Export dynamics:
+        self.export_handler(data=dynamics_min_max_mean_dfs, dataset_names=dynamics_df_names, stats_name='DynamicsMinMaxMean')
 
         # Brightness:
-        brightness_min_max_mean_dfs = self.get_all_min_max(data_frames=brightness_unique_dfs)
+        brightness_min_max_mean_dfs, brightness_df_names = self.get_all_min_max(data_frames=brightness_unique_dfs)
+        # Export brightness:
+        self.export_handler(data=brightness_min_max_mean_dfs, dataset_names=brightness_df_names, stats_name='BrightnessMinMaxMean')
 
         # Evolution:
-        evolution_min_max_mean_dfs = self.get_all_min_max(data_frames=evolution_unique_dfs)
+        evolution_min_max_mean_dfs, evolution_df_names = self.get_all_min_max(data_frames=evolution_unique_dfs)
+        # Export evolution:
+        self.export_handler(data=evolution_min_max_mean_dfs, dataset_names=evolution_df_names, stats_name='EvolutionMinMaxMean')
 
         return consistency_min_max_mean_dfs, dynamics_min_max_mean_dfs, brightness_min_max_mean_dfs, evolution_min_max_mean_dfs
 
@@ -308,26 +343,15 @@ class SynthiaStats:
         x = input('...')
         
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     def get_all_min_max(self, data_frames):
         rtn = []
+        df_names = [] # This stores the names of the dataframes for the export code:
         for df in data_frames:
             min_max_mean = self.min_max_descriptor(data_frame=df)
+            df_names.append(min_max_mean['Min'][0])
             rtn.append(min_max_mean)
 
-        return rtn
+        return rtn, df_names
 
     def min_max_descriptor(self, data_frame):
 
@@ -353,9 +377,7 @@ class SynthiaStats:
         df = pd.DataFrame(data=pd_dict)
         return df
                 
-
-        
-        
+   
     def get_unique_values_dfs(self, data, values, descriptor):
         
         """This function will return dataframes where the descriptor column only contains the same value.
@@ -390,16 +412,50 @@ class SynthiaStats:
             df_dict[c] = [data[c].min()]
             df_dict[c].append(data[c].max())
             
-        
-
         return pd.DataFrame(data=df_dict)
-        
-
-        
 
 
-
-
+    def export_statistics(self):
+        """This function exports all of the statistical summaries that I could need.
+           More will be added later on as the development of this project continues.
+        """
+ 
+        print('Exporting: ', self.is_exporting)
 
     
+    def export_handler(self, data, dataset_names, stats_name):
+
+        print('DATA: ', data)
+        print('NAMES: ', dataset_names)
+
+        # Get the path to the statistics folder:
+        stats_path = os.path.join('Statistics')
         
+        # Get the date:
+        today = date.today()
+        date_str = today.strftime("%b-%d-%Y")
+
+        # WE NEED TO CHECK IF THE FOLDER ALREADY EXISTS!!!!!!
+
+        if (self.is_exporting == True):
+            print('Export')
+
+            # Get the path for the new stats directory:
+            new_stats_path = os.path.join(stats_path, date_str)
+
+            # We need to make the parent folder of the statistics:
+            if (exists(new_stats_path) != True):
+                os.mkdir(new_stats_path)
+
+            # We need to make the directory for the stats_name:
+            new_stats_name = os.path.join(new_stats_path, stats_name)
+            os.mkdir(new_stats_name)
+
+            # We need to loop through the data:
+            for index, x in enumerate(data):
+                csv_name = str(dataset_names[index]) + ".csv"
+                print('X: ', x)
+                x.to_csv(os.path.join(new_stats_name, csv_name))
+        else:
+            print('Export is false')
+

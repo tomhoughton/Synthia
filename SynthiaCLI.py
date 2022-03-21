@@ -99,12 +99,19 @@ def data_summary(delay):
         print(x, ': ', dataset)
 
     usr_input = int(input('Select which dataset you would like to summarise: '))
+    usr_input_2 = input('Press [y] to export the statistical summaries, press [n] to leave it: ')
+
+    # Handle the usr_input:
+    if (usr_input_2 == 'y'):
+        usr_input_2 = True
+    else:
+        usr_input_2 = False
     
     # Get and store the dataframe the user would like:
     df = pd.read_csv(os.path.join(df_path, datasets[usr_input]))
 
     # Create a new Synthia Stats class and provide it with the selected dataframe:
-    S_Stats = SynthiaStats(data=df)
+    S_Stats = SynthiaStats(data=df, is_exporting=usr_input_2)
     
     # Display the dataframe
     S_Stats.display_dataframe()
@@ -122,6 +129,9 @@ def data_summary(delay):
     consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
     
     S_Stats.display_decriptor_stats(consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm)
+
+    # Call the export function:
+    S_Stats.export_statistics()
 
     usr_input = input('Type [exit] to go back to the main menu')
 
@@ -161,13 +171,18 @@ def data_augment(delay):
     df = pd.read_csv(os.path.join(df_path, datasets[usr_input]))
     
     # Create a new Synthia Stats class and provide it with the selected dataframe:
-    S_Stats = SynthiaStats(data=df)
+    S_Stats = SynthiaStats(data=df, is_exporting=False)
 
     consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
 
     augmentor = DataAugmentor(df, consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm)
 
     augmentor.display_dataset()
+
+    print('----- IN DEVELOPMENT -----')
+
+    # Augment the data:
+    augmentor.augment()
 
     x = input('...')
 
