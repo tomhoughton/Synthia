@@ -60,20 +60,15 @@ class DataAugmentor:
 
         
     def augment_min_max(self, augment_margin):
-        # The augment margin is just the degree at which we +/-.
-        
+        # The augment margin is just the degree at which we +/-
         # We need to create a variable to store the augmented peices of data.
 
-        # Firstly we need to go through each row of the current dataset:
-        for row in self.df.itertuples(): # Itertuples is used due to it being faster.
-            print(row.Name)
-
-            # We must augment here:
+        
 
     # We need to create a function to augment each row to simplify the code
 
 
-    def augment(self):
+    def augment(self, method, margin):
         """
         This method will consist of going through each row of the dataset to augment it in every way possible.
 
@@ -98,7 +93,9 @@ class DataAugmentor:
         print('AUGMENT')
 
         for row in self.df.itertuples(): # Itertuples is used due to it being faster.
-            print(row.Name)
+            
+            # Do the augmentation method here:
+            self.augment_min_max(augment_margin=margin)
 
 
         
