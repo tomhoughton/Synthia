@@ -22,6 +22,9 @@ def clear_console():
     if (usr_os == 'Darwin'):
         clear = lambda: os.system('clear')
         clear()
+    elif (usr_os == 'Linux'):
+        clear = lambda: os.system('clear')
+        clear()
     elif (usr_os == 'Windows'):
         clear = lambda: os.system('cls')
         clear()

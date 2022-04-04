@@ -40,11 +40,8 @@ and also make the display code easier to read.
 class SynthiaStats: 
     
     def __init__(self, data, is_exporting) -> None:
+        # Get the dataset:
         self.df = data
-        self.types = [
-            'Pluck',
-            'Bass'
-        ]
 
         # Export Code:
         self.is_exporting = is_exporting
@@ -72,7 +69,10 @@ class SynthiaStats:
 
         rtn_dict = {}
 
-        for s_type in self.types:
+        # Get each unique value in the dataset:
+        unique_types = self.df.Type.unique()
+
+        for s_type in unique_types:
             rtn_dict[s_type] = [self.df['Type'].value_counts()[s_type]]
 
         rtn_df = pd.DataFrame(rtn_dict)

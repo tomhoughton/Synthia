@@ -33,7 +33,7 @@ def consistency_brightness(train, test):
     
     model.compile(
         loss='mean_squared_error',
-        optimizer='sgd'
+        optimizer='sgd' 
     )
     
     history = model.fit(train_x, train_y, epochs=30)
