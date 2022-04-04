@@ -180,12 +180,13 @@ def data_augment(delay):
 
     augmentor = DataAugmentor(df, consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm)
 
-    augmentor.display_dataset()
+    # augmentor.display_current_working_data()
 
     print('----- IN DEVELOPMENT -----')
 
     # Augment the data:
-    augmentor.augment()
+    augmentor.augment() 
+    # augmentor.augment_min_max(augment_margin=1)
 
     x = input('...')
 

@@ -7,13 +7,39 @@ TODO:
 
 """
 
+
+"""
+How is this going to work?
+
+- We are going to get the dataset and the stat summaries of it all.
+"""
+
+"""
+Possible methods to augment data:
+- Preserve min and max
+- Preserve Min Mean and Max
+
+"""
+
 class DataAugmentor:
     def __init__(self, data, consistency, dynamics, brightness, evolution) -> None:
         self.df = data
+
+        # These tables contain the min, mean and max.
         self.stats_consistency = consistency
         self.stats_brightness = brightness
         self.stats_dynamics = dynamics
         self.stats_evolution = evolution
+
+
+    def display_current_working_data(self):
+        print('Data Augment Display')
+        print(self.df)
+        print('--------------------------------------------------------------------------------')
+        print(self.stats_brightness)
+        print('--------------------------------------------------------------------------------')
+        print(self.stats_consistency)
+
 
     def display_dataset(self):
         print('The Dataset')
@@ -33,6 +59,20 @@ class DataAugmentor:
         temp_evolution_df = self.df[['Evolution', 'LFOSpeed', 'FilterLFOCutoffMod']]
 
         
+    def augment_min_max(self, augment_margin):
+        # The augment margin is just the degree at which we +/-.
+        
+        # We need to create a variable to store the augmented peices of data.
+
+        # Firstly we need to go through each row of the current dataset:
+        for row in self.df.itertuples(): # Itertuples is used due to it being faster.
+            print(row.Name)
+
+            # We must augment here:
+
+    # We need to create a function to augment each row to simplify the code
+
+
     def augment(self):
         """
         This method will consist of going through each row of the dataset to augment it in every way possible.
@@ -52,14 +92,13 @@ class DataAugmentor:
         data = data.drop("Unnamed: 0", axis=1)
         data_reset_index = data.reset_index()
         
-        print('Looping through the data set')
 
         """NEED TO FINISH THIS"""
+        
+        print('AUGMENT')
 
-
-        for index in data.index:
-            print('======')
-            print(data['Name'][index])
+        for row in self.df.itertuples(): # Itertuples is used due to it being faster.
+            print(row.Name)
 
 
         
