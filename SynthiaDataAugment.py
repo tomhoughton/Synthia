@@ -38,11 +38,22 @@ class DataAugmentor:
             'Consistent', 
             'OscillatorDetune', 
             'OscillatorDetune2', 
-            'KeyboardUnison',
+            'KeyboardDetune',
             'KeyboardUnisonToggle',
             'VibratoAmount',
             'VibratoSpeed'
         ]
+
+        # self.consistency_features = [
+        #     'Consistency', 
+        #     'Consistent', 
+        #     'OscillatorDetune', 
+        #     'OscillatorDetune2', 
+        #     'KeyboardUnison',
+        #     'KeyboardUnisonToggle',
+        #     'VibratoAmount',
+        #     'VibratoSpeed'
+        # ]
 
         self.dynamics_features = [
             'Dynamics',
@@ -106,7 +117,7 @@ class DataAugmentor:
         # Evolution:
         temp_evolution_df = self.df[['Evolution', 'LFOSpeed', 'FilterLFOCutoffMod']]
 
-        
+
     def augment_min_max(self, row):
         # The augment margin is just the degree at which we +/-
         # We need to create a variable to store the augmented peices of data.
