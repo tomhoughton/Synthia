@@ -184,8 +184,12 @@ def data_augment(delay):
 
     print('----- IN DEVELOPMENT -----')
 
+    print('STATISTICS')
+    augmentor.get_statistics()
+
+
     # Augment the data:
-    augmentor.augment() 
+    augmentor.augment(method='method', margin=0.2) 
     # augmentor.augment_min_max(augment_margin=1)
 
     x = input('...')

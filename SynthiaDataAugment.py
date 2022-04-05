@@ -1,5 +1,6 @@
 from SynthiaStats import SynthiaStats
 import pandas as pd
+import numpy as np
 
 """ 
 TODO: 
@@ -31,6 +32,45 @@ class DataAugmentor:
         self.stats_dynamics = dynamics
         self.stats_evolution = evolution
 
+        # We need to create arrays to store the values which are assosiated with each descriptor:
+        self.consistency_features = [
+            'Consistency', 
+            'Consistent', 
+            'OscillatorDetune', 
+            'OscillatorDetune2', 
+            'KeyboardUnison',
+            'KeyboardUnisonToggle',
+            'VibratoAmount',
+            'VibratoSpeed'
+        ]
+
+        self.dynamics_features = [
+            'Dynamics',
+            'Dynamic',
+            'AttackTime',
+            'AttackTime2',
+            'DecayTime',
+            'DecayTime2',
+            'SustainTime',
+            'SustainTime2',
+            'ReleaseTime',
+            'ReleaseTime2',
+            'FilterEnvCutoffMod'
+        ]
+
+        self.evolution_features = [
+            'Evolution',
+            'Evolves',
+            'LFOSpeed',
+            'FilterLFOCutoffMod'
+        ]
+
+        self.brightness_features = [
+            'Brightness',
+            'Bright',
+            'FilterCutoffFrequency'
+        ]
+
 
     def display_current_working_data(self):
         print('Data Augment Display')
@@ -40,6 +80,14 @@ class DataAugmentor:
         print('--------------------------------------------------------------------------------')
         print(self.stats_consistency)
 
+
+    def get_statistics(self):
+        S_Stats = SynthiaStats(data=self.df, is_exporting=False)
+        consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
+
+        for i in consistency_mmm:
+            print('-----------------------------')
+            print(consistency_mmm)
 
     def display_dataset(self):
         print('The Dataset')
@@ -59,13 +107,49 @@ class DataAugmentor:
         temp_evolution_df = self.df[['Evolution', 'LFOSpeed', 'FilterLFOCutoffMod']]
 
         
-    def augment_min_max(self, augment_margin):
+    def augment_min_max(self, row):
         # The augment margin is just the degree at which we +/-
         # We need to create a variable to store the augmented peices of data.
+        print(row['Name'])
 
+        # We need to get the values for each descriptor in each row before we augment.
+        consistency_features = self.get_features_from_dict(row=row, descriptor='Consistency')
+        # dynamics_features = self.get_features_from_dict(row=row, descriptor='Dynamics')
+        # brightness_features = self.get_features_from_dict(row=row, descriptor='Brightness')
+        # evolution_features = self.get_features_from_dict(row=row, descriptor='Evolution')
+
+        # Now we need to get the min and max for each column and descriptor:
+        # We need to somehow deicde how to select the descriptor stats based on the degree:
+
+        # Get the stats:
+        # consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
+
+        print('Consistency Features')
+        print(consistency_features)
+        
         
 
-    # We need to create a function to augment each row to simplify the code
+    def get_features_from_dict(self, row, descriptor):
+        features = []
+        
+        if (descriptor == 'Consistency'):
+            features = self.consistency_features
+        elif (descriptor == 'Dynamics'):
+            features = self.dynamics_features
+        elif (descriptor == 'Brightness'):
+            features = self.brightness_features
+        elif (descriptor == 'Evolution'):
+            features = self.evolution_features
+        
+        rtn_vector = np.ones(len(features))
+
+        for feature_index, feature in enumerate(features):
+            print('ISSUE')
+            print('Feature: ', feature)
+            print('Feature Value: ', row[feature])
+            rtn_vector[feature_index] = row[feature]
+
+        return rtn_vector
 
 
     def augment(self, method, margin):
@@ -91,11 +175,10 @@ class DataAugmentor:
         """NEED TO FINISH THIS"""
         
         print('AUGMENT')
-
-        for row in self.df.itertuples(): # Itertuples is used due to it being faster.
-            
-            # Do the augmentation method here:
-            self.augment_min_max(augment_margin=margin)
+        
+        for (index_label, row_series) in data.iterrows(): # Itertuples is used due to it being faster.
+            self.augment_min_max(row=row_series.to_dict())
+            # print(row_series.to_dict())            
 
 
         
