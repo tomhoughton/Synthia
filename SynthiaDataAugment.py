@@ -82,6 +82,9 @@ class DataAugmentor:
             'FilterCutoffFrequency'
         ]
 
+        # Combination store:
+        self.combinations = [] # This is a global class variable for the recursion algorithm to access.
+
 
     def display_current_working_data(self):
         print('Data Augment Display')
@@ -117,11 +120,139 @@ class DataAugmentor:
         # Evolution:
         temp_evolution_df = self.df[['Evolution', 'LFOSpeed', 'FilterLFOCutoffMod']]
 
+    """
+    Binary Combinations:
+    """
+
+    def gen(self, n, arr, i):
+        if i == n:
+            rtn_arr = self.extract(arr, n, i)
+            self.combinations.append(rtn_arr)
+
+        # First assign "0" at the position and try for all other permutations.
+        arr[i] = 0
+        self.gen(n, arr, i + 1)
+
+        # Assign "1" at the position and try for all other permutations.
+        arr[i] = 1
+        self.gen(n, arr, i + 1)
+
+        # Assign "2" at the position and try for all other permutations.
+        arr[i] = 2
+        self.gen(n, arr, i + 1)
+
+    def extract(self, arr, n, i):
+        temp = []
+        for i in range(0, n):
+            temp.append(arr[i])
+
+        return temp
+
+    def generate_combinations(self, n):
+        arr = [None] * n
+        self.gen(n, arr, 0)
+
+        print('Generate Combimations')
+        rtn = np.array(self.combinations)
+        print(rtn)
+
+
+    # def buildArray(arr, n, i):
+    #     temp = []
+    #     for i in range(0, n):
+    #         temp.append(arr[i])
+
+    # def generateAllCombinations(n, arr, i):
+    #     if i == n:
+    #         rtn_arr = 
+
+    def gen_augment_combinations():
+        """
+        This function will gather all combinations of increase, decrease and remmain whilst augmenting the data.
+        This allows us to generate much more data.
+        """
+
+    def augmentable_features(self, row_dict):
+        features = [
+            'OscillatorWaveShape',
+            'OscillatorOct',
+            'OscillatorSemi',
+            'OscillatorDetune',
+            'FilterCutoffFrequency',
+            'FilterLFOCutoffMod',
+            'FilterEnvCutoffMod',
+            'LFOSpeed',
+            'LFOFadeIn',
+            'OscillatorWaveShape2',
+            'OscillatorOct2',
+            'OscillatorSemi2',
+            'OscillatorDetune2',
+            'AttackTime',
+            'DecayTime',
+            'SustainLevel',
+            'SustainTime',
+            'ReleaseTime',
+            'ReleaseTime',
+            'AttackTime2',
+            'DecayTime2',
+            'SustainLevel2',
+            'SustainTime2',
+            'ReleaseTime2',
+            'VibratoSpeed',
+            'VibratoAmount',
+            'KeyboardDetune'
+        ]
+
+        rtn_arr = np.ones(len(features))
+
+        for index, feature in enumerate(features):
+            rtn_arr[index] = float(row_dict[feature])
+
+        return rtn_arr, features
+
+    def non_augmentable_features(self, row_dict):
+        features = [
+            'Name',
+            'Type',
+            'Consistent',
+            'Bright',
+            'Evolves',
+            'Dynamic',
+            'Consistency',
+            'Brightness',
+            'Evolution',
+            'Dynamics',
+            'KeyboardUnisonToggle'
+        ]
+
+        rtn_arr = np.ones(len(features))
+
+        for index, feature in enumerate(features):
+            rtn_arr[index] = feature
+        
+        return rtn_arr, features
+
+
 
     def augment_min_max(self, row):
+
+        """
+        This function augments a single row and will return a new dataframe or matrix of the new rows (discluding the original)
+        """
+
         # The augment margin is just the degree at which we +/-
         # We need to create a variable to store the augmented peices of data.
-        print(row['Name'])
+        print(row)
+
+        # get the augmentable features and non augmentable fewaures and non augmentable features:
+        augmentable, augmentable_features = self.augmentable_features(row_dict=row)
+        # non_augmentable, non_augmentable_features = self.non_augmentable_features(row_dict=row)
+
+        # Get the amount of combinations for the augmentable features:
+        self.generate_combinations(n = len(augmentable))
+
+
+
 
         # We need to get the values for each descriptor in each row before we augment.
         consistency_features = self.get_features_from_dict(row=row, descriptor='Consistency')
@@ -136,7 +267,11 @@ class DataAugmentor:
         # consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
 
         print('Consistency Features')
+        
         print(consistency_features)
+        print('Len: ', len(consistency_features))
+
+        print('Combinations')
         
         
 
@@ -164,6 +299,8 @@ class DataAugmentor:
 
 
     def augment(self, method, margin):
+
+
         """
         This method will consist of going through each row of the dataset to augment it in every way possible.
 
