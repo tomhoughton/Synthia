@@ -251,9 +251,6 @@ class DataAugmentor:
         # Get the amount of combinations for the augmentable features:
         self.generate_combinations(n = len(augmentable))
 
-
-
-
         # We need to get the values for each descriptor in each row before we augment.
         consistency_features = self.get_features_from_dict(row=row, descriptor='Consistency')
         # dynamics_features = self.get_features_from_dict(row=row, descriptor='Dynamics')

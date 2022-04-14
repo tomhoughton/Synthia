@@ -16,14 +16,17 @@ manager = PresetManager_V3()
 
 import os
 import pandas as pd
-
+from SynthiaDataAugmentV2 import Augmentor
 df_path = os.path.join('TrainingData', 'Datasets')
 df = pd.read_csv(os.path.join(df_path, 'Mar-16-2022.csv'))
 
-S_Stats = SynthiaStats(data=df)
-S_Stats.type_count()
-combination_counts = S_Stats.get_combination_counts()
-S_Stats.display_dataframe()
-print(combination_counts)
-print('----- Min and Max Test -----')
-S_Stats.get_combination_min_max()
+augmentor = Augmentor(df)
+augmentor.gen()
+
+# S_Stats = SynthiaStats(data=df)
+# S_Stats.type_count()
+# combination_counts = S_Stats.get_combination_counts()
+# S_Stats.display_dataframe()
+# print(combination_counts)
+# print('----- Min and Max Test -----')
+# S_Stats.get_combination_min_max()

@@ -5,6 +5,7 @@ import platform
 import pandas as pd
 from InputSynthiaV2 import run_input
 from SynthiaDataAugment import DataAugmentor
+from SynthiaDataAugmentV2 import Augmentor
 from SynthiaStats import SynthiaStats
 
 def display_title():
@@ -157,6 +158,8 @@ def data_augment(delay):
     print('██████╔╝██║░░██║░░░██║░░░██║░░██║  ██║░░██║╚██████╔╝╚██████╔╝██║░╚═╝░██║███████╗██║░╚███║░░░██║░░░')
     print('╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ╚═╝░░╚═╝░╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░')
 
+    
+
     """REPEATING CODE"""
     # Get the path to the datasets:
     df_path = os.path.join('TrainingData', 'Datasets')
@@ -173,26 +176,33 @@ def data_augment(delay):
     # Get and store the dataframe the user would like:
     df = pd.read_csv(os.path.join(df_path, datasets[usr_input]))
     
-    # Create a new Synthia Stats class and provide it with the selected dataframe:
-    S_Stats = SynthiaStats(data=df, is_exporting=False)
+    augmentor = Augmentor(df=df)
+    # augmentor.generate_combinations(n=3)
 
-    consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
-
-    augmentor = DataAugmentor(df, consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm)
-
-    # augmentor.display_current_working_data()
-
-    print('----- IN DEVELOPMENT -----')
-
-    print('STATISTICS')
-    augmentor.get_statistics()
+    # Augmented the dataset:
+    augmentor.augment()
 
 
-    # Augment the data:
-    augmentor.augment(method='method', margin=0.2) 
-    # augmentor.augment_min_max(augment_margin=1)
+    # # Create a new Synthia Stats class and provide it with the selected dataframe:
+    # S_Stats = SynthiaStats(data=df, is_exporting=False)
 
-    x = input('...')
+    # consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
+
+    # augmentor = DataAugmentor(df, consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm)
+
+    # # augmentor.display_current_working_data()
+
+    # print('----- IN DEVELOPMENT -----')
+
+    # print('STATISTICS')
+    # augmentor.get_statistics()
+
+
+    # # Augment the data:
+    # augmentor.augment(method='method', margin=0.2) 
+    # # augmentor.augment_min_max(augment_margin=1)
+
+    # x = input('...')
 
 
 def root_menu(delay):
