@@ -47,6 +47,7 @@ class SynthiaStats:
         self.is_exporting = is_exporting
         self.export_path = os.path.join('Statistics') # Holds the folder for the stats exports.
         self.data_frames_to_export = [] # This holds the array of data framees to export.
+        self.export_folder_name = '' # This holds the name of the folder containing the export stats.
 
         if (is_exporting == True):
             print('Is exporting...')
@@ -242,9 +243,9 @@ class SynthiaStats:
 
         # Get min max for all degrees of each descriptor:
         consistency_min_max_mean_dfs, consistency_df_names = self.get_all_min_max(data_frames=consistency_unique_dfs)
-        print('CONSISTENCY DF STUFF: ')
-        print('Dataframes: ', consistency_min_max_mean_dfs)
-        print('Names: ', consistency_df_names)
+        # print('CONSISTENCY DF STUFF: ')
+        # print('Dataframes: ', consistency_min_max_mean_dfs)
+        # print('Names: ', consistency_df_names)
         # Export consistency:
         self.export_handler(data=consistency_min_max_mean_dfs, dataset_names=consistency_df_names, stats_name='ConsistencyMinMaxMean')
 
@@ -434,6 +435,7 @@ class SynthiaStats:
         # Get the date:
         today = date.today()
         date_str = today.strftime("%b-%d-%Y")
+        self.export_folder_name = date_str
 
         # WE NEED TO CHECK IF THE FOLDER ALREADY EXISTS!!!!!!
 

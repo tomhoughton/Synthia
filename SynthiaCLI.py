@@ -15,6 +15,44 @@ def display_title():
         print(c, end=' ')
         time.sleep(0.13)
 
+def display_data_augment_title():
+    print('██████╗░░█████╗░████████╗░█████╗░  ░█████╗░██╗░░░██╗░██████╗░███╗░░░███╗███████╗███╗░░██╗████████╗')
+    print('██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗  ██╔══██╗██║░░░██║██╔════╝░████╗░████║██╔════╝████╗░██║╚══██╔══╝')
+    print('██║░░██║███████║░░░██║░░░███████║  ███████║██║░░░██║██║░░██╗░██╔████╔██║█████╗░░██╔██╗██║░░░██║░░░')
+    print('██║░░██║██╔══██║░░░██║░░░██╔══██║  ██╔══██║██║░░░██║██║░░╚██╗██║╚██╔╝██║██╔══╝░░██║╚████║░░░██║░░░')
+    print('██████╔╝██║░░██║░░░██║░░░██║░░██║  ██║░░██║╚██████╔╝╚██████╔╝██║░╚═╝░██║███████╗██║░╚███║░░░██║░░░')
+    print('╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ╚═╝░░╚═╝░╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░')
+
+def consistency_title():
+    # Display consistency title:
+    print('---------------------------------------------------------------------------------------')
+    print('░█████╗░░█████╗░███╗░░██╗░██████╗██╗░██████╗████████╗███████╗███╗░░██╗░█████╗░██╗░░░██╗')
+    print('██╔══██╗██╔══██╗████╗░██║██╔════╝██║██╔════╝╚══██╔══╝██╔════╝████╗░██║██╔══██╗╚██╗░██╔╝')
+    print('██║░░╚═╝██║░░██║██╔██╗██║╚█████╗░██║╚█████╗░░░░██║░░░█████╗░░██╔██╗██║██║░░╚═╝░╚████╔╝░')
+    print('██║░░██╗██║░░██║██║╚████║░╚═══██╗██║░╚═══██╗░░░██║░░░██╔══╝░░██║╚████║██║░░██╗░░╚██╔╝░░')
+    print('╚█████╔╝╚█████╔╝██║░╚███║██████╔╝██║██████╔╝░░░██║░░░███████╗██║░╚███║╚█████╔╝░░░██║░░░')
+    print('░╚════╝░░╚════╝░╚═╝░░╚══╝╚═════╝░╚═╝╚═════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░')
+    print('---------------------------------------------------------------------------------------')
+
+def brightness_title():
+    print('------------------------------------------------------------------------------')
+    print('██████╗░██████╗░██╗░██████╗░██╗░░██╗████████╗███╗░░██╗███████╗░██████╗░██████╗')
+    print('██╔══██╗██╔══██╗██║██╔════╝░██║░░██║╚══██╔══╝████╗░██║██╔════╝██╔════╝██╔════╝')
+    print('██████╦╝██████╔╝██║██║░░██╗░███████║░░░██║░░░██╔██╗██║█████╗░░╚█████╗░╚█████╗░')
+    print('██╔══██╗██╔══██╗██║██║░░╚██╗██╔══██║░░░██║░░░██║╚████║██╔══╝░░░╚═══██╗░╚═══██╗')
+    print('██████╦╝██║░░██║██║╚██████╔╝██║░░██║░░░██║░░░██║░╚███║███████╗██████╔╝██████╔╝')
+    print('╚═════╝░╚═╝░░╚═╝╚═╝░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚══╝╚══════╝╚═════╝░╚═════╝░')
+    print('------------------------------------------------------------------------------')
+
+def dynamics_title():
+    print('----------------------------------------------------------------')
+    print('██████╗░██╗░░░██╗███╗░░██╗░█████╗░███╗░░░███╗██╗░█████╗░░██████╗')
+    print('██╔══██╗╚██╗░██╔╝████╗░██║██╔══██╗████╗░████║██║██╔══██╗██╔════╝')
+    print('██║░░██║░╚████╔╝░██╔██╗██║███████║██╔████╔██║██║██║░░╚═╝╚█████╗░')
+    print('██║░░██║░░╚██╔╝░░██║╚████║██╔══██║██║╚██╔╝██║██║██║░░██╗░╚═══██╗')
+    print('██████╔╝░░░██║░░░██║░╚███║██║░░██║██║░╚═╝░██║██║╚█████╔╝██████╔╝')
+    print('╚═════╝░░░░╚═╝░░░╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░╚════╝░╚═════╝░')
+    print('----------------------------------------------------------------')
 
 def clear_console():
     # Get the os that the user is using:
@@ -151,14 +189,8 @@ def data_augment(delay):
     # Clear the console:
     clear_console() 
 
-    print('██████╗░░█████╗░████████╗░█████╗░  ░█████╗░██╗░░░██╗░██████╗░███╗░░░███╗███████╗███╗░░██╗████████╗')
-    print('██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗  ██╔══██╗██║░░░██║██╔════╝░████╗░████║██╔════╝████╗░██║╚══██╔══╝')
-    print('██║░░██║███████║░░░██║░░░███████║  ███████║██║░░░██║██║░░██╗░██╔████╔██║█████╗░░██╔██╗██║░░░██║░░░')
-    print('██║░░██║██╔══██║░░░██║░░░██╔══██║  ██╔══██║██║░░░██║██║░░╚██╗██║╚██╔╝██║██╔══╝░░██║╚████║░░░██║░░░')
-    print('██████╔╝██║░░██║░░░██║░░░██║░░██║  ██║░░██║╚██████╔╝╚██████╔╝██║░╚═╝░██║███████╗██║░╚███║░░░██║░░░')
-    print('╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ╚═╝░░╚═╝░╚═════╝░░╚═════╝░╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░')
-
-    
+    # Display the data augment title:
+    display_data_augment_title()    
 
     """REPEATING CODE"""
     # Get the path to the datasets:
@@ -173,36 +205,80 @@ def data_augment(delay):
 
     usr_input = int(input('Select which dataset you would like to summarise: '))
     
+    print('USR INPUT: ')
+    print(datasets[usr_input])
+    x = input('...')
+
+    date = datasets[usr_input]
     # Get and store the dataframe the user would like:
     df = pd.read_csv(os.path.join(df_path, datasets[usr_input]))
     
-    augmentor = Augmentor(df=df)
-    # augmentor.generate_combinations(n=3)
+    # Right we need to generate the statistics based of the dataset that we want to use:
+    # I would do it where we pick the stats that we want to use but lets try do this automatically.
 
-    # Augmented the dataset:
-    augmentor.augment()
+    # Create a new synthia stats class:
+    S_Stats = SynthiaStats(data=df, is_exporting=True)
 
+    # Display the dataframe:
+    clear_console()
+    display_data_augment_title()
+    S_Stats.display_dataframe()
+    x = input('...')
 
-    # # Create a new Synthia Stats class and provide it with the selected dataframe:
-    # S_Stats = SynthiaStats(data=df, is_exporting=False)
+    # Get the type count:
+    clear_console()
+    display_data_augment_title()
+    S_Stats.type_count()
+    x = input('...')
 
-    # consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
+    # Get the binary combination counts:
+    clear_console()
+    display_data_augment_title()
+    combination_counts = S_Stats.get_combination_counts()
+    print(combination_counts)
+    x = input('...')
 
-    # augmentor = DataAugmentor(df, consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm)
+    # Get the descriptor degrees min max and mean
+    clear_console()
+    display_data_augment_title()
+    cons_mmm, dyna_mmm, brigh_mmm, evol_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
+    S_Stats.display_decriptor_stats(consistency=cons_mmm, dynamics=dyna_mmm, brightness=brigh_mmm, evolution=evol_mmm)
+    x = input('...')
 
-    # # augmentor.display_current_working_data()
+    # Now we must export the statistics:
+    clear_console()
+    display_data_augment_title()
+    print('Exorting the statistics: ')
+    S_Stats.export_statistics()
 
-    # print('----- IN DEVELOPMENT -----')
+    # Create an augmentor object:
+    augmentor = Augmentor(df=df, date=S_Stats.export_folder_name)
 
-    # print('STATISTICS')
-    # augmentor.get_statistics()
+    # Sort the min max and stats paths:
+    clear_console()
+    display_data_augment_title()
+    print('Now we are sorting the statistics into ascending order in accordance of the descriptor degree')
+    
+    print('Consistency')
+    augmentor.sort_min_max_stats_paths(augmentor.consistency_path)
 
+    print('Dynamics')
+    augmentor.sort_min_max_stats_paths(augmentor.dynamics_path)
+
+    print('Brightness')
+    augmentor.sort_min_max_stats_paths(augmentor.brightness_path)
+
+    print('Evolution')
+    augmentor.sort_min_max_stats_paths(augmentor.evolution_path)
+
+    # This is now where we will augment the data:
+    augmentor.augment(method='Method', margin='0.2')
 
     # # Augment the data:
     # augmentor.augment(method='method', margin=0.2) 
     # # augmentor.augment_min_max(augment_margin=1)
 
-    # x = input('...')
+    x = input('...')
 
 
 def root_menu(delay):
@@ -256,5 +332,3 @@ def main():
             return '...'
 
 main()
-
-

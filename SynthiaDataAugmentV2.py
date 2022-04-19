@@ -15,10 +15,9 @@ TODO:
         - All augmentations must adhere to the min and max of the dataset to preserve the groups.
 """
 
-
 class Augmentor:
     
-    def __init__(self, df) -> None:
+    def __init__(self, df, date) -> None:
         
         # Augmented Dataset export path:
         self.export_path = os.path.join('TrainingData', 'AugmentedDatasets')
@@ -29,6 +28,14 @@ class Augmentor:
         # Store the binary permutations for the augmentation algorithm:
         self.combinations = []
         
+        # So we need to also read and obtain the directories of where the statistics are located:
+        self.date_var = date # Store the date of the of the statistics that we'll use. 
+        self.path_to_stats = os.path.join('Statistics', self.date_var)
+        self.consistency_path = os.path.join(self.path_to_stats, 'ConsistencyMinMaxMean')
+        self.brightness_path = os.path.join(self.path_to_stats, 'BrightnessMinMaxMean')
+        self.dynamics_path = os.path.join(self.path_to_stats, 'DynamicsMinMaxMean')
+        self.evolution_path = os.path.join(self.path_to_stats, 'EvolutionMixMaxMean')
+
         # Holds the descriptive data:
         self.meta = [
             'Name',
@@ -43,7 +50,7 @@ class Augmentor:
             'Dynamics',
             'KeyboardUnisonToggle'
         ]
-
+        
         # The numerical values of each preset:
         self.values = [
             ['OscillatorWaveShape', 'Preserve'],
@@ -106,7 +113,42 @@ class Augmentor:
             [2, 2, 2]
         ]
 
+    def sort_min_max_stats_paths(self, descriptor_mmm_path):
 
+        # Get the list of file names in the directory:
+        mmm_files = os.listdir(descriptor_mmm_path)
+        
+        # Remove .csv and convert everything to floats:
+        store = np.zeros(len(mmm_files)) # Store an empty array of zeros matching the length of the files.
+
+        # Enumerate through the files, the file is the name and i is the index to access the array.
+        for i, file in enumerate(mmm_files):
+            # Remove .csv, convert to float and store in the array.
+            store[i] = float(file[:3])
+
+        # Now we bubble sort the array:
+        # Get the length of the store array:
+        n = len(store)
+
+        # Traverse through the store values:
+        for i in range(n-1):
+            for j in range(0, n-i-1):
+                # Swap is the initial element is greater than the next element:
+                if (store[j] > store[j + 1]):
+                    store[j], store[j + 1] = store[j + 1], store[j]
+
+        dfs = []
+        for s in store:
+            df_name = str(s) + '.csv'
+            df = pd.read_csv(os.path.join(descriptor_mmm_path, df_name))
+            dfs.append(df)
+        
+        # Display the dfs:
+        for df in dfs:
+            print(df)
+            print('--------------------------------------------------------------')
+
+        x = input('...')
 
     def add_to_data_frame(self, new_rows):
 
