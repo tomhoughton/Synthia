@@ -34,7 +34,7 @@ class Augmentor:
         self.consistency_path = os.path.join(self.path_to_stats, 'ConsistencyMinMaxMean')
         self.brightness_path = os.path.join(self.path_to_stats, 'BrightnessMinMaxMean')
         self.dynamics_path = os.path.join(self.path_to_stats, 'DynamicsMinMaxMean')
-        self.evolution_path = os.path.join(self.path_to_stats, 'EvolutionMixMaxMean')
+        self.evolution_path = os.path.join(self.path_to_stats, 'EvolutionMinMaxMean')
 
         # Holds the descriptive data:
         self.meta = [

@@ -272,7 +272,7 @@ def data_augment(delay):
     augmentor.sort_min_max_stats_paths(augmentor.evolution_path)
 
     # This is now where we will augment the data:
-    augmentor.augment(method='Method', margin='0.2')
+    augmentor.augment()
 
     # # Augment the data:
     # augmentor.augment(method='method', margin=0.2) 
