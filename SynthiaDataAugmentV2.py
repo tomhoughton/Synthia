@@ -36,6 +36,9 @@ class Augmentor:
         self.dynamics_path = os.path.join(self.path_to_stats, 'DynamicsMinMaxMean')
         self.evolution_path = os.path.join(self.path_to_stats, 'EvolutionMinMaxMean')
 
+        # this is a log to print at the end, I'm going to put all logs here:
+        self.dev_log = []
+
         # Holds the descriptive data:
         self.meta = [
             'Name',
@@ -82,6 +85,69 @@ class Augmentor:
             ['KeyboardDetune', 'Consistency']
         ]
 
+        self.values = [
+   #         ['OscillatorWaveShape', 'Preserve'],
+    #        ['OscillatorOct', 'Preserve'],
+     #       ['OscillatorSemi', 'Preserve'],
+      #      ['OscillatorDetune', 'Consistency'],
+       #     ['FilterCutoffFrequency', 'Brightness'],
+        #    ['FilterLFOCutoffMod', 'Evolution'],
+         #   ['FilterEnvCutoffMod', 'Dynamics'],
+          #  ['LFOSpeed', 'Evolution'],
+           # ['LFOFadeIn', 'Preserve'],
+            #['OscillatorWaveShape2', 'Preserve'],
+            #['OscillatorOct2', 'Preserve'],
+            #['OscillatorSemi2', 'Preserve'],
+            #['OscillatorDetune2', 'Consistency'],
+            #['AttackTime', 'Type', 'Dynamics'],
+            ['DecayTime', 'Dynamics'],
+            ['SustainLevel', 'Dynamics'],
+            ['SustainTime', 'Dynamics'],
+            ['ReleaseTime', 'Dynamics'],
+            ['AttackTime2', 'Type', 'Dynamics'],
+            ['DecayTime2', 'Dynamics'],
+            ['SustainLevel2', 'Dynamics'],
+            ['SustainTime2', 'Dynamics'],
+            ['ReleaseTime2', 'Dynamics'],
+            ['VibratoSpeed', 'Consistency'],
+            ['VibratoAmount', 'Consistency'],
+            ['KeyboardUnison', 'Preserve'],
+            ['KeyboardDetune', 'Consistency']
+        ]
+
+        # Values 2: this will essentially be a more refined structure of the current values variable.
+        # Goes in the order of Feature, Preserve, Descriptor
+        self.values_2 = [
+            ['OscillatorWaveShape', 'Preserve', 'Consistency'],
+            ['OscillatorOct', 'Preserve', 'Consistency'],
+            ['OscillatorSemi', 'Preserve', 'Consistency'],
+            ['OscillatorDetune', 'None', 'Consistency'],
+            ['FilterCutoffFrequency', 'None', 'Brightness'],
+            ['FilterLFOCutoffMod', 'None', 'Evoulution'],
+            ['FilterEnvCutoffMod', 'None', 'Evolution'],
+            ['LFOSpeed', 'None', 'Evolution'],
+            ['LFOFadeIn', 'Preserve', 'Evolution'],
+            ['OscillatorWaveShape2', 'Preserve', 'Consistency'],
+            ['OscillatorOct2', 'Preserve', 'Consistency'],
+            ['OscillatorSemi2', 'Preserve', 'Consistency'],
+            ['OscillatorDetune2', 'None', 'Consistency'],
+            ['AttackTime', 'None', 'Dynamics'],
+            ['DecayTime', 'None', 'Dynamics'],
+            ['SustainLevel', 'None', 'Dynamics'],
+            ['SustainTime', 'None', 'Dynamics'],
+            ['ReleaseTime', 'None', 'Dynamics'],
+            ['AttackTime2', 'None', 'Dynaimcs'],
+            ['DecayTime2', 'None', 'Dynamics'],
+            ['SustainLevel2', 'None', 'Dynamics'],
+            ['SustainTime2', 'None', 'Dynamics'],
+            ['ReleaseTime2', 'None', 'Dynaimcs'],
+            ['VibratoSpeed', 'None', 'Consistency'],
+            ['VibratoAmount', 'None', 'Consistency'],
+            ['KeyboardUnison', 'Preserve', 'Consistency'],
+            ['KeyboardDetune', 'None', 'Consistency']
+        ]
+
+
         # We now need to figure out the combinations:
         self.combinations = [
             [0, 0, 0], 
@@ -114,6 +180,9 @@ class Augmentor:
         ]
 
     def sort_min_max_stats_paths(self, descriptor_mmm_path):
+
+        # We need to know what descriptor it is:
+
 
         # Get the list of file names in the directory:
         mmm_files = os.listdir(descriptor_mmm_path)
@@ -221,7 +290,7 @@ class Augmentor:
 
 
         data_frame = pd.DataFrame(pd_dictionary)
-        self.export_data_frame(data_frame=data_frame)
+        # self.export_data_frame(data_frame=data_frame)
 
         return data_frame
 
@@ -309,7 +378,27 @@ class Augmentor:
 
         user_input = input('Press any key to exit: ')
 
+    def get_stats_per_feature(self, v, row):
+        print('------------- Get stats per feature --------------------')
+        print('V: ', v)
 
+        # Things we need from each row:
+        # Descriptor:
+        descriptor = row[str(v[2])]
+        descriptor_degree = float(row[descriptor])
+        
+        # We need to make sure that the descriptor value is not a decimal to access,
+        # The dataframe that is in the dataframe of arrays.
+
+
+
+        # Min
+        # Max
+
+
+
+
+        return min, max
 
     def augment(self):
         # Get the dataset:
@@ -324,6 +413,9 @@ class Augmentor:
             # Get the row:
             row = df.iloc[row_index]
 
+            print('------------------------ Row: ----------------------------------------------')
+            print(row)
+
             # Now loop through the augmentation combinations:
             for x, combination in enumerate(self.combinations):
                 holder = [] # This stores the augmented values.
@@ -334,6 +426,11 @@ class Augmentor:
                 # Loop through the augmentable values in groups of three:
                 for i in range(0, len(self.values), 3):
                     v_1, v_2, v_3 = self.values[i:i+3]
+                    
+                    # We need to get the min max values per feature and descriptor:
+                    self.get_stats_per_feature(v=v_1, row=row)
+                    self.get_stats_per_feature(v=v_2, row=row)
+                    self.get_stats_per_feature(v=v_3, row=row)
 
                     # Retrieve augmented values:
                     value_01 = self.augment_value(value=row[str(v_1[0])], rule=v_1[1], operator=combination[0])
@@ -346,10 +443,10 @@ class Augmentor:
 
                 new_rows.append(holder)
             
-            self.clear_console()
-            print('| ', row_index, ' / ', len(df.to_numpy()) - 1, '|')
-            counter += '#'
-            print(counter)
+            # self.clear_console()
+            # print('| ', row_index, ' / ', len(df.to_numpy()) - 1, '|')
+            # counter += '#'
+            # print(counter)
 
         new_data_frame = self.add_to_data_frame(new_rows=new_rows)
 

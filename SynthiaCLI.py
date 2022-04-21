@@ -157,16 +157,16 @@ def data_summary(delay):
     
     # Display the dataframe
     S_Stats.display_dataframe()
-    x = input('...')
+    # x = input('...')
 
     # Get the type count:
     S_Stats.type_count()
-    x = input('...')
+    # x = input('...')
 
     # Get the binary combination counts:
     combination_counts = S_Stats.get_combination_counts()
     print(combination_counts)
-    x = input('...')
+    # x = input('...')
 
     consistency_mmm, dynamics_mmm, brightness_mmm, evolution_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
     
@@ -217,7 +217,7 @@ def data_augment(delay):
     # I would do it where we pick the stats that we want to use but lets try do this automatically.
 
     # Create a new synthia stats class:
-    S_Stats = SynthiaStats(data=df, is_exporting=True)
+    S_Stats = SynthiaStats(data=df, is_exporting=False)
 
     # Display the dataframe:
     clear_console()
