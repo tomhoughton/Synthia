@@ -260,16 +260,24 @@ def data_augment(delay):
     print('Now we are sorting the statistics into ascending order in accordance of the descriptor degree')
     
     print('Consistency')
-    augmentor.sort_min_max_stats_paths(augmentor.consistency_path)
+    consistency_stats = augmentor.sort_min_max_stats_paths(augmentor.consistency_path)
 
     print('Dynamics')
-    augmentor.sort_min_max_stats_paths(augmentor.dynamics_path)
+    dynamics_stats = augmentor.sort_min_max_stats_paths(augmentor.dynamics_path)
 
     print('Brightness')
-    augmentor.sort_min_max_stats_paths(augmentor.brightness_path)
+    brightness_stats = augmentor.sort_min_max_stats_paths(augmentor.brightness_path)
 
     print('Evolution')
-    augmentor.sort_min_max_stats_paths(augmentor.evolution_path)
+    evolution_stats = augmentor.sort_min_max_stats_paths(augmentor.evolution_path)
+
+    # We now need to set the statistics using the function in the augmentor:
+    augmentor.set_descriptor_stats(
+        consistency=consistency_stats,
+        dynamics=dynamics_stats,
+        brightness=brightness_stats,
+        evolution=evolution_stats    
+    )
 
     # This is now where we will augment the data:
     augmentor.augment()

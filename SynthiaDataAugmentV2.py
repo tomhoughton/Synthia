@@ -36,6 +36,12 @@ class Augmentor:
         self.dynamics_path = os.path.join(self.path_to_stats, 'DynamicsMinMaxMean')
         self.evolution_path = os.path.join(self.path_to_stats, 'EvolutionMinMaxMean')
 
+        # We need to store the stats for all of the descriptors:
+        self.consistency_stats = None
+        self.dynamics_stats = None
+        self.brightness_stats = None
+        self.evolution_stats = None
+
         # this is a log to print at the end, I'm going to put all logs here:
         self.dev_log = []
 
@@ -123,7 +129,7 @@ class Augmentor:
             ['OscillatorSemi', 'Preserve', 'Consistency'],
             ['OscillatorDetune', 'None', 'Consistency'],
             ['FilterCutoffFrequency', 'None', 'Brightness'],
-            ['FilterLFOCutoffMod', 'None', 'Evoulution'],
+            ['FilterLFOCutoffMod', 'None', 'Evolution'],
             ['FilterEnvCutoffMod', 'None', 'Evolution'],
             ['LFOSpeed', 'None', 'Evolution'],
             ['LFOFadeIn', 'Preserve', 'Evolution'],
@@ -136,11 +142,11 @@ class Augmentor:
             ['SustainLevel', 'None', 'Dynamics'],
             ['SustainTime', 'None', 'Dynamics'],
             ['ReleaseTime', 'None', 'Dynamics'],
-            ['AttackTime2', 'None', 'Dynaimcs'],
+            ['AttackTime2', 'None', 'Dynamics'],
             ['DecayTime2', 'None', 'Dynamics'],
             ['SustainLevel2', 'None', 'Dynamics'],
             ['SustainTime2', 'None', 'Dynamics'],
-            ['ReleaseTime2', 'None', 'Dynaimcs'],
+            ['ReleaseTime2', 'None', 'Dynamics'],
             ['VibratoSpeed', 'None', 'Consistency'],
             ['VibratoAmount', 'None', 'Consistency'],
             ['KeyboardUnison', 'Preserve', 'Consistency'],
@@ -179,11 +185,26 @@ class Augmentor:
             [2, 2, 2]
         ]
 
+    def set_descriptor_stats(self, consistency, dynamics, brightness, evolution):
+        """
+            The purpose of this function is to literally just set the statistics into the 
+            global variables of this class. I just couldn't be botheres to edit the CLI.
+        """
+
+        # Set consistency:
+        self.consistency_stats = consistency
+
+        # Set dyamics:
+        self.dynamics_stats = dynamics
+
+        # Set brightness:
+        self.brightness_stats = brightness
+
+        # Set the evolution stats:
+        self.evolution_stats = evolution
+
     def sort_min_max_stats_paths(self, descriptor_mmm_path):
-
         # We need to know what descriptor it is:
-
-
         # Get the list of file names in the directory:
         mmm_files = os.listdir(descriptor_mmm_path)
         
@@ -218,6 +239,9 @@ class Augmentor:
             print('--------------------------------------------------------------')
 
         x = input('...')
+
+        # Return the sorted dataframes:
+        return dfs
 
     def add_to_data_frame(self, new_rows):
 
@@ -285,8 +309,12 @@ class Augmentor:
             # Values:
             row_slice = row[len(self.meta):]
 
-            for index, v in enumerate(self.values):
+            for index, v in enumerate(self.values_2):
                 pd_dictionary[v[0]].append(row_slice[index])
+
+
+        print('The Dictionary: ')
+        print(pd_dictionary)
 
 
         data_frame = pd.DataFrame(pd_dictionary)
@@ -378,26 +406,30 @@ class Augmentor:
 
         user_input = input('Press any key to exit: ')
 
-    def get_stats_per_feature(self, v, row):
-        print('------------- Get stats per feature --------------------')
-        print('V: ', v)
+    def get_stats_per_feature(self, values, row):
 
-        # Things we need from each row:
-        # Descriptor:
-        descriptor = row[str(v[2])]
-        descriptor_degree = float(row[descriptor])
+        """ 
+        What does this function need TODO:
+            * We need to figure out the descriptor of it.
+            * Then we need to get the degrees
+            * Then return the min and max:
+        """
+
+        current_descriptor = values[2]
+
+        # Lets get the descriptor of the current row:
+        current_descriptor_degree = row[str(values[2])]
+
+        # Now we need the degree:
+        # descriptor_degree = float(row[current_descriptor])
+
+        print('######## Get Stats Per Feature ############')
+        print('| Current descriptor: ', current_descriptor, ' |')
+        print('| Current descriptor degree: ', current_descriptor_degree, '|')
+        # print('| Descriptor Degree: ', descriptor_degree, '|')
         
-        # We need to make sure that the descriptor value is not a decimal to access,
-        # The dataframe that is in the dataframe of arrays.
-
-
-
-        # Min
-        # Max
-
-
-
-
+        min = 0
+        max = 0
         return min, max
 
     def augment(self):
@@ -424,13 +456,13 @@ class Augmentor:
                 holder = self.apply_meta_data(row=row, combination=combination)
 
                 # Loop through the augmentable values in groups of three:
-                for i in range(0, len(self.values), 3):
-                    v_1, v_2, v_3 = self.values[i:i+3]
+                for i in range(0, len(self.values_2), 3):
+                    v_1, v_2, v_3 = self.values_2[i:i+3]
                     
                     # We need to get the min max values per feature and descriptor:
-                    self.get_stats_per_feature(v=v_1, row=row)
-                    self.get_stats_per_feature(v=v_2, row=row)
-                    self.get_stats_per_feature(v=v_3, row=row)
+                    self.get_stats_per_feature(values=v_1, row=row)
+                    self.get_stats_per_feature(values=v_2, row=row)
+                    self.get_stats_per_feature(values=v_3, row=row)
 
                     # Retrieve augmented values:
                     value_01 = self.augment_value(value=row[str(v_1[0])], rule=v_1[1], operator=combination[0])
