@@ -216,20 +216,28 @@ def data_augment(delay):
     # Right we need to generate the statistics based of the dataset that we want to use:
     # I would do it where we pick the stats that we want to use but lets try do this automatically.
 
-    # Create a new synthia stats class:
-    S_Stats = SynthiaStats(data=df, is_exporting=False)
+    print('Are you exporting? y or n')
+    x = input('=> ')
 
+    export_stats = None
+    if x == "y":
+        export_stats = True
+    elif x == "n":
+        export_stats = False
+
+    S_Stats = SynthiaStats(data=df, is_exporting=export_stats)
+    
     # Display the dataframe:
     clear_console()
     display_data_augment_title()
     S_Stats.display_dataframe()
-    x = input('...')
+    # x = input('...')
 
     # Get the type count:
     clear_console()
     display_data_augment_title()
     S_Stats.type_count()
-    x = input('...')
+    # x = input('...')
 
     # Get the binary combination counts:
     clear_console()
@@ -238,12 +246,13 @@ def data_augment(delay):
     print(combination_counts)
     x = input('...')
 
+    # clear_console()
+    # display_data_augment_title()
+
     # Get the descriptor degrees min max and mean
-    clear_console()
-    display_data_augment_title()
     cons_mmm, dyna_mmm, brigh_mmm, evol_mmm = S_Stats.get_descriptor_degrees_min_max_mean()
-    S_Stats.display_decriptor_stats(consistency=cons_mmm, dynamics=dyna_mmm, brightness=brigh_mmm, evolution=evol_mmm)
-    x = input('...')
+    # S_Stats.display_decriptor_stats(consistency=cons_mmm, dynamics=dyna_mmm, brightness=brigh_mmm, evolution=evol_mmm)
+    # x = input('...')
 
     # Now we must export the statistics:
     clear_console()
@@ -258,19 +267,14 @@ def data_augment(delay):
     clear_console()
     display_data_augment_title()
     print('Now we are sorting the statistics into ascending order in accordance of the descriptor degree')
-    
-    print('Consistency')
+        # print('Consistency')
     consistency_stats = augmentor.sort_min_max_stats_paths(augmentor.consistency_path)
-
-    print('Dynamics')
+    # print('Dynamics')
     dynamics_stats = augmentor.sort_min_max_stats_paths(augmentor.dynamics_path)
-
-    print('Brightness')
+    # print('Brightness')
     brightness_stats = augmentor.sort_min_max_stats_paths(augmentor.brightness_path)
-
-    print('Evolution')
+    # print('Evolution')
     evolution_stats = augmentor.sort_min_max_stats_paths(augmentor.evolution_path)
-
     # We now need to set the statistics using the function in the augmentor:
     augmentor.set_descriptor_stats(
         consistency=consistency_stats,
@@ -278,10 +282,8 @@ def data_augment(delay):
         brightness=brightness_stats,
         evolution=evolution_stats    
     )
-
     # This is now where we will augment the data:
     augmentor.augment()
-
     # # Augment the data:
     # augmentor.augment(method='method', margin=0.2) 
     # # augmentor.augment_min_max(augment_margin=1)
@@ -321,7 +323,6 @@ def root_menu(delay):
 def main():
     delay = 0.13 # Delay for the title display.
     isActive = True # Bool to control if the program should continue running.
-
 
     while isActive == True:
         root_menu(delay=delay)

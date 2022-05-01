@@ -426,8 +426,8 @@ class SynthiaStats:
     
     def export_handler(self, data, dataset_names, stats_name):
 
-        print('DATA: ', data)
-        print('NAMES: ', dataset_names)
+        # print('DATA: ', data)
+        # print('NAMES: ', dataset_names)
 
         # Get the path to the statistics folder:
         stats_path = os.path.join('Statistics')
@@ -456,7 +456,7 @@ class SynthiaStats:
             # We need to loop through the data:
             for index, x in enumerate(data):
                 csv_name = str(dataset_names[index]) + ".csv"
-                print('X: ', x)
+                # print('X: ', x)
                 x.to_csv(os.path.join(new_stats_name, csv_name))
         else:
             print('Export is false')

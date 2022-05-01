@@ -1,8 +1,0 @@
-,Name,Min,Max,Mean
-0,Consistency,0.2,0.2,0.2
-1,OscillatorDetune,0.3151577115,0.3174603283,0.3163090199
-2,OscillatorDetune2,0.6825742126,0.6848422885,0.68370825055
-3,KeyboardUnison,0,0,0.0
-4,KeyboardUnisonToggle,True,True,1.0
-5,VibratoAmount,0.234375,0.4296875,0.33203125
-6,VibratoSpeed,0.1640625,0.390625,0.27734375

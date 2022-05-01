@@ -5,10 +5,12 @@ import platform
 from datetime import date
 import numpy as np
 from SynthiaStats import SynthiaStats
+import random
 
 """ 
 TODO:
 - We need to create all of the rules that must be folled during the augmentation:
+    - We must create a hyper parameter for the range of audible difference.
     - Some rules of the top of my head:
         - The detunes must be the same distance from 0.5 -> could augment one then calculate the distance
                                                             then subtract that distance from 0.5 to get the lower.
@@ -18,7 +20,7 @@ TODO:
 class Augmentor:
     
     def __init__(self, df, date) -> None:
-        
+
         # Augmented Dataset export path:
         self.export_path = os.path.join('TrainingData', 'AugmentedDatasets')
 
@@ -27,6 +29,8 @@ class Augmentor:
 
         # Store the binary permutations for the augmentation algorithm:
         self.combinations = []
+
+        # Audible difference 
         
         # So we need to also read and obtain the directories of where the statistics are located:
         self.date_var = date # Store the date of the of the statistics that we'll use. 
@@ -233,20 +237,18 @@ class Augmentor:
             df = pd.read_csv(os.path.join(descriptor_mmm_path, df_name))
             dfs.append(df)
         
-        # Display the dfs:
-        for df in dfs:
-            print(df)
-            print('--------------------------------------------------------------')
+        # # Display the dfs:
+        # for df in dfs:
+        #     print(df)
+        #     print('--------------------------------------------------------------')
 
-        x = input('...')
+        # x = input('...')
 
         # Return the sorted dataframes:
         return dfs
 
     def add_to_data_frame(self, new_rows):
-
         pd_dictionary = {}
-
         # Descriptors 01:
         pd_dictionary['Name'] = []
         pd_dictionary['Type'] = []
@@ -300,7 +302,6 @@ class Augmentor:
         pd_dictionary['KeyboardDetune'] = []
 
         for row in new_rows:
-            
             # Meta:
             for index, m in enumerate(self.meta):
                 pd_dictionary[m].append(row[index])
@@ -311,32 +312,35 @@ class Augmentor:
 
             for index, v in enumerate(self.values_2):
                 pd_dictionary[v[0]].append(row_slice[index])
-
-
-        print('The Dictionary: ')
-        print(pd_dictionary)
-
-
+        # print('The Dictionary: ')
+        # print(pd_dictionary)
         data_frame = pd.DataFrame(pd_dictionary)
-        # self.export_data_frame(data_frame=data_frame)
 
+
+        self.export_data_frame(data_frame=data_frame)
         return data_frame
-
 
     def export_data_frame(self, data_frame):
         
-        # Get the date of when the augmented dataset was created:
-        today = date.today()
-
-        # Get the date string:
-        file_name_date_str = today.strftime("%b-%d-%Y") + '.csv'
-
+        """Basically the reason for this function is to give the file name a random number
+        this is simply to give each augmented dataset an almost unique key in the easiest way.
+        """
         # Create the path to export the dataset to:
-        file_export = os.path.join(self.export_path, file_name_date_str)
+        today = date.today()
+        file_name_str_no_csv = today.strftime("%b-%d-%Y") # Generate the date.
+        random_key = str(random.randint(0, 100)) # Generate rhe random number.
+        random_key_with_borders = '[' + random_key + ']' # Give the random key boarders to differentiate between the key and the date.
+        file_name_str = file_name_str_no_csv + random_key_with_borders + '.csv' # Generate the file name str. 
+        file_export = os.path.join(self.export_path, file_name_str)
         
         # Export the dataframe:
         data_frame.to_csv(file_export)
 
+        # Confirm the export:
+        print('Dataset exported!!!')
+        print('------------------------------')
+        print('Name: ', file_name_str)
+        print('Path: ', file_export)
 
     def apply_meta_data(self, row, combination):
         rtn = [] # This stores the list for the function to return.
@@ -351,6 +355,12 @@ class Augmentor:
 
 
     def augment_value(self, value, rule, operator):
+
+        """
+        TODO: We need to implement the range of audible difference in here
+        TODO: We need to gather the min and max to help us know whether the new value fits within the range of the group.
+        """
+    
         if (rule == "Preserve"):
             return value
         
@@ -423,9 +433,9 @@ class Augmentor:
         # Now we need the degree:
         # descriptor_degree = float(row[current_descriptor])
 
-        print('######## Get Stats Per Feature ############')
-        print('| Current descriptor: ', current_descriptor, ' |')
-        print('| Current descriptor degree: ', current_descriptor_degree, '|')
+        # print('######## Get Stats Per Feature ############')
+        # print('| Current descriptor: ', current_descriptor, ' |')
+        # print('| Current descriptor degree: ', current_descriptor_degree, '|')
         # print('| Descriptor Degree: ', descriptor_degree, '|')
         
         min = 0
@@ -445,8 +455,8 @@ class Augmentor:
             # Get the row:
             row = df.iloc[row_index]
 
-            print('------------------------ Row: ----------------------------------------------')
-            print(row)
+            # print('------------------------ Row: ----------------------------------------------')
+            # print(row)
 
             # Now loop through the augmentation combinations:
             for x, combination in enumerate(self.combinations):
@@ -482,5 +492,4 @@ class Augmentor:
 
         new_data_frame = self.add_to_data_frame(new_rows=new_rows)
 
-        # We need some form of confirmation to show the new augmented dataset, lets get some statistics:
-        self.confirm_augment(data_frame=new_data_frame)
+        # We need to confirm the data frame: 

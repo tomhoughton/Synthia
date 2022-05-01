@@ -5,6 +5,12 @@ from PyQt6.QtCore import Qt
 
 import sys
 
+"""
+NOTES:
+# This is a link to update arc drawings when values change: 
+https://forum.qt.io/topic/90341/change-dial-cosmetics-in-python/8
+"""
+
 class Dojo(QMainWindow):
     def __init__(self, *args, **kwargs) -> None:
         super(Dojo, self).__init__(*args, **kwargs)
@@ -52,7 +58,6 @@ class Dojo(QMainWindow):
 
         # Set main widget:
         self.setCentralWidget(main_widget)
-
 
 if __name__=="__main__":
     app = QApplication(sys.argv)
