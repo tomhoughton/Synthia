@@ -19,7 +19,7 @@ TODO:
 
 class Augmentor:
     
-    def __init__(self, df, date) -> None:
+    def __init__(self, df, date, audible_diff_range) -> None:
 
         # Augmented Dataset export path:
         self.export_path = os.path.join('TrainingData', 'AugmentedDatasets')
@@ -30,8 +30,10 @@ class Augmentor:
         # Store the binary permutations for the augmentation algorithm:
         self.combinations = []
 
-        # Audible difference 
-        
+        # Audible difference :
+        # This variable is here to be the default range in which we can add or subract values to augment them.
+        self.audible_difference_range = audible_diff_range 
+
         # So we need to also read and obtain the directories of where the statistics are located:
         self.date_var = date # Store the date of the of the statistics that we'll use. 
         self.path_to_stats = os.path.join('Statistics', self.date_var)
@@ -207,6 +209,7 @@ class Augmentor:
         # Set the evolution stats:
         self.evolution_stats = evolution
 
+
     def sort_min_max_stats_paths(self, descriptor_mmm_path):
         # We need to know what descriptor it is:
         # Get the list of file names in the directory:
@@ -316,7 +319,6 @@ class Augmentor:
         # print(pd_dictionary)
         data_frame = pd.DataFrame(pd_dictionary)
 
-
         self.export_data_frame(data_frame=data_frame)
         return data_frame
 
@@ -359,16 +361,27 @@ class Augmentor:
         """
         TODO: We need to implement the range of audible difference in here
         TODO: We need to gather the min and max to help us know whether the new value fits within the range of the group.
+        NOTE: In terms of operators [0 = -] [1 = None] [2 = +]
         """
-    
+
+        # NOTE: Need to find a better name for this variable as I know it's the wrong word for it.
+        scalar = random.uniform(0, self.audible_difference_range)
+
+        # We need to get the correct array:
+        
+
         if (rule == "Preserve"):
             return value
         
-        if (operator == 0):
+        if (operator == 0): # -
+            new_value = value - scalar
+
+            # Now we need to check the min and max stats of this number.        
+
             return value - 1
-        elif (operator == 1):
-            return value + 0
-        elif (operator == 2):
+        elif (operator == 1): # None
+            return value
+        elif (operator == 2): # + 
             return value + 2
         
         return 69
@@ -423,24 +436,49 @@ class Augmentor:
             * We need to figure out the descriptor of it.
             * Then we need to get the degrees
             * Then return the min and max:
+
+
+        Dev:
+        TODO: Make sure it's getting the stats we need and not just one of the stats where for example all values aren't
+        of the same descriptor.
         """
+        
+        print('Values', values)
 
         current_descriptor = values[2]
 
         # Lets get the descriptor of the current row:
-        current_descriptor_degree = row[str(values[2])]
+        current_descriptor_degree = float(row[str(values[2])])
 
-        # Now we need the degree:
-        # descriptor_degree = float(row[current_descriptor])
+        # NOTE: May need to remove this.
+        print('Current_descriptor degree: ', current_descriptor_degree)
 
-        # print('######## Get Stats Per Feature ############')
-        # print('| Current descriptor: ', current_descriptor, ' |')
-        # print('| Current descriptor degree: ', current_descriptor_degree, '|')
-        # print('| Descriptor Degree: ', descriptor_degree, '|')
-        
-        min = 0
-        max = 0
-        return min, max
+        # We need to check to make sure that the value isn't a 1.0:
+        if current_descriptor_degree == 1.0:
+            current_descriptor_degree = int(current_descriptor_degree)
+        else:
+            current_descriptor_degree = int(current_descriptor_degree * 10)
+
+        current_stats = []
+
+        # We need to get the correct array:        
+        if (current_descriptor == 'Consistency'):
+            current_stats = self.consistency_stats
+        elif (current_descriptor == 'Brightness'):
+            current_stats = self.brightness_stats
+        elif (current_descriptor == 'Evolution'):
+            current_stats = self.evolution_stats
+        elif (current_descriptor == 'Dynamics'):   
+            current_stats = self.dynamics_stats
+
+        stats = current_stats[current_descriptor_degree]
+
+        # NOTE: May need to remove this.
+        print('Returned stats: ')
+        print(stats)
+        print('Row: ')
+        print(row)
+        return stats 
 
     def augment(self):
         # Get the dataset:
@@ -485,6 +523,8 @@ class Augmentor:
 
                 new_rows.append(holder)
             
+            # NOTE: May need to remove this.
+            x = input('-_- -_- -_-')
             # self.clear_console()
             # print('| ', row_index, ' / ', len(df.to_numpy()) - 1, '|')
             # counter += '#'

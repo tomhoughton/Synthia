@@ -260,14 +260,24 @@ def data_augment(delay):
     print('Exorting the statistics: ')
     S_Stats.export_statistics()
 
-    # Create an augmentor object:
-    augmentor = Augmentor(df=df, date=S_Stats.export_folder_name)
+    # Get the audible difference:
+    print('Would you like to set the range of audible difference or leave it alone: y or n')
+    x = input('=>')
+    # When creating the audible difference we only consider the upper limit for now
+    # This is because the range above and below '0' will be the same.
+    audible_diff = 0.70000
 
+    # Create an augmentor object:
+    augmentor = Augmentor(df=df, date=S_Stats.export_folder_name, audible_diff_range=audible_diff)
+    
+    # Make sure that we retrieve the difference:
+    print(augmentor.audible_difference_range)
+    x = input('...')
     # Sort the min max and stats paths:
     clear_console()
     display_data_augment_title()
     print('Now we are sorting the statistics into ascending order in accordance of the descriptor degree')
-        # print('Consistency')
+    # print('Consistency')
     consistency_stats = augmentor.sort_min_max_stats_paths(augmentor.consistency_path)
     # print('Dynamics')
     dynamics_stats = augmentor.sort_min_max_stats_paths(augmentor.dynamics_path)
@@ -287,7 +297,6 @@ def data_augment(delay):
     # # Augment the data:
     # augmentor.augment(method='method', margin=0.2) 
     # # augmentor.augment_min_max(augment_margin=1)
-
     x = input('...')
 
 
