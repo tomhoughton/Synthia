@@ -1,5 +1,6 @@
 # Imports:
 import os
+from turtle import st
 import pandas as pd
 import platform
 from datetime import date
@@ -356,7 +357,7 @@ class Augmentor:
         return rtn
 
 
-    def augment_value(self, value, rule, operator):
+    def augment_value(self, value, rule, operator, stats, values_arr):
 
         """
         TODO: We need to implement the range of audible difference in here
@@ -367,17 +368,21 @@ class Augmentor:
         # NOTE: Need to find a better name for this variable as I know it's the wrong word for it.
         scalar = random.uniform(0, self.audible_difference_range)
 
-        # We need to get the correct array:
+        print('----------------------------')
+        print('Numberical value: ', value)
+        print('Values arr: ', values_arr)
+        print('Stats: ')
+        print(stats)
+        print('----------------------------')
         
-
         if (rule == "Preserve"):
             return value
         
         if (operator == 0): # -
             new_value = value - scalar
 
-            # Now we need to check the min and max stats of this number.        
-
+            # Now we need to check the min and max stats of this number:       
+            
             return value - 1
         elif (operator == 1): # None
             return value
@@ -443,7 +448,7 @@ class Augmentor:
         of the same descriptor.
         """
         
-        print('Values', values)
+        # print('Values', values)
 
         current_descriptor = values[2]
 
@@ -451,7 +456,8 @@ class Augmentor:
         current_descriptor_degree = float(row[str(values[2])])
 
         # NOTE: May need to remove this.
-        print('Current_descriptor degree: ', current_descriptor_degree)
+        # print('Current_descriptor: ', current_descriptor)
+        # print('Current_descriptor degree: ', current_descriptor_degree)
 
         # We need to check to make sure that the value isn't a 1.0:
         if current_descriptor_degree == 1.0:
@@ -474,10 +480,10 @@ class Augmentor:
         stats = current_stats[current_descriptor_degree]
 
         # NOTE: May need to remove this.
-        print('Returned stats: ')
-        print(stats)
-        print('Row: ')
-        print(row)
+        # print('Returned stats: ')
+        # print(stats)
+        # print('Row: ')
+        # print(row)
         return stats 
 
     def augment(self):
@@ -507,15 +513,19 @@ class Augmentor:
                 for i in range(0, len(self.values_2), 3):
                     v_1, v_2, v_3 = self.values_2[i:i+3]
                     
+                    # print('VALUES 01: ', v_1)
+                    # print('VALUES 02: ', v_2)
+                    # print('VALUES 03: ', v_3)
+
                     # We need to get the min max values per feature and descriptor:
-                    self.get_stats_per_feature(values=v_1, row=row)
-                    self.get_stats_per_feature(values=v_2, row=row)
-                    self.get_stats_per_feature(values=v_3, row=row)
+                    stats_v1 = self.get_stats_per_feature(values=v_1, row=row)
+                    stats_v2 = self.get_stats_per_feature(values=v_2, row=row)
+                    stats_v3 = self.get_stats_per_feature(values=v_3, row=row)
 
                     # Retrieve augmented values:
-                    value_01 = self.augment_value(value=row[str(v_1[0])], rule=v_1[1], operator=combination[0])
-                    value_02 = self.augment_value(value=row[str(v_2[0])], rule=v_2[1], operator=combination[1])
-                    value_03 = self.augment_value(value=row[str(v_3[0])], rule=v_3[1], operator=combination[2])
+                    value_01 = self.augment_value(value=row[str(v_1[0])], rule=v_1[1], operator=combination[0], stats=stats_v1, values_arr=v_1)
+                    value_02 = self.augment_value(value=row[str(v_2[0])], rule=v_2[1], operator=combination[1], stats=stats_v2, values_arr=v_2)
+                    value_03 = self.augment_value(value=row[str(v_3[0])], rule=v_3[1], operator=combination[2], stats=stats_v3, values_arr=v_3)
 
                     holder.append(value_01)
                     holder.append(value_02)

@@ -41,3 +41,23 @@ a = df.loc[(df['Consistent'] == True) & (df['Bright'] == False) & (df['Evolves']
 r, c = a.shape
 print(r)
 # %%
+
+import os
+import pandas as pd
+
+stats_path = os.path.join('Statistics', 'May-02-2022')
+consistency = os.path.join(stats_path, 'ConsistencyMinMaxMean')
+df_path = os.path.join(consistency, '0.1.csv')
+
+df = pd.read_csv(df_path)
+df.head()
+# %%
+
+# We need the Names row:
+names = df['Name']
+nnp = names.values
+print(nnp[1:])
+# %%
+
+# Now we need to loop through and find the index of the row we need:
+
