@@ -18,29 +18,6 @@ TODO:
         - All augmentations must adhere to the min and max of the dataset to preserve the groups.
 """
 
-""" 
-ERRORS:
-Traceback (most recent call last):
-  File "/home/tom/Documents/Repos/Synthia/SynthiaCLI.py", line 352, in <module>
-    main()
-  File "/home/tom/Documents/Repos/Synthia/SynthiaCLI.py", line 347, in main
-    data_augment(delay=delay)
-  File "/home/tom/Documents/Repos/Synthia/SynthiaCLI.py", line 296, in data_augment
-    augmentor.augment()
-  File "/home/tom/Documents/Repos/Synthia/SynthiaDataAugmentV2.py", line 581, in augment
-    stats_v3 = self.get_stats_per_feature(values=v_3, row=row)
-  File "/home/tom/Documents/Repos/Synthia/SynthiaDataAugmentV2.py", line 538, in get_stats_per_feature
-    stats = current_stats[current_descriptor_degree]
-IndexError: list index out of range
-
-- > Basically this error occurs in the get stats per feature function where it cant actually find the proper index for the descriptor. 
-    I personally think that this is just an error in terms of not completing the full dataset yet as it wont have covered all of the descriptors.
-    This means that all of the data produced from this algorithm thus far is false and results from this shouldn't be taken seriously yet.
-- > The next step to fix this error is to essentially make the initial dataset as well as I can... quickly.
-- > Whilst simultaniously writing notes for the ML part of the program to make development easier, as well as quickly write all of the function names and comment what they need to do,
-    before writing the export code.
-"""
-
 class Augmentor:
     
     def __init__(self, df, date, audible_diff_range) -> None:
@@ -391,7 +368,6 @@ class Augmentor:
         # NOTE: Need to find a better name for this variable as I know it's the wrong word for it.
         scalar = random.uniform(0, self.audible_difference_range)
 
-        # NOTE LOGS.
         print('----------------------------')
         print('Feature: ', feature)
         print('Numberical value: ', value)
@@ -403,7 +379,7 @@ class Augmentor:
         names = stats['Name'] # Get the names row.
         names_v = names.values # Turn it into values to make an array.
         feature_row_index = 0 # This is to store the index of the feature.
-        # print('Names_v ', names_v) # NOTE LOGS.
+        print('Names_v ', names_v)
 
         # Now we loop through the names array: NOTE -> May change this name to features.
         for i, name in enumerate(names_v):
@@ -418,12 +394,11 @@ class Augmentor:
         min_v = row_stats['Min']
         max_v = row_stats['Max']
 
-        # NOTE LOGS.
         print('Therefore the row is: ', stats.iloc[feature_row_index])
         print('Min: ', row_stats['Min'])
         print('Max: ', row_stats['Max'])
         # print('Feature row: ', feature_row)
-        print('----------------------------') 
+        print('----------------------------')
         
         if (rule == "Preserve"):
             return value
@@ -433,6 +408,9 @@ class Augmentor:
             
             # Create the new value:
             new_value = value - scalar
+
+            print('NewValue: ', new_value)
+            print('Scalar: ', scalar)
 
             # Now we need to check the min and max stats of this number:       
             if (float(new_value) < float(min_v)):
@@ -446,10 +424,6 @@ class Augmentor:
                 """ 
                 NOTE: FINISH THIS !!!!!!
                 """
-
-            # NOTE: Logs:
-            print('New Value: ', new_value)
-
             return new_value
 
         elif (operator == 1): # None
@@ -470,8 +444,6 @@ class Augmentor:
                 temp = new_value - x
                 new_value = temp 
 
-            # NOTE: Logs:
-            print('New Value: ', new_value)
 
             return new_value
         
@@ -563,11 +535,6 @@ class Augmentor:
         elif (current_descriptor == 'Dynamics'):   
             current_stats = self.dynamics_stats
 
-        print('| Get Stats per feature |')
-        print('Current descriptor: ', current_descriptor)
-        print('Current descriptor degree ', current_descriptor_degree)
-
-
         stats = current_stats[current_descriptor_degree]
 
         # NOTE: May need to remove this.
@@ -625,6 +592,7 @@ class Augmentor:
                 new_rows.append(holder)
             
             # NOTE: May need to remove this.
+            x = input('-_- -_- -_-')
             # self.clear_console()
             # print('| ', row_index, ' / ', len(df.to_numpy()) - 1, '|')
             # counter += '#'
