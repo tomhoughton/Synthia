@@ -563,10 +563,9 @@ class Augmentor:
         
         # print('Values', values)
 
-        # Get the current descriptor:
         current_descriptor = values[2]
 
-        # Lets get the descriptor degree of the current row:
+        # Lets get the descriptor of the current row:
         current_descriptor_degree = float(row[str(values[2])])
 
         # NOTE: May need to remove this.
