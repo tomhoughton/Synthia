@@ -5,7 +5,7 @@ import platform
 import pandas as pd
 from InputSynthiaV2 import run_input
 from SynthiaDataAugment import DataAugmentor
-from SynthiaDataAugmentV2 import Augmentor
+from DataAugmentV3 import Augmentor
 from SynthiaStats import SynthiaStats
 
 def display_title():
@@ -265,7 +265,7 @@ def data_augment(delay):
     x = input('=>')
     # When creating the audible difference we only consider the upper limit for now
     # This is because the range above and below '0' will be the same.
-    audible_diff = 0.70000
+    audible_diff = 0.0900
 
     # Create an augmentor object:
     augmentor = Augmentor(df=df, date=S_Stats.export_folder_name, audible_diff_range=audible_diff)
@@ -276,6 +276,8 @@ def data_augment(delay):
     # Sort the min max and stats paths:
     clear_console()
     display_data_augment_title()
+    
+    """
     print('Now we are sorting the statistics into ascending order in accordance of the descriptor degree')
     # print('Consistency')
     consistency_stats = augmentor.sort_min_max_stats_paths(augmentor.consistency_path)
@@ -292,6 +294,7 @@ def data_augment(delay):
         brightness=brightness_stats,
         evolution=evolution_stats    
     )
+    """
     # This is now where we will augment the data:
     augmentor.augment()
     # # Augment the data:

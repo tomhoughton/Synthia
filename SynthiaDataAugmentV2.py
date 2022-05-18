@@ -642,7 +642,7 @@ class Augmentor:
                     stats_v3 = self.get_stats_per_feature(values=v_3, row=row)
 
                     # Retrieve augmented values:
-                    value_01 = self.augment_value(value=row[str(v_1[0])], rule=v_1[1], feature=v_1[0],operator=combination[0], stats=stats_v1, values_arr=v_1)
+                    value_01 = self.augment_value(value=row[str(v_1[0])], rule=v_1[1], feature= v_1[0],operator=combination[0], stats=stats_v1, values_arr=v_1)
                     value_02 = self.augment_value(value=row[str(v_2[0])], rule=v_2[1], feature= v_2[0],operator=combination[1], stats=stats_v2, values_arr=v_2)
                     value_03 = self.augment_value(value=row[str(v_3[0])], rule=v_3[1], feature= v_3[0],operator=combination[2], stats=stats_v3, values_arr=v_3)
 
