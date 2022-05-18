@@ -142,13 +142,12 @@ class Augmentor:
             if value == 0:
                 return value
 
-
             new_value = value - scalar
 
             # Add some checks for the number:
             if new_value < 0:
                 new_value = 0
-
+                
             return new_value
         elif (operator == 1): # 1 = Nothing
             return value
