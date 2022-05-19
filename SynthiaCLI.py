@@ -7,6 +7,7 @@ from InputSynthiaV2 import run_input
 from SynthiaDataAugment import DataAugmentor
 from DataAugmentV3 import Augmentor
 from SynthiaStats import SynthiaStats
+from SynthiaV2 import Synthia
 
 def display_title():
     line_01 = '░██████╗██╗░░░██╗███╗░░██╗████████╗██╗░░██╗██╗░█████╗'
@@ -302,6 +303,12 @@ def data_augment(delay):
     # # augmentor.augment_min_max(augment_margin=1)
     x = input('...')
 
+def machine_learning():
+    augmented_path = os.path.join('TrainingData', 'AugmentedDatasets') # Get the path to the augmented datasets.
+    df = pd.read_csv(os.path.join(augmented_path, 'May-18-2022[100].csv')) # Get the dataset for training.
+
+    synthia = Synthia(df=df)
+    synthia.train()
 
 def root_menu(delay):
     # Clear the console:
@@ -348,6 +355,8 @@ def main():
             data_summary(delay=delay)
         elif usr_input == '3':
             data_augment(delay=delay)
+        elif usr_input == '4':
+            machine_learning()
         elif usr_input == 'exit':
             exit(delay=delay)
             return '...'
