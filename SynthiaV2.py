@@ -188,7 +188,7 @@ class Synthia:
 
         x = input('....')
 
-    def predict(self, model):
+    def predict(self, model, input):
         print('Get the predictions')
 
         # Get the trained neural network:
@@ -196,7 +196,7 @@ class Synthia:
         model = keras.models.load_model(os.path.join(models_path, 'synthia.h5'))
         
         # Get the input:
-        input = [[0.3, 0.5, 1, 0.7, 1, 0, 0, 0]]
+        #input = [[0.3, 0.5, 1, 0.7, 1, 0, 0, 0]]
         prediction = model.predict(x=input) # Make the prediction.
 
         # Matrix of trained features and rules which must be follwed,
@@ -241,7 +241,7 @@ class Synthia:
         return features_2d
 
 
-    def export_preset(self, synthia_output):
+    def export_preset(self, synthia_output, preset_name):
         """This function will allow the exporting of the synthia predicted presets
         into ableton.
 
@@ -252,13 +252,10 @@ class Synthia:
         print('Export Preset')
 
         synthia_artefacts_path = os.path.join('SynthiaArtefacts')
-        data = self.populate_genesis(features_2d=synthia_output)
-
-        # Now we need to convert the json to xml:
+        data = self.populate_genesis(features_2d=synthia_output, preset_name=preset_name)
 
 
-
-    def populate_genesis(self, features_2d):
+    def populate_genesis(self, features_2d, preset_name):
         """This function is to essentially populate a .json variation of Ableton Presets.
         """
 
@@ -306,8 +303,8 @@ class Synthia:
             print('00000000000000000000000000000000')
             xml = xmltodict.unparse(data)
             print(xml)
-
-            self.write_preset(os.path.join(synthia_artefacts_path, f"hello.adv"), xml)
+            file_name = str(preset_name) + ".adv"
+            self.write_preset(os.path.join(synthia_artefacts_path, file_name), xml)
         return data
 
 

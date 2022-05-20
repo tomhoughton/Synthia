@@ -6,6 +6,7 @@ from qt_material import apply_stylesheet
 from PyQt6.QtWidgets import QStyleOptionSlider
 import tensorflow as tf
 from tensorflow import keras
+from SynthiaV2 import Synthia
 
 import sys
 
@@ -18,6 +19,11 @@ https://forum.qt.io/topic/90341/change-dial-cosmetics-in-python/8
 class Dojo(QMainWindow):
     def __init__(self, *args, **kwargs) -> None:
         super(Dojo, self).__init__(*args, **kwargs)
+
+        # Get the synthia class:
+        self.synthia = Synthia(df=None)
+        self.selected_type = 0
+        self.preset_name = ""
 
         # Set the window title:
         self.setWindowTitle("Synthia Dojo")
@@ -39,41 +45,46 @@ class Dojo(QMainWindow):
         main_title.setStyleSheet("font-size: 38px; padding: 16px; font-weight: bold")
 
         # Create the buttons:
-        pluck_button = QPushButton("Pluck")
-        lead_button = QPushButton("Lead")
-        bass_button = QPushButton("Bass")
-        eight08_button = QPushButton("808")
-        create_button = QPushButton("Create")
+        self.create_button = QPushButton("Create")
+        self.create_button.clicked.connect(self.create_button_clicked)
+
+        # Preset name input box:
+        self.preset_name_input = QLineEdit()
+        self.preset_name_input.textChanged.connect(self.preset_name_input_change)
 
         # Create the sliders:
-        consistency_slider = QSlider(Qt.Orientation.Horizontal)
-        brightness_slider = QSlider(Qt.Orientation.Horizontal)
-        evolution_slider = QSlider(Qt.Orientation.Horizontal)
-        dynamics_slider = QSlider(Qt.Orientation.Horizontal)
+        self.consistency_slider = QSlider(Qt.Orientation.Horizontal)
+        self.brightness_slider = QSlider(Qt.Orientation.Horizontal)
+        self.evolution_slider = QSlider(Qt.Orientation.Horizontal)
+        self.dynamics_slider = QSlider(Qt.Orientation.Horizontal)
 
+        # Set the minimum and maximum of the sliders:
+        self.consistency_slider.setMinimum(0)
+        self.consistency_slider.setMaximum(10)
+        self.brightness_slider.setMinimum(0)
+        self.brightness_slider.setMaximum(10)
+        self.evolution_slider.setMinimum(0)
+        self.evolution_slider.setMaximum(10)
+        self.dynamics_slider.setMinimum(0)
+        self.dynamics_slider.setMaximum(10)
+
+        # Set the signals:
+        self.consistency_slider.valueChanged.connect(self.consistency_change)
+        self.brightness_slider.valueChanged.connect(self.brightness_change)
+        self.evolution_slider.valueChanged.connect(self.evolution_change)
+        self.dynamics_slider.valueChanged.connect(self.dynamics_change)
+        
         # Create the slider titles:
-        consistency_slider_title = QLabel("Consistency")
-        consistency_slider_title.setStyleSheet("font-size: 26px; padding: 7px;")
-        brightness_slider_title = QLabel("Brightness")
-        brightness_slider_title.setStyleSheet("font-size: 26px; padding: 7px;")
-        evolution_slider_title = QLabel("Evolution")
-        evolution_slider_title.setStyleSheet("font-size: 26px; padding: 7px;")
-        dynamics_slider_title = QLabel("Dynamics")
-        dynamics_slider_title.setStyleSheet("font-size: 26px; padding: 7px;")
+        self.consistency_slider_title = QLabel("Consistency")
+        self.consistency_slider_title.setStyleSheet("font-size: 26px; padding: 7px;")
+        self.brightness_slider_title = QLabel("Brightness")
+        self.brightness_slider_title.setStyleSheet("font-size: 26px; padding: 7px;")
+        self.evolution_slider_title = QLabel("Evolution")
+        self.evolution_slider_title.setStyleSheet("font-size: 26px; padding: 7px;")
+        self.dynamics_slider_title = QLabel("Dynamics")
+        self.dynamics_slider_title.setStyleSheet("font-size: 26px; padding: 7px;")
 
-        """Checkbox's"""
-        # Create the widgets:
-        pluck_wid = QWidget()
-        lead_wid = QWidget()
-        eight08_wid = QWidget()
-        bass_wid = QWidget() 
-
-        # Create the layouts:
-        pluck_lay = QVBoxLayout()
-        lead_lay = QVBoxLayout()
-        eight08_lay = QVBoxLayout()
-        bass_lay = QVBoxLayout()
-
+    
         # Create the labels:
         pluck_title = QLabel("Pluck")
         lead_title = QLabel("Lead")
@@ -81,69 +92,46 @@ class Dojo(QMainWindow):
         bass_title = QLabel("Bass")
 
         # Create the CheckBox's:
-        self.pluck_check = QCheckBox()
-        self.lead_check = QCheckBox()
-        self.eightOeight_check = QCheckBox()
-        self.bass_check = QCheckBox()
+        self.pluck_check = QCheckBox() # 0
+        self.pluck_check.setChecked(True)
+        self.lead_check = QCheckBox() # 1
+        self.eightOeight_check = QCheckBox() # 2
+        self.bass_check = QCheckBox() # 3
 
         # Connect to functions:
-        self.pluck_check.toggled.connect(self.type_toggle)
-        self.lead_check.toggled.connect(self.type_toggle)
-        self.eightOeight_check.toggled.connect(self.type_toggle)
-        self.bass_check.toggled.connect(self.type_toggle)
-
-        # Setup Layouts:
-        pluck_lay.addWidget(pluck_title)
-        pluck_lay.addWidget(self.pluck_check)
-        lead_lay.addWidget(lead_title)
-        lead_lay.addWidget(self.lead_check)
-        eight08_lay.addWidget(eight08_title)
-        eight08_lay.addWidget(self.eightOeight_check)
-        bass_lay.addWidget(bass_title)
-        bass_lay.addWidget(self.bass_check)
-
-        # Set the layouts:
-        pluck_wid.setLayout(pluck_lay)
-        lead_wid.setLayout(lead_lay)
-        eight08_wid.setLayout(eight08_lay)
-        bass_wid.setLayout(bass_lay) 
+        self.pluck_check.toggled.connect(self.pluck_toggle)
+        self.lead_check.toggled.connect(self.lead_toggle)
+        self.eightOeight_check.toggled.connect(self.eight08_toggle)
+        self.bass_check.toggled.connect(self.bass_toggle)
 
         # Set the buttons to the layout:
         left_layout.addWidget(main_title)
-        # left_layout.addWidget(pluck_button)
-        # left_layout.addWidget(lead_button)
-        # left_layout.addWidget(bass_button)
-        # left_layout.addWidget(eight08_button)
-        left_layout.addWidget(create_button)
+        left_layout.addWidget(self.preset_name_input)
+        left_layout.addWidget(self.create_button)
+        
+        # Right Layout:
+        right_layout.addWidget(pluck_title)
+        right_layout.addWidget(self.pluck_check)
+        right_layout.addWidget(lead_title)   
+        right_layout.addWidget(self.lead_check)
+        right_layout.addWidget(eight08_title)
+        right_layout.addWidget(self.eightOeight_check)
+        right_layout.addWidget(bass_title)
+        right_layout.addWidget(self.bass_check)
+        right_layout.addWidget(types_widget)
+        right_layout.addWidget(self.consistency_slider_title)
+        right_layout.addWidget(self.consistency_slider)
+        right_layout.addWidget(self.brightness_slider_title)
+        right_layout.addWidget(self.brightness_slider)
+        right_layout.addWidget(self.evolution_slider_title)
+        right_layout.addWidget(self.evolution_slider)
+        right_layout.addWidget(self.dynamics_slider_title)
+        right_layout.addWidget(self.dynamics_slider)
 
         # Add layouts to widget:
         left_widget.setLayout(left_layout)
         right_widget.setLayout(right_layout)
-        types_widget.setLayout(types_layout)
 
-        # Types Layout:
-        types_layout.addWidget(pluck_wid)
-        types_layout.addWidget(lead_wid)
-        types_layout.addWidget(eight08_wid)
-        types_layout.addWidget(bass_wid)
-
-        # Right Layout:
-        right_layout.addWidget(types_widget)
-        right_layout.addWidget(consistency_slider_title)
-        right_layout.addWidget(consistency_slider)
-        right_layout.addWidget(brightness_slider_title)
-        right_layout.addWidget(brightness_slider)
-        right_layout.addWidget(evolution_slider_title)
-        right_layout.addWidget(evolution_slider)
-        right_layout.addWidget(dynamics_slider_title)
-        right_layout.addWidget(dynamics_slider)
-
-        # Types Layout:
-        types_layout.addWidget(self.pluck_check)
-        types_layout.addWidget(self.lead_check)
-        types_layout.addWidget(self.eightOeight_check)
-        types_layout.addWidget(self.bass_check)
-        
         # Add Widgets to the Layout:
         main_layout.addWidget(left_widget, 1)
         main_layout.addWidget(right_widget, 2)
@@ -154,20 +142,107 @@ class Dojo(QMainWindow):
         # Set main widget:
         self.setCentralWidget(main_widget)
 
-    def check_widget(self, title):
-        w_title = QLabel(title)
-        w_title.setStyleSheet("font-size: 26px; padding: 7px;")
-        w_checkbox = QCheckBox()
-        w_checkbox.toggled.connect(self.hello)
-        wid = QWidget()
-        lay = QVBoxLayout()
-        lay.addWidget(w_title)
-        lay.addWidget(w_checkbox)
-        wid.setLayout(lay)
-        return wid
-    
-    def type_toggle(self):
-        print('Hello')
+
+    def pluck_toggle(self):
+        if self.pluck_check.isChecked():
+            # Change the state for the others:
+            self.lead_check.setChecked(False)
+            self.eightOeight_check.setChecked(False)
+            self.bass_check.setChecked(False)
+
+            self.selected_type = 0
+
+    def lead_toggle(self):
+        if self.lead_check.isChecked():
+            # Change the state for the others:
+            self.pluck_check.setChecked(False)
+            self.eightOeight_check.setChecked(False)
+            self.bass_check.setChecked(False)
+
+            self.selected_type = 1
+
+    def bass_toggle(self):
+        if self.bass_check.isChecked():
+            # Change the state for the others:
+            self.pluck_check.setChecked(False)
+            self.eightOeight_check.setChecked(False)
+            self.lead_check.setChecked(False)
+
+            self.selected_type = 3
+
+    def eight08_toggle(self):
+        if self.eightOeight_check.isChecked():
+            # Change the state for the others:
+            self.pluck_check.setChecked(False)
+            self.bass_check.setChecked(False)
+            self.lead_check.setChecked(False)
+            
+            self.selected_type = 2
+
+
+    def consistency_change(self):
+        print('Value Changed')
+        title_change = 'Consistency: ' + str(self.consistency_slider.value())
+        self.consistency_slider_title.setText(title_change)
+
+
+    def brightness_change(self):
+        print('Value Changed')
+        title_change = 'Brightness: ' + str(self.brightness_slider.value())
+        self.brightness_slider_title.setText(title_change)
+
+
+    def evolution_change(self):
+        print('Value Changed')
+        title_change = 'Evolution: ' + str(self.evolution_slider.value())
+        self.evolution_slider_title.setText(title_change)
+
+
+    def dynamics_change(self):
+        print('Value Changed')
+        title_change = 'Dynamics: ' + str(self.dynamics_slider.value())
+        self.dynamics_slider_title.setText(title_change)
+
+
+    def preset_name_input_change(self, text):
+        self.preset_name = text
+
+
+    def create_button_clicked(self):
+        print('Create')
+
+        # Matrix with one row for the input (needs to be a matrix for tensorflow).
+        synthia_input = [[0, 0, 0, 0, 0, 0, 0, 0]]
+
+        # Assemble the input data:
+        
+        # First the types:
+        if (self.selected_type == 0):
+            synthia_input[0][7] = 1
+        elif (self.selected_type == 1):
+            synthia_input[0][6] = 1
+        elif (self.selected_type == 2):
+            synthia_input[0][4] = 1
+        elif (self.selected_type == 3):
+            synthia_input[0][5] = 1
+
+        # Now we need to normalise the input values:
+        consistency = float(self.consistency_slider.value() / 10)
+        brightness = float(self.brightness_slider.value() / 10)
+        evolution = float(self.evolution_slider.value() / 10)
+        dynamics = float(self.dynamics_slider.value() / 10)
+
+        # Add the descriptors to the synthia input matrix:
+        synthia_input[0][0] = consistency
+        synthia_input[0][1] = brightness
+        synthia_input[0][2] = evolution
+        synthia_input[0][3] = dynamics
+
+        print(synthia_input)
+        predictions = self.synthia.predict(model=None, input=synthia_input)
+        print(predictions)
+        
+        self.synthia.export_preset(synthia_output=predictions, preset_name=self.preset_name) 
 
 
     def hello(self):
