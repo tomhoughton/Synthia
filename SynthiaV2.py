@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow import keras
 import json
+import xmltodict
+import gzip
     
 class Synthia:
     def __init__(self, df) -> None:
@@ -252,15 +254,16 @@ class Synthia:
         synthia_artefacts_path = os.path.join('SynthiaArtefacts')
         data = self.populate_genesis(features_2d=synthia_output)
 
-        print(data) # Test to see if the json worked.
+        # Now we need to convert the json to xml:
 
-        # Actually maybe just do the prints from the ML notesbook.
+
 
     def populate_genesis(self, features_2d):
         """This function is to essentially populate a .json variation of Ableton Presets.
         """
 
         new_presets_json_path = os.path.join('NewPresetsJson')
+        synthia_artefacts_path = os.path.join('SynthiaArtefacts')
         new_presets_json_list = os.listdir(new_presets_json_path)
         genesis = os.path.join(new_presets_json_path, new_presets_json_list[0])
 
@@ -297,10 +300,27 @@ class Synthia:
             data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.1"]["DecayTime"]["Manual"]["@Value"] = features_2d[12][1]
             data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.1"]["SustainTime"]["Manual"]["@Value"] = features_2d[14][1]
             data["Ableton"]["UltraAnalog"]["SignalChain1"]["Envelope.1"]["ReleaseTime"]["Manual"]["@Value"] = features_2d[16][1]
+            
+            print('The data type: ', type(data))
 
+            print('00000000000000000000000000000000')
+            xml = xmltodict.unparse(data)
+            print(xml)
+
+            self.write_preset(os.path.join(synthia_artefacts_path, f"hello.adv"), xml)
         return data
 
 
+    def write_preset(self, file_path, data):
+        with gzip.open(file_path, 'w') as output:
+            output.write(data.encode("utf-8"))
+
+""" 
+write_zipped_preset(os.path.join(path, f"{name}.adv"), xml)
 
 
+    Utility for writing final preset content as zip file
+    with gzip.open(file_path, "wb") as zip_handle:
+        zip_handle.write(content.encode("utf-8"))
 
+"""
