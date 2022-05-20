@@ -4,6 +4,8 @@ from PyQt6.QtCore import *
 from PyQt6.QtCore import Qt
 from qt_material import apply_stylesheet
 from PyQt6.QtWidgets import QStyleOptionSlider
+import tensorflow as tf
+from tensorflow import keras
 
 import sys
 
@@ -59,11 +61,52 @@ class Dojo(QMainWindow):
         dynamics_slider_title = QLabel("Dynamics")
         dynamics_slider_title.setStyleSheet("font-size: 26px; padding: 7px;")
 
-        # Checkbox:
-        pluck_check = self.check_widget(title="Pluck")
-        lead_check = self.check_widget(title="Lead")
-        eightOeight_check = self.check_widget(title="808")
-        bass_check = self.check_widget(title="Bass")
+        """Checkbox's"""
+        # Create the widgets:
+        pluck_wid = QWidget()
+        lead_wid = QWidget()
+        eight08_wid = QWidget()
+        bass_wid = QWidget() 
+
+        # Create the layouts:
+        pluck_lay = QVBoxLayout()
+        lead_lay = QVBoxLayout()
+        eight08_lay = QVBoxLayout()
+        bass_lay = QVBoxLayout()
+
+        # Create the labels:
+        pluck_title = QLabel("Pluck")
+        lead_title = QLabel("Lead")
+        eight08_title = QLabel("808")
+        bass_title = QLabel("Bass")
+
+        # Create the CheckBox's:
+        self.pluck_check = QCheckBox()
+        self.lead_check = QCheckBox()
+        self.eightOeight_check = QCheckBox()
+        self.bass_check = QCheckBox()
+
+        # Connect to functions:
+        self.pluck_check.toggled.connect(self.type_toggle)
+        self.lead_check.toggled.connect(self.type_toggle)
+        self.eightOeight_check.toggled.connect(self.type_toggle)
+        self.bass_check.toggled.connect(self.type_toggle)
+
+        # Setup Layouts:
+        pluck_lay.addWidget(pluck_title)
+        pluck_lay.addWidget(self.pluck_check)
+        lead_lay.addWidget(lead_title)
+        lead_lay.addWidget(self.lead_check)
+        eight08_lay.addWidget(eight08_title)
+        eight08_lay.addWidget(self.eightOeight_check)
+        bass_lay.addWidget(bass_title)
+        bass_lay.addWidget(self.bass_check)
+
+        # Set the layouts:
+        pluck_wid.setLayout(pluck_lay)
+        lead_wid.setLayout(lead_lay)
+        eight08_wid.setLayout(eight08_lay)
+        bass_wid.setLayout(bass_lay) 
 
         # Set the buttons to the layout:
         left_layout.addWidget(main_title)
@@ -79,10 +122,10 @@ class Dojo(QMainWindow):
         types_widget.setLayout(types_layout)
 
         # Types Layout:
-        types_layout.addWidget(pluck_check)
-        types_layout.addWidget(lead_check)
-        types_layout.addWidget(eightOeight_check)
-        types_layout.addWidget(bass_check)
+        types_layout.addWidget(pluck_wid)
+        types_layout.addWidget(lead_wid)
+        types_layout.addWidget(eight08_wid)
+        types_layout.addWidget(bass_wid)
 
         # Right Layout:
         right_layout.addWidget(types_widget)
@@ -96,10 +139,10 @@ class Dojo(QMainWindow):
         right_layout.addWidget(dynamics_slider)
 
         # Types Layout:
-        types_layout.addWidget(pluck_check)
-        types_layout.addWidget(lead_check)
-        types_layout.addWidget(eightOeight_check)
-        types_layout.addWidget(bass_check)
+        types_layout.addWidget(self.pluck_check)
+        types_layout.addWidget(self.lead_check)
+        types_layout.addWidget(self.eightOeight_check)
+        types_layout.addWidget(self.bass_check)
         
         # Add Widgets to the Layout:
         main_layout.addWidget(left_widget, 1)
@@ -115,12 +158,20 @@ class Dojo(QMainWindow):
         w_title = QLabel(title)
         w_title.setStyleSheet("font-size: 26px; padding: 7px;")
         w_checkbox = QCheckBox()
+        w_checkbox.toggled.connect(self.hello)
         wid = QWidget()
         lay = QVBoxLayout()
         lay.addWidget(w_title)
         lay.addWidget(w_checkbox)
         wid.setLayout(lay)
         return wid
+    
+    def type_toggle(self):
+        print('Hello')
+
+
+    def hello(self):
+        print('Hello')
 
 if __name__=="__main__":
     app = QApplication(sys.argv)
